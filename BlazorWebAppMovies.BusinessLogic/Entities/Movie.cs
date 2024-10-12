@@ -6,5 +6,6 @@ public class Movie
     public Guid Id { get; set; }
 
     public ICollection<CastMemberMovie> CastMemberMovies { get; set; } = [];
+    public string Title { get; set; } = string.Empty;
     // ActualPropertyPlaceholder
 }
