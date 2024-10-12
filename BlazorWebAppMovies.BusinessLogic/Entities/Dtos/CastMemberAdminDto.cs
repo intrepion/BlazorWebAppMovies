@@ -35,6 +35,7 @@ public class CastMemberAdminDto
             ApplicationUserUpdatedBy = applicationUser,
             Id = castMemberAdminDto.Id,
 
+            Name1 = castMemberAdminDto.Name1,
             // DtoToEntityPropertyPlaceholder
             // Title = castMemberAdminDto.Title,
             // ToDoList = castMemberAdminDto.ToDoList,
