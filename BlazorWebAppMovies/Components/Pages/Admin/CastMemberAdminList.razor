@@ -34,15 +34,15 @@
         }
         else
         {
-          @foreach (var EntityLowercaseNamePlaceholder in TableLowercaseNamePlaceholder)
+          @foreach (var castMember in TableLowercaseNamePlaceholder)
           {
             <tr>
-              <td>@EntityLowercaseNamePlaceholder.Id</td>
+              <td>@castMember.Id</td>
 
               @* ListItemCodePlaceholder *@
 
               <td>
-                <a href="@("/admin/UrlNamePlaceholder-edit/" + EntityLowercaseNamePlaceholder?.Id)">Edit</a>
+                <a href="@("/admin/UrlNamePlaceholder-edit/" + castMember?.Id)">Edit</a>
               </td>
             </tr>
           }
