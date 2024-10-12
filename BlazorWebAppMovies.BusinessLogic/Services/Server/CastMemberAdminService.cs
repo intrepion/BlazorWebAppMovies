@@ -37,6 +37,7 @@ public class CastMemberAdminService(ApplicationDbContext applicationDbContext) :
         var castMember = CastMemberAdminDto.ToCastMember(user, castMemberAdminDto);
 
         castMember.NormalizedName1 = castMemberAdminDto.Name1.ToUpperInvariant();
+        castMember.NormalizedName2 = castMemberAdminDto.Name2.ToUpperInvariant();
         // AddDatabasePropertyCodePlaceholder
 
         var result = await _applicationDbContext.CastMembers.AddAsync(castMember);
