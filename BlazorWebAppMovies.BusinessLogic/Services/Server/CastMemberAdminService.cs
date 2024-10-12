@@ -33,7 +33,7 @@ public class CastMemberAdminService(ApplicationDbContext applicationDbContext) :
 
         // AddDatabasePropertyCodePlaceholder
 
-        var result = await _applicationDbContext.TableNamePlaceholder.AddAsync(castMember);
+        var result = await _applicationDbContext.CastMembers.AddAsync(castMember);
         var databaseCastMemberAdminDto = CastMemberAdminDto.FromCastMember(result.Entity);
         await _applicationDbContext.SaveChangesAsync();
 
@@ -54,7 +54,7 @@ public class CastMemberAdminService(ApplicationDbContext applicationDbContext) :
             throw new Exception("Authentication required.");
         }
 
-        var databaseCastMember = await _applicationDbContext.TableNamePlaceholder.FindAsync(id);
+        var databaseCastMember = await _applicationDbContext.CastMembers.FindAsync(id);
 
         if (databaseCastMember == null)
         {
@@ -85,7 +85,7 @@ public class CastMemberAdminService(ApplicationDbContext applicationDbContext) :
             throw new Exception("Authentication required.");
         }
 
-        var databaseCastMember = await _applicationDbContext.TableNamePlaceholder.FindAsync(castMemberAdminDto.Id);
+        var databaseCastMember = await _applicationDbContext.CastMembers.FindAsync(castMemberAdminDto.Id);
 
         if (databaseCastMember == null)
         {
@@ -124,7 +124,7 @@ public class CastMemberAdminService(ApplicationDbContext applicationDbContext) :
             throw new Exception("Authentication required.");
         }
 
-        return await _applicationDbContext.TableNamePlaceholder
+        return await _applicationDbContext.CastMembers
 
             // IncludeTableCodePlaceholder
 
@@ -145,7 +145,7 @@ public class CastMemberAdminService(ApplicationDbContext applicationDbContext) :
             throw new Exception("Authentication required.");
         }
 
-        var result = await _applicationDbContext.TableNamePlaceholder.FindAsync(id);
+        var result = await _applicationDbContext.CastMembers.FindAsync(id);
 
         if (result == null)
         {
