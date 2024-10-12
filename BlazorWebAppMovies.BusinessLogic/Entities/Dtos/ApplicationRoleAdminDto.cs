@@ -1,4 +1,4 @@
-﻿namespace ApplicationNamePlaceholder.BusinessLogic.Entities.Dtos;
+﻿namespace BlazorWebAppMovies.BusinessLogic.Entities.Dtos;
 
 public class ApplicationRoleAdminDto
 {
