@@ -101,6 +101,7 @@ public class CastMemberMovieAdminService(ApplicationDbContext applicationDbConte
         databaseCastMemberMovie.ApplicationUserUpdatedBy = user;
 
         databaseCastMemberMovie.CastMember = castMemberMovieAdminDto.CastMember;
+        databaseCastMemberMovie.Movie = castMemberMovieAdminDto.Movie;
         // EditDatabasePropertyCodePlaceholder
         // databaseCastMemberMovie.Title = castMemberMovieAdminDto.Title;
         // databaseCastMemberMovie.NormalizedTitle = castMemberMovieAdminDto.Title.ToUpperInvariant();
