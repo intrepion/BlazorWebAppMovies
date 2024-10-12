@@ -1,0 +1,216 @@
+{
+  "entities": [
+    {
+      "keys": [
+        {
+          "key": "NormalizedName1",
+          "ordering": 1
+        },
+        {
+          "key": "NormalizedName2",
+          "ordering": 2
+        }
+      ],
+      "names": {
+        "entity": "CastMember",
+        "human": "Cast Member",
+        "plural": "Cast Members",
+        "table": "CastMembers",
+        "url": "cast-member"
+      },
+      "properties": [
+        {
+          "foreign": {
+            "display": [
+              {
+                "ordering": 1,
+                "property": "Movie",
+                "subproperty": "Title"
+              }
+            ],
+            "entity": "CastMemberMovie"
+          },
+          "names": {
+            "human": "Cast Member Movies",
+            "property": "CastMemberMovies"
+          },
+          "type": "oneToMany"
+        },
+        {
+          "names": {
+            "human": "Name 1",
+            "property": "Name1"
+          },
+          "normalized": true,
+          "required": true,
+          "type": "string"
+        },
+        {
+          "names": {
+            "human": "Name 2",
+            "property": "Name2"
+          },
+          "normalized": true,
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "keys": [
+        {
+          "object": "CastMember",
+          "required": true,
+          "ordering": 1
+        },
+        {
+          "object": "Movie",
+          "required": true,
+          "ordering": 2
+        }
+      ],
+      "names": {
+        "entity": "CastMemberMovie",
+        "human": "Cast Member Movie",
+        "plural": "Cast Member Movies",
+        "table": "CastMemberMovies",
+        "url": "cast-member-movie"
+      },
+      "properties": [
+        {
+          "foreign": {
+            "display": [
+              {
+                "ordering": 1,
+                "property": "Name1"
+              },
+              {
+                "ordering": 2,
+                "string": " "
+              },
+              {
+                "ordering": 3,
+                "property": "Name2"
+              }
+            ],
+            "entity": "CastMember",
+            "keys": [
+              {
+                "key": "NormalizedName1",
+                "ordering": 1
+              },
+              {
+                "key": "NormalizedName2",
+                "ordering": 2
+              }
+            ],
+            "property": "CastMemberMovies",
+            "table": "CastMembers"
+          },
+          "names": {
+            "human": "Cast Member",
+            "property": "CastMember"
+          },
+          "type": "manyToOne"
+        },
+        {
+          "foreign": {
+            "display": [
+              {
+                "ordering": 1,
+                "property": "Title"
+              }
+            ],
+            "entity": "Movie",
+            "keys": [
+              {
+                "key": "NormalizedTitle",
+                "ordering": 1
+              },
+              {
+                "key": "Year",
+                "ordering": 2
+              }
+            ],
+            "property": "MovieCastMembers",
+            "table": "Movies"
+          },
+          "names": {
+            "human": "Movie",
+            "property": "Movie"
+          },
+          "type": "manyToOne"
+        }
+      ]
+    },
+    {
+      "keys": [
+        {
+          "key": "NormalizedTitle",
+          "ordering": 1
+        },
+        {
+          "key": "Year",
+          "ordering": 2
+        }
+      ],
+      "names": {
+        "entity": "Movie",
+        "human": "Movie",
+        "plural": "Movies",
+        "table": "Movies",
+        "url": "movie"
+      },
+      "properties": [
+        {
+          "foreign": {
+            "display": [
+              {
+                "ordering": 1,
+                "property": "CastMember",
+                "subproperty": "Name1"
+              },
+              {
+                "ordering": 2,
+                "string": " "
+              },
+              {
+                "ordering": 3,
+                "property": "CastMember",
+                "subproperty": "Name2"
+              }
+            ],
+            "entity": "CastMemberMovie"
+          },
+          "names": {
+            "human": "Movie Cast Members",
+            "property": "MovieCastMembers"
+          },
+          "type": "oneToMany"
+        },
+        {
+          "names": {
+            "human": "Title",
+            "property": "Title"
+          },
+          "normalized": true,
+          "required": true,
+          "type": "string"
+        },
+        {
+          "names": {
+            "human": "Year",
+            "property": "Year"
+          },
+          "required": true,
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "names": {
+    "human": "Blazor Web App Movies",
+    "namespace": "BlazorWebAppMovies"
+  },
+  "version": "0.1.0"
+}
