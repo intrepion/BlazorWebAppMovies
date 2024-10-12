@@ -1,8 +1,8 @@
 ﻿using System.Net.Http.Json;
-using ApplicationNamePlaceholder.BusinessLogic.Entities;
-using ApplicationNamePlaceholder.BusinessLogic.Entities.Dtos;
+using BlazorWebAppMovies.BusinessLogic.Entities;
+using BlazorWebAppMovies.BusinessLogic.Entities.Dtos;
 
-namespace ApplicationNamePlaceholder.BusinessLogic.Services.Client;
+namespace BlazorWebAppMovies.BusinessLogic.Services.Client;
 
 public class ApplicationUserClientAdminService(HttpClient httpClient) : IApplicationUserAdminService
 {
