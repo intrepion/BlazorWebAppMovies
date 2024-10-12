@@ -62,6 +62,7 @@ builder.Services.AddScoped<IApplicationUserAdminService, ApplicationUserAdminSer
 
 builder.Services.AddScoped<ICastMemberAdminService, CastMemberAdminService>();
 builder.Services.AddScoped<ICastMemberMovieAdminService, CastMemberMovieAdminService>();
+builder.Services.AddScoped<IMovieAdminService, MovieAdminService>();
 // RegisterServerServiceCodePlaceholder
 
 var app = builder.Build();
