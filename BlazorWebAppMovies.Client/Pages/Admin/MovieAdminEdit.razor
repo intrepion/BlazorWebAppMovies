@@ -1,5 +1,5 @@
-@page "/admin/UrlNamePlaceholder-edit"
-@page "/admin/UrlNamePlaceholder-edit/{id:guid}"
+@page "/admin/movie-edit"
+@page "/admin/movie-edit/{id:guid}"
 @rendermode InteractiveAuto
 @inject AuthenticationStateProvider GetAuthenticationStateAsync
 @inject NavigationManager NavigationManager
@@ -39,7 +39,7 @@
           }
         </div>
         <div class="col">
-          <a href="/admin/UrlNamePlaceholder-list">Cancel</a>
+          <a href="/admin/movie-list">Cancel</a>
           @if (Id.Equals(Guid.Empty))
           {
             <button type="submit" class="btn btn-primary">Create</button>
@@ -132,7 +132,7 @@
         return;
       }
 
-      NavigationManager.NavigateTo($"/admin/UrlNamePlaceholder-edit/{newMovieAdminDto.Id}");
+      NavigationManager.NavigateTo($"/admin/movie-edit/{newMovieAdminDto.Id}");
     }
     else
     {
@@ -156,7 +156,7 @@
     }
 
     await MovieAdminService.DeleteAsync(userName, Id);
-    NavigationManager.NavigateTo($"/admin/UrlNamePlaceholder-list");
+    NavigationManager.NavigateTo($"/admin/movie-list");
   }
 
   @* OnChangeCodePlaceholder *@
