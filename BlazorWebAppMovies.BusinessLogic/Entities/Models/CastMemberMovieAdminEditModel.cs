@@ -10,37 +10,37 @@ public class EntityNamePlaceholderAdminEditModel
     // public string Title { get; set; } = string.Empty;
     // public ToDoList? ToDoList { get; set; }
 
-    public static EntityNamePlaceholderAdminEditModel FromEntityNamePlaceholderAdminDto(EntityNamePlaceholderAdminDto EntityLowercaseNamePlaceholderAdminDto)
+    public static EntityNamePlaceholderAdminEditModel FromEntityNamePlaceholderAdminDto(EntityNamePlaceholderAdminDto castMemberMovieAdminDto)
     {
-        if (EntityLowercaseNamePlaceholderAdminDto == null)
+        if (castMemberMovieAdminDto == null)
         {
             return new EntityNamePlaceholderAdminEditModel();
         }
 
         return new EntityNamePlaceholderAdminEditModel
         {
-            Id = EntityLowercaseNamePlaceholderAdminDto.Id,
+            Id = castMemberMovieAdminDto.Id,
 
             // DtoToModelPlaceholder
-            // Title = EntityLowercaseNamePlaceholderAdminDto.Title,
-            // ToDoList = EntityLowercaseNamePlaceholderAdminDto.ToDoList,
+            // Title = castMemberMovieAdminDto.Title,
+            // ToDoList = castMemberMovieAdminDto.ToDoList,
         };
     }
 
-    public static EntityNamePlaceholderAdminDto ToEntityNamePlaceholderAdminDto(EntityNamePlaceholderAdminEditModel EntityLowercaseNamePlaceholderAdminEditModel)
+    public static EntityNamePlaceholderAdminDto ToEntityNamePlaceholderAdminDto(EntityNamePlaceholderAdminEditModel castMemberMovieAdminEditModel)
     {
-        if (EntityLowercaseNamePlaceholderAdminEditModel == null)
+        if (castMemberMovieAdminEditModel == null)
         {
             return new EntityNamePlaceholderAdminDto();
         }
 
         return new EntityNamePlaceholderAdminDto
         {
-            Id = EntityLowercaseNamePlaceholderAdminEditModel.Id,
+            Id = castMemberMovieAdminEditModel.Id,
 
             // ModelToDtoPlaceholder
-            // Title = EntityLowercaseNamePlaceholderAdminEditModel.Title,
-            // ToDoList = EntityLowercaseNamePlaceholderAdminEditModel.ToDoList,
+            // Title = castMemberMovieAdminEditModel.Title,
+            // ToDoList = castMemberMovieAdminEditModel.ToDoList,
         };
     }
 }
