@@ -31,6 +31,7 @@ public class MovieAdminService(ApplicationDbContext applicationDbContext) : IMov
 
         var movie = MovieAdminDto.ToMovie(user, movieAdminDto);
 
+        movie.NormalizedTitle = movieAdminDto.Title.ToUpperInvariant();
         // AddDatabasePropertyCodePlaceholder
 
         var result = await _applicationDbContext.Movies.AddAsync(movie);
