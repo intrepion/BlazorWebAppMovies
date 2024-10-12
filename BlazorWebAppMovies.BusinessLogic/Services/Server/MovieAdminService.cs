@@ -33,7 +33,7 @@ public class MovieAdminService(ApplicationDbContext applicationDbContext) : IMov
 
         // AddDatabasePropertyCodePlaceholder
 
-        var result = await _applicationDbContext.TableNamePlaceholder.AddAsync(movie);
+        var result = await _applicationDbContext.Movies.AddAsync(movie);
         var databaseMovieAdminDto = MovieAdminDto.FromMovie(result.Entity);
         await _applicationDbContext.SaveChangesAsync();
 
@@ -54,7 +54,7 @@ public class MovieAdminService(ApplicationDbContext applicationDbContext) : IMov
             throw new Exception("Authentication required.");
         }
 
-        var databaseMovie = await _applicationDbContext.TableNamePlaceholder.FindAsync(id);
+        var databaseMovie = await _applicationDbContext.Movies.FindAsync(id);
 
         if (databaseMovie == null)
         {
@@ -85,7 +85,7 @@ public class MovieAdminService(ApplicationDbContext applicationDbContext) : IMov
             throw new Exception("Authentication required.");
         }
 
-        var databaseMovie = await _applicationDbContext.TableNamePlaceholder.FindAsync(movieAdminDto.Id);
+        var databaseMovie = await _applicationDbContext.Movies.FindAsync(movieAdminDto.Id);
 
         if (databaseMovie == null)
         {
@@ -124,7 +124,7 @@ public class MovieAdminService(ApplicationDbContext applicationDbContext) : IMov
             throw new Exception("Authentication required.");
         }
 
-        return await _applicationDbContext.TableNamePlaceholder
+        return await _applicationDbContext.Movies
 
             // IncludeTableCodePlaceholder
 
@@ -145,7 +145,7 @@ public class MovieAdminService(ApplicationDbContext applicationDbContext) : IMov
             throw new Exception("Authentication required.");
         }
 
-        var result = await _applicationDbContext.TableNamePlaceholder.FindAsync(id);
+        var result = await _applicationDbContext.Movies.FindAsync(id);
 
         if (result == null)
         {
