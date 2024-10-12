@@ -27,7 +27,7 @@
     <h1>HumanNamePlaceholder Modification</h1>
   }
   <article>
-    <EditForm class="container" Model="EntityLowercaseNamePlaceholderAdminEditModel" OnSubmit="HandleSubmit">
+    <EditForm class="container" Model="castMemberMovieAdminEditModel" OnSubmit="HandleSubmit">
 
       @* EditRowCodePlaceholder *@
 
@@ -57,7 +57,7 @@
 @code {
   [Parameter]
   public Guid Id { get; set; }
-  EntityNamePlaceholderAdminEditModel EntityLowercaseNamePlaceholderAdminEditModel { get; set; } = new EntityNamePlaceholderAdminEditModel();
+  EntityNamePlaceholderAdminEditModel castMemberMovieAdminEditModel { get; set; } = new EntityNamePlaceholderAdminEditModel();
 
   @* ListDeclarationCodePlaceholder *@
 
@@ -95,11 +95,11 @@
 
     if (databaseEntityNamePlaceholderAdminDto == null)
     {
-      EntityLowercaseNamePlaceholderAdminEditModel = new EntityNamePlaceholderAdminEditModel();
+      castMemberMovieAdminEditModel = new EntityNamePlaceholderAdminEditModel();
     }
     else
     {
-      EntityLowercaseNamePlaceholderAdminEditModel = EntityNamePlaceholderAdminEditModel.FromEntityNamePlaceholderAdminDto(databaseEntityNamePlaceholderAdminDto);
+      castMemberMovieAdminEditModel = EntityNamePlaceholderAdminEditModel.FromEntityNamePlaceholderAdminDto(databaseEntityNamePlaceholderAdminDto);
     }
   }
 
@@ -115,17 +115,17 @@
 
     @* RequiredPropertyPlaceholder *@
 
-    @* if (string.IsNullOrWhiteSpace(EntityLowercaseNamePlaceholderAdminEditModel.Name))
+    @* if (string.IsNullOrWhiteSpace(castMemberMovieAdminEditModel.Name))
     {
       return;
     } *@
 
-    var EntityLowercaseNamePlaceholderAdminDto = EntityNamePlaceholderAdminEditModel.ToEntityNamePlaceholderAdminDto(EntityLowercaseNamePlaceholderAdminEditModel);
-    EntityLowercaseNamePlaceholderAdminDto.ApplicationUserName = userName;
+    var castMemberMovieAdminDto = EntityNamePlaceholderAdminEditModel.ToEntityNamePlaceholderAdminDto(castMemberMovieAdminEditModel);
+    castMemberMovieAdminDto.ApplicationUserName = userName;
 
     if (Id.Equals(Guid.Empty))
     {
-      var newEntityNamePlaceholderAdminDto = await EntityNamePlaceholderAdminService.AddAsync(EntityLowercaseNamePlaceholderAdminDto);
+      var newEntityNamePlaceholderAdminDto = await EntityNamePlaceholderAdminService.AddAsync(castMemberMovieAdminDto);
 
       if (newEntityNamePlaceholderAdminDto == null)
       {
@@ -136,7 +136,7 @@
     }
     else
     {
-      await EntityNamePlaceholderAdminService.EditAsync(EntityLowercaseNamePlaceholderAdminDto);
+      await EntityNamePlaceholderAdminService.EditAsync(castMemberMovieAdminDto);
     }
   }
 
