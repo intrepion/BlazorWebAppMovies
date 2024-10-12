@@ -99,7 +99,12 @@
 
     await base.OnInitializedAsync();
 
-    @* OnInitializedCodePlaceholder *@
+    var castMemberListResult = await CastMemberAdminService.GetAllAsync(userName);
+        if (castMemberListResult != null)
+        {
+            castMemberList = castMemberListResult;
+        }
+        @* OnInitializedCodePlaceholder *@
   }
 
   protected override async Task OnParametersSetAsync()
