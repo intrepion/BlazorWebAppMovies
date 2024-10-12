@@ -6,12 +6,12 @@ namespace ApplicationNamePlaceholder.Controllers;
 
 [Route("api/admin/[controller]")]
 [ApiController]
-public class EntityNamePlaceholderController(IEntityNamePlaceholderAdminService EntityLowercaseNamePlaceholderAdminService) : ControllerBase
+public class EntityNamePlaceholderController(IEntityNamePlaceholderAdminService castMemberMovieAdminService) : ControllerBase
 {
-    private readonly IEntityNamePlaceholderAdminService _EntityLowercaseNamePlaceholderAdminService = EntityLowercaseNamePlaceholderAdminService;
+    private readonly IEntityNamePlaceholderAdminService _castMemberMovieAdminService = castMemberMovieAdminService;
 
     [HttpPost]
-    public async Task<ActionResult<EntityNamePlaceholderAdminDto?>> Add(EntityNamePlaceholderAdminDto EntityLowercaseNamePlaceholderAdminDto)
+    public async Task<ActionResult<EntityNamePlaceholderAdminDto?>> Add(EntityNamePlaceholderAdminDto castMemberMovieAdminDto)
     {
         var userIdentityName = User.Identity?.Name;
 
@@ -20,12 +20,12 @@ public class EntityNamePlaceholderController(IEntityNamePlaceholderAdminService 
             return Ok(null);
         }
 
-        if (string.Equals(EntityLowercaseNamePlaceholderAdminDto.ApplicationUserName, userIdentityName, StringComparison.InvariantCultureIgnoreCase))
+        if (string.Equals(castMemberMovieAdminDto.ApplicationUserName, userIdentityName, StringComparison.InvariantCultureIgnoreCase))
         {
             return Ok(null);
         }
 
-        var databaseEntityNamePlaceholderAdminDto = await _EntityLowercaseNamePlaceholderAdminService.AddAsync(EntityLowercaseNamePlaceholderAdminDto);
+        var databaseEntityNamePlaceholderAdminDto = await _castMemberMovieAdminService.AddAsync(castMemberMovieAdminDto);
 
         return Ok(databaseEntityNamePlaceholderAdminDto);
     }
@@ -45,13 +45,13 @@ public class EntityNamePlaceholderController(IEntityNamePlaceholderAdminService 
             return Ok(null);
         }
 
-        var result = await _EntityLowercaseNamePlaceholderAdminService.DeleteAsync(userIdentityName, id);
+        var result = await _castMemberMovieAdminService.DeleteAsync(userIdentityName, id);
 
         return Ok(result);
     }
 
     [HttpPut]
-    public async Task<ActionResult<EntityNamePlaceholderAdminDto?>> Edit(EntityNamePlaceholderAdminDto EntityLowercaseNamePlaceholderAdminDto)
+    public async Task<ActionResult<EntityNamePlaceholderAdminDto?>> Edit(EntityNamePlaceholderAdminDto castMemberMovieAdminDto)
     {
         var userIdentityName = User.Identity?.Name;
 
@@ -60,12 +60,12 @@ public class EntityNamePlaceholderController(IEntityNamePlaceholderAdminService 
             return Ok(null);
         }
 
-        if (string.Equals(EntityLowercaseNamePlaceholderAdminDto.ApplicationUserName, userIdentityName, StringComparison.InvariantCultureIgnoreCase))
+        if (string.Equals(castMemberMovieAdminDto.ApplicationUserName, userIdentityName, StringComparison.InvariantCultureIgnoreCase))
         {
             return Ok(null);
         }
 
-        var databaseEntityNamePlaceholder = await _EntityLowercaseNamePlaceholderAdminService.EditAsync(EntityLowercaseNamePlaceholderAdminDto);
+        var databaseEntityNamePlaceholder = await _castMemberMovieAdminService.EditAsync(castMemberMovieAdminDto);
 
         return Ok(databaseEntityNamePlaceholder);
     }
@@ -85,9 +85,9 @@ public class EntityNamePlaceholderController(IEntityNamePlaceholderAdminService 
             return Ok(null);
         }
 
-        var EntityLowercaseNamePlaceholderAdminDtos = await _EntityLowercaseNamePlaceholderAdminService.GetAllAsync(userIdentityName);
+        var castMemberMovieAdminDtos = await _castMemberMovieAdminService.GetAllAsync(userIdentityName);
 
-        return Ok(EntityLowercaseNamePlaceholderAdminDtos);
+        return Ok(castMemberMovieAdminDtos);
     }
 
     [HttpGet("{id}")]
@@ -105,8 +105,8 @@ public class EntityNamePlaceholderController(IEntityNamePlaceholderAdminService 
             return Ok(null);
         }
 
-        var EntityLowercaseNamePlaceholderAdminDto = await _EntityLowercaseNamePlaceholderAdminService.GetByIdAsync(userIdentityName, id);
+        var castMemberMovieAdminDto = await _castMemberMovieAdminService.GetByIdAsync(userIdentityName, id);
 
-        return Ok(EntityLowercaseNamePlaceholderAdminDto);
+        return Ok(castMemberMovieAdminDto);
     }
 }
