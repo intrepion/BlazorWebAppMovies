@@ -24,6 +24,7 @@ public class CastMemberAdminEditModel
             Id = castMemberAdminDto.Id,
 
             Name1 = castMemberAdminDto.Name1,
+            Name2 = castMemberAdminDto.Name2,
             // DtoToModelPlaceholder
             // Title = castMemberAdminDto.Title,
             // ToDoList = castMemberAdminDto.ToDoList,
