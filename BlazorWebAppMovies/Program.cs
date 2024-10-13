@@ -1,7 +1,10 @@
-﻿using BlazorWebAppMovies.Client.Pages;
-using BlazorWebAppMovies.Components;
-using BlazorWebAppMovies.Components.Account;
-using BlazorWebAppMovies.Data;
+﻿using ApplicationNamePlaceholder.BusinessLogic.Data;
+using ApplicationNamePlaceholder.BusinessLogic.Entities;
+using ApplicationNamePlaceholder.BusinessLogic.Services;
+using ApplicationNamePlaceholder.BusinessLogic.Services.Server;
+using ApplicationNamePlaceholder.Client.Pages;
+using ApplicationNamePlaceholder.Components;
+using ApplicationNamePlaceholder.Components.Account;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -25,9 +28,21 @@ builder.Services.AddAuthentication(options =>
     })
     .AddIdentityCookies();
 
+builder.Services.AddControllers();
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+
+if (builder.Environment.EnvironmentName == "Test")
+{
+    builder.Services.AddDbContextFactory<ApplicationDbContext>(options =>
+        options.UseSqlite(connectionString));
+}
+else
+{
+    builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlServer(connectionString));
+}
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -37,7 +52,25 @@ builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.Requ
 
 builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
 
+builder.Services.AddScoped(http => new HttpClient
+{
+    BaseAddress = new Uri(builder.Configuration.GetSection("BaseUri").Value!),
+});
+
+builder.Services.AddScoped<IApplicationRoleAdminService, ApplicationRoleAdminService>();
+builder.Services.AddScoped<IApplicationUserAdminService, ApplicationUserAdminService>();
+
+// RegisterServerServiceCodePlaceholder
+
 var app = builder.Build();
+
+if (app.Environment.EnvironmentName == "Test")
+{
+    app.UseWebAssemblyDebugging();
+    await using var scope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateAsyncScope();
+    var options = scope.ServiceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>();
+    await DatabaseUtility.EnsureDbCreatedAndSeedAsync(options, scope.ServiceProvider);
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -54,13 +87,15 @@ else
 
 app.UseHttpsRedirection();
 
+app.MapControllers();
+
 app.UseStaticFiles();
 app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
     .AddInteractiveWebAssemblyRenderMode()
-    .AddAdditionalAssemblies(typeof(BlazorWebAppMovies.Client._Imports).Assembly);
+    .AddAdditionalAssemblies(typeof(ApplicationNamePlaceholder.Client._Imports).Assembly);
 
 // Add additional endpoints required by the Identity /Account Razor components.
 app.MapAdditionalIdentityEndpoints();
