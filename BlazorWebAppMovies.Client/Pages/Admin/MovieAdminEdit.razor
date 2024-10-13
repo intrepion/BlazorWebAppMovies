@@ -1,0 +1,163 @@
+@page "/admin/UrlNamePlaceholder-edit"
+@page "/admin/UrlNamePlaceholder-edit/{id:guid}"
+@rendermode InteractiveAuto
+@inject AuthenticationStateProvider GetAuthenticationStateAsync
+@inject NavigationManager NavigationManager
+@inject IEntityNamePlaceholderAdminService EntityNamePlaceholderAdminService
+
+@* InjectionCodePlaceholder *@
+@* @inject IToDoListAdminService ToDoListAdminService *@
+
+  @if (Id.Equals(Guid.Empty))
+  {
+    <PageTitle>HumanNamePlaceholder Creation</PageTitle>
+  }
+  else
+  {
+    <PageTitle>HumanNamePlaceholder Modification</PageTitle>
+  }
+
+<section>
+  @if (Id.Equals(Guid.Empty))
+  {
+    <h1>HumanNamePlaceholder Creation</h1>
+  }
+  else
+  {
+    <h1>HumanNamePlaceholder Modification</h1>
+  }
+  <article>
+    <EditForm class="container" Model="EntityLowercaseNamePlaceholderAdminEditModel" OnSubmit="HandleSubmit">
+
+      @* EditRowCodePlaceholder *@
+
+      <div class="row">
+        <div class="col">
+          @if (!Id.Equals(Guid.Empty))
+          {
+            <button @onclick="Remove" type="button" class="btn btn-danger">Remove</button>
+          }
+        </div>
+        <div class="col">
+          <a href="/admin/UrlNamePlaceholder-list">Cancel</a>
+          @if (Id.Equals(Guid.Empty))
+          {
+            <button type="submit" class="btn btn-primary">Create</button>
+          }
+          else
+          {
+            <button type="submit" class="btn btn-primary">Modify</button>
+          }
+         </div>
+      </div>
+    </EditForm>
+  </article>
+</section>
+
+@code {
+  [Parameter]
+  public Guid Id { get; set; }
+  EntityNamePlaceholderAdminEditModel EntityLowercaseNamePlaceholderAdminEditModel { get; set; } = new EntityNamePlaceholderAdminEditModel();
+
+  @* ListDeclarationCodePlaceholder *@
+
+  protected override async Task OnInitializedAsync()
+  {
+    var authState = await GetAuthenticationStateAsync.GetAuthenticationStateAsync();
+    var userName = authState.User.Identity?.Name;
+
+    if (userName == null)
+    {
+      return;
+    }
+
+    await base.OnInitializedAsync();
+
+    @* OnInitializedCodePlaceholder *@
+  }
+
+  protected override async Task OnParametersSetAsync()
+  {
+    var authState = await GetAuthenticationStateAsync.GetAuthenticationStateAsync();
+    var userName = authState.User.Identity?.Name;
+
+    if (userName == null)
+    {
+      return;
+    }
+
+    if (Id.Equals(Guid.Empty))
+    {
+      return;
+    }
+
+    var databaseEntityNamePlaceholderAdminDto = await EntityNamePlaceholderAdminService.GetByIdAsync(userName, Id);
+
+    if (databaseEntityNamePlaceholderAdminDto == null)
+    {
+      EntityLowercaseNamePlaceholderAdminEditModel = new EntityNamePlaceholderAdminEditModel();
+    }
+    else
+    {
+      EntityLowercaseNamePlaceholderAdminEditModel = EntityNamePlaceholderAdminEditModel.FromEntityNamePlaceholderAdminDto(databaseEntityNamePlaceholderAdminDto);
+    }
+  }
+
+  async Task HandleSubmit()
+  {
+    var authState = await GetAuthenticationStateAsync.GetAuthenticationStateAsync();
+    var userName = authState.User.Identity?.Name;
+
+    if (userName == null)
+    {
+      return;
+    }
+
+    @* RequiredPropertyPlaceholder *@
+
+    @* if (string.IsNullOrWhiteSpace(EntityLowercaseNamePlaceholderAdminEditModel.Name))
+    {
+      return;
+    } *@
+
+    var EntityLowercaseNamePlaceholderAdminDto = EntityNamePlaceholderAdminEditModel.ToEntityNamePlaceholderAdminDto(EntityLowercaseNamePlaceholderAdminEditModel);
+    EntityLowercaseNamePlaceholderAdminDto.ApplicationUserName = userName;
+
+    if (Id.Equals(Guid.Empty))
+    {
+      var newEntityNamePlaceholderAdminDto = await EntityNamePlaceholderAdminService.AddAsync(EntityLowercaseNamePlaceholderAdminDto);
+
+      if (newEntityNamePlaceholderAdminDto == null)
+      {
+        return;
+      }
+
+      NavigationManager.NavigateTo($"/admin/UrlNamePlaceholder-edit/{newEntityNamePlaceholderAdminDto.Id}");
+    }
+    else
+    {
+      await EntityNamePlaceholderAdminService.EditAsync(EntityLowercaseNamePlaceholderAdminDto);
+    }
+  }
+
+  async Task Remove()
+  {
+    var authState = await GetAuthenticationStateAsync.GetAuthenticationStateAsync();
+    var userName = authState.User.Identity?.Name!;
+
+    if (userName == null)
+    {
+      return;
+    }
+
+    if (Id.Equals(Guid.Empty))
+    {
+      return;
+    }
+
+    await EntityNamePlaceholderAdminService.DeleteAsync(userName, Id);
+    NavigationManager.NavigateTo($"/admin/UrlNamePlaceholder-list");
+  }
+
+  @* OnChangeCodePlaceholder *@
+}
