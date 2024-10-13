@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BlazorWebAppMovies.Shared\BlazorWebAppMovies.Shared.csproj" />
+    <ProjectReference Include="..\BlazorWebAppMovies.BusinessLogic\BlazorWebAppMovies.BusinessLogic.csproj" />
   </ItemGroup>
 
 </Project>
