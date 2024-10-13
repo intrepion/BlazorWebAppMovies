@@ -29,6 +29,14 @@
   <article>
     <EditForm class="container" Model="castMemberAdminEditModel" OnSubmit="HandleSubmit">
 
+      <div class="row">
+        <div class="col">
+          <label>
+            Name 1:
+            <InputText @bind-Value="castMemberAdminEditModel.Name1" data-testid="castMemberAdminEditName1" />
+          </label>
+        </div>
+      </div>
       @* EditRowCodePlaceholder *@
 
       <div class="row">
