@@ -6,6 +6,7 @@ public class CastMemberMovieAdminEditModel
 {
     public Guid Id { get; set; }
 
+    public CastMember? CastMember { get; set; }
     // JustModelPropertyPlaceholder
     // public string Title { get; set; } = string.Empty;
     // public ToDoList? ToDoList { get; set; }
