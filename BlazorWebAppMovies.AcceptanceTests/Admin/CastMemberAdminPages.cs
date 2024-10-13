@@ -23,6 +23,7 @@ public partial class CastMemberAdminPages : PageTest
         await Page.GetByRole(AriaRole.Button, new() { Name = "Create" }).ClickAsync();
         await Expect(Page).ToHaveTitleAsync("Cast Member Modification");
 
+        await Page.GetByTestId("castMemberAdminEditName1").FillAsync("some castMember");
         // ModifyPropertyCodePlaceholder
         // await Page.GetByTestId("castMemberAdminEditName").FillAsync("some castMember");
 
