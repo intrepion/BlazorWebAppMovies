@@ -40,6 +40,7 @@ public class CastMemberMovieAdminEditModel
         {
             Id = castMemberMovieAdminEditModel.Id,
 
+            CastMember = castMemberMovieAdminEditModel.CastMember,
             // ModelToDtoPlaceholder
             // Title = castMemberMovieAdminEditModel.Title,
             // ToDoList = castMemberMovieAdminEditModel.ToDoList,
