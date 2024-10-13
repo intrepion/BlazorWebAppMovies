@@ -40,6 +40,7 @@ public class CastMemberAdminEditModel
         {
             Id = castMemberAdminEditModel.Id,
 
+            Name1 = castMemberAdminEditModel.Name1,
             // ModelToDtoPlaceholder
             // Title = castMemberAdminEditModel.Title,
             // ToDoList = castMemberAdminEditModel.ToDoList,
