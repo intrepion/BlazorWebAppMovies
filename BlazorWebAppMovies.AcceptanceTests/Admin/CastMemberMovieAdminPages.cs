@@ -34,7 +34,7 @@ public partial class EntityNamePlaceholderAdminPages : PageTest
     [SetUp]
     public async Task SetUp()
     {
-        await Page.GotoAsync("ClientUriPlaceholder");
+        await Page.GotoAsync("http://localhost:5120");
         await Page.GetByRole(AriaRole.Link, new() { Name = "Login" }).ClickAsync();
         await Expect(Page).ToHaveTitleAsync("Log in");
         await Page.GetByTestId("loginEmail").FillAsync("Admin1@ApplicationNamePlaceholder.com");
