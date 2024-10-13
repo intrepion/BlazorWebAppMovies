@@ -22,6 +22,7 @@ public class MovieAdminEditModel
         {
             Id = movieAdminDto.Id,
 
+            Title = movieAdminDto.Title,
             // DtoToModelPlaceholder
             // Title = movieAdminDto.Title,
             // ToDoList = movieAdminDto.ToDoList,
