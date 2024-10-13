@@ -35,6 +35,7 @@ public class MovieAdminDto
             ApplicationUserUpdatedBy = applicationUser,
             Id = movieAdminDto.Id,
 
+            Title = movieAdminDto.Title,
             // DtoToEntityPropertyPlaceholder
             // Title = movieAdminDto.Title,
             // ToDoList = movieAdminDto.ToDoList,
