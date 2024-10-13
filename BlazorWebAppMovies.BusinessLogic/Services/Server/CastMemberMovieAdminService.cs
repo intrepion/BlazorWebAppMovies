@@ -33,7 +33,7 @@ public class CastMemberMovieAdminService(ApplicationDbContext applicationDbConte
 
         // AddDatabasePropertyCodePlaceholder
 
-        var result = await _applicationDbContext.TableNamePlaceholder.AddAsync(castMemberMovie);
+        var result = await _applicationDbContext.CastMemberMovies.AddAsync(castMemberMovie);
         var databaseCastMemberMovieAdminDto = CastMemberMovieAdminDto.FromCastMemberMovie(result.Entity);
         await _applicationDbContext.SaveChangesAsync();
 
@@ -54,7 +54,7 @@ public class CastMemberMovieAdminService(ApplicationDbContext applicationDbConte
             throw new Exception("Authentication required.");
         }
 
-        var databaseCastMemberMovie = await _applicationDbContext.TableNamePlaceholder.FindAsync(id);
+        var databaseCastMemberMovie = await _applicationDbContext.CastMemberMovies.FindAsync(id);
 
         if (databaseCastMemberMovie == null)
         {
@@ -85,7 +85,7 @@ public class CastMemberMovieAdminService(ApplicationDbContext applicationDbConte
             throw new Exception("Authentication required.");
         }
 
-        var databaseCastMemberMovie = await _applicationDbContext.TableNamePlaceholder.FindAsync(castMemberMovieAdminDto.Id);
+        var databaseCastMemberMovie = await _applicationDbContext.CastMemberMovies.FindAsync(castMemberMovieAdminDto.Id);
 
         if (databaseCastMemberMovie == null)
         {
@@ -124,7 +124,7 @@ public class CastMemberMovieAdminService(ApplicationDbContext applicationDbConte
             throw new Exception("Authentication required.");
         }
 
-        return await _applicationDbContext.TableNamePlaceholder
+        return await _applicationDbContext.CastMemberMovies
 
             // IncludeTableCodePlaceholder
 
@@ -145,7 +145,7 @@ public class CastMemberMovieAdminService(ApplicationDbContext applicationDbConte
             throw new Exception("Authentication required.");
         }
 
-        var result = await _applicationDbContext.TableNamePlaceholder.FindAsync(id);
+        var result = await _applicationDbContext.CastMemberMovies.FindAsync(id);
 
         if (result == null)
         {
