@@ -3,7 +3,7 @@
 @rendermode InteractiveAuto
 @inject AuthenticationStateProvider GetAuthenticationStateAsync
 @inject NavigationManager NavigationManager
-@inject IEntityNamePlaceholderAdminService EntityNamePlaceholderAdminService
+@inject IMovieAdminService MovieAdminService
 
 @* InjectionCodePlaceholder *@
 @* @inject IToDoListAdminService ToDoListAdminService *@
@@ -57,7 +57,7 @@
 @code {
   [Parameter]
   public Guid Id { get; set; }
-  EntityNamePlaceholderAdminEditModel movieAdminEditModel { get; set; } = new EntityNamePlaceholderAdminEditModel();
+  MovieAdminEditModel movieAdminEditModel { get; set; } = new MovieAdminEditModel();
 
   @* ListDeclarationCodePlaceholder *@
 
@@ -91,15 +91,15 @@
       return;
     }
 
-    var databaseEntityNamePlaceholderAdminDto = await EntityNamePlaceholderAdminService.GetByIdAsync(userName, Id);
+    var databaseMovieAdminDto = await MovieAdminService.GetByIdAsync(userName, Id);
 
-    if (databaseEntityNamePlaceholderAdminDto == null)
+    if (databaseMovieAdminDto == null)
     {
-      movieAdminEditModel = new EntityNamePlaceholderAdminEditModel();
+      movieAdminEditModel = new MovieAdminEditModel();
     }
     else
     {
-      movieAdminEditModel = EntityNamePlaceholderAdminEditModel.FromEntityNamePlaceholderAdminDto(databaseEntityNamePlaceholderAdminDto);
+      movieAdminEditModel = MovieAdminEditModel.FromMovieAdminDto(databaseMovieAdminDto);
     }
   }
 
@@ -120,23 +120,23 @@
       return;
     } *@
 
-    var movieAdminDto = EntityNamePlaceholderAdminEditModel.ToEntityNamePlaceholderAdminDto(movieAdminEditModel);
+    var movieAdminDto = MovieAdminEditModel.ToMovieAdminDto(movieAdminEditModel);
     movieAdminDto.ApplicationUserName = userName;
 
     if (Id.Equals(Guid.Empty))
     {
-      var newEntityNamePlaceholderAdminDto = await EntityNamePlaceholderAdminService.AddAsync(movieAdminDto);
+      var newMovieAdminDto = await MovieAdminService.AddAsync(movieAdminDto);
 
-      if (newEntityNamePlaceholderAdminDto == null)
+      if (newMovieAdminDto == null)
       {
         return;
       }
 
-      NavigationManager.NavigateTo($"/admin/UrlNamePlaceholder-edit/{newEntityNamePlaceholderAdminDto.Id}");
+      NavigationManager.NavigateTo($"/admin/UrlNamePlaceholder-edit/{newMovieAdminDto.Id}");
     }
     else
     {
-      await EntityNamePlaceholderAdminService.EditAsync(movieAdminDto);
+      await MovieAdminService.EditAsync(movieAdminDto);
     }
   }
 
@@ -155,7 +155,7 @@
       return;
     }
 
-    await EntityNamePlaceholderAdminService.DeleteAsync(userName, Id);
+    await MovieAdminService.DeleteAsync(userName, Id);
     NavigationManager.NavigateTo($"/admin/UrlNamePlaceholder-list");
   }
 
