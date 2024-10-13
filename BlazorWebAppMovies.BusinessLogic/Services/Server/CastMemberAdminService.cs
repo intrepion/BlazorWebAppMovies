@@ -100,6 +100,7 @@ public class CastMemberAdminService(ApplicationDbContext applicationDbContext) :
 
         databaseCastMember.ApplicationUserUpdatedBy = user;
 
+        databaseCastMember.Name1 = castMemberAdminDto.Name1;
         // EditDatabasePropertyCodePlaceholder
         // databaseCastMember.Title = castMemberAdminDto.Title;
         // databaseCastMember.NormalizedTitle = castMemberAdminDto.Title.ToUpperInvariant();
