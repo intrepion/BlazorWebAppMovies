@@ -1,6 +1,6 @@
-﻿using ApplicationNamePlaceholder.BusinessLogic.Entities.Dtos;
+﻿using BlazorWebAppMovies.BusinessLogic.Entities.Dtos;
 
-namespace ApplicationNamePlaceholder.BusinessLogic.Entities.Models;
+namespace BlazorWebAppMovies.BusinessLogic.Entities.Models;
 
 public class MovieAdminEditModel
 {
