@@ -20,13 +20,13 @@
         </tr>
       </thead>
       <tbody>
-        @if (TableLowercaseNamePlaceholder == null)
+        @if (castMembers == null)
         {
           <tr>
             @* LoadingCountCodePlaceholder *@
           </tr>
         }
-        else if (TableLowercaseNamePlaceholder.Count == 0)
+        else if (castMembers.Count == 0)
         {
           <tr>
             @* ZeroCountCodePlaceholder *@
@@ -34,7 +34,7 @@
         }
         else
         {
-          @foreach (var castMember in TableLowercaseNamePlaceholder)
+          @foreach (var castMember in castMembers)
           {
             <tr>
               <td>@castMember.Id</td>
@@ -54,7 +54,7 @@
 </section>
 
 @code {
-  List<CastMember>? TableLowercaseNamePlaceholder = null;
+  List<CastMember>? castMembers = null;
 
   protected override async Task OnInitializedAsync()
   {
@@ -66,6 +66,6 @@
       return;
     }
 
-    TableLowercaseNamePlaceholder = await CastMemberAdminService.GetAllAsync(userName);
+    castMembers = await CastMemberAdminService.GetAllAsync(userName);
   }
 }
