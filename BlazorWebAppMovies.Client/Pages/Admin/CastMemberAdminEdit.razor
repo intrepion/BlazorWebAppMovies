@@ -10,21 +10,21 @@
 
   @if (Id.Equals(Guid.Empty))
   {
-    <PageTitle>HumanNamePlaceholder Creation</PageTitle>
+    <PageTitle>Cast Member Creation</PageTitle>
   }
   else
   {
-    <PageTitle>HumanNamePlaceholder Modification</PageTitle>
+    <PageTitle>Cast Member Modification</PageTitle>
   }
 
 <section>
   @if (Id.Equals(Guid.Empty))
   {
-    <h1>HumanNamePlaceholder Creation</h1>
+    <h1>Cast Member Creation</h1>
   }
   else
   {
-    <h1>HumanNamePlaceholder Modification</h1>
+    <h1>Cast Member Modification</h1>
   }
   <article>
     <EditForm class="container" Model="castMemberAdminEditModel" OnSubmit="HandleSubmit">
