@@ -2,7 +2,7 @@
 
 namespace ApplicationNamePlaceholder.BusinessLogic.Entities.Models;
 
-public class EntityNamePlaceholderAdminEditModel
+public class MovieAdminEditModel
 {
     public Guid Id { get; set; }
 
@@ -10,14 +10,14 @@ public class EntityNamePlaceholderAdminEditModel
     // public string Title { get; set; } = string.Empty;
     // public ToDoList? ToDoList { get; set; }
 
-    public static EntityNamePlaceholderAdminEditModel FromEntityNamePlaceholderAdminDto(EntityNamePlaceholderAdminDto movieAdminDto)
+    public static MovieAdminEditModel FromMovieAdminDto(MovieAdminDto movieAdminDto)
     {
         if (movieAdminDto == null)
         {
-            return new EntityNamePlaceholderAdminEditModel();
+            return new MovieAdminEditModel();
         }
 
-        return new EntityNamePlaceholderAdminEditModel
+        return new MovieAdminEditModel
         {
             Id = movieAdminDto.Id,
 
@@ -27,14 +27,14 @@ public class EntityNamePlaceholderAdminEditModel
         };
     }
 
-    public static EntityNamePlaceholderAdminDto ToEntityNamePlaceholderAdminDto(EntityNamePlaceholderAdminEditModel movieAdminEditModel)
+    public static MovieAdminDto ToMovieAdminDto(MovieAdminEditModel movieAdminEditModel)
     {
         if (movieAdminEditModel == null)
         {
-            return new EntityNamePlaceholderAdminDto();
+            return new MovieAdminDto();
         }
 
-        return new EntityNamePlaceholderAdminDto
+        return new MovieAdminDto
         {
             Id = movieAdminEditModel.Id,
 
