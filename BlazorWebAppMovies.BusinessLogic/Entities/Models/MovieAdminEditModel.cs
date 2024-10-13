@@ -40,6 +40,7 @@ public class MovieAdminEditModel
         {
             Id = movieAdminEditModel.Id,
 
+            Title = movieAdminEditModel.Title,
             // ModelToDtoPlaceholder
             // Title = movieAdminEditModel.Title,
             // ToDoList = movieAdminEditModel.ToDoList,
