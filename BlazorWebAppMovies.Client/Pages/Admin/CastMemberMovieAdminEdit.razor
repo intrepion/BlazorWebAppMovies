@@ -84,7 +84,8 @@
   public Guid Id { get; set; }
   CastMemberMovieAdminEditModel castMemberMovieAdminEditModel { get; set; } = new CastMemberMovieAdminEditModel();
 
-  @* ListDeclarationCodePlaceholder *@
+  List<CastMember> castMemberList { get; set; } = [];
+    @* ListDeclarationCodePlaceholder *@
 
   protected override async Task OnInitializedAsync()
   {
