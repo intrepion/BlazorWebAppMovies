@@ -140,7 +140,7 @@ public class MovieAdminService(ApplicationDbContext applicationDbContext) : IMov
         return await _applicationDbContext.Movies
 
             .Include(x => x.MovieCastMembers)
-    // IncludeTableCodePlaceholder
+            // IncludeTableCodePlaceholder
 
             .ToListAsync();
     }
