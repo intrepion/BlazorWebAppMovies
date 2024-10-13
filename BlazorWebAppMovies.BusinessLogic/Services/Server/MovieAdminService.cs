@@ -98,6 +98,11 @@ public class MovieAdminService(ApplicationDbContext applicationDbContext) : IMov
             throw new Exception("HumanNamePlaceholder not found.");
         }
 
+        if (string.IsNullOrWhiteSpace(movieAdminDto.Title))
+        {
+            throw new Exception("Title required.");
+        }
+
         // EditRequiredPropertyCodePlaceholder
         // if (string.IsNullOrWhiteSpace(movieAdminDto.Title))
         // {
