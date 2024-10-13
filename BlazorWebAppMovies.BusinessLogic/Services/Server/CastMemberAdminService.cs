@@ -126,7 +126,8 @@ public class CastMemberAdminService(ApplicationDbContext applicationDbContext) :
 
         return await _applicationDbContext.CastMembers
 
-            // IncludeTableCodePlaceholder
+            .Include(x => x.CastMemberMovies)
+    // IncludeTableCodePlaceholder
 
             .ToListAsync();
     }
