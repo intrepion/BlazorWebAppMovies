@@ -100,6 +100,7 @@ public class MovieAdminService(ApplicationDbContext applicationDbContext) : IMov
 
         databaseMovie.ApplicationUserUpdatedBy = user;
 
+        databaseMovie.Title = movieAdminDto.Title;
         // EditDatabasePropertyCodePlaceholder
         // databaseMovie.Title = movieAdminDto.Title;
         // databaseMovie.NormalizedTitle = movieAdminDto.Title.ToUpperInvariant();
