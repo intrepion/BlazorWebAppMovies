@@ -9,14 +9,14 @@ public class EntityNamePlaceholderAdminRepository(ApplicationDbContext applicati
 {
     private readonly ApplicationDbContext _applicationDbContext = applicationDbContext;
 
-    public async Task<EntityNamePlaceholderAdminDto?> AddAsync(EntityNamePlaceholderAdminDto EntityLowercaseNamePlaceholderAdminDto)
+    public async Task<EntityNamePlaceholderAdminDto?> AddAsync(EntityNamePlaceholderAdminDto movieAdminDto)
     {
-        if (string.IsNullOrWhiteSpace(EntityLowercaseNamePlaceholderAdminDto.ApplicationUserName))
+        if (string.IsNullOrWhiteSpace(movieAdminDto.ApplicationUserName))
         {
             throw new Exception("UserName is required.");
         }
 
-        var user = await _applicationDbContext.Users.FirstOrDefaultAsync(x => EntityLowercaseNamePlaceholderAdminDto.ApplicationUserName.ToUpper().Equals(x.NormalizedUserName));
+        var user = await _applicationDbContext.Users.FirstOrDefaultAsync(x => movieAdminDto.ApplicationUserName.ToUpper().Equals(x.NormalizedUserName));
 
         if (user == null)
         {
@@ -24,16 +24,16 @@ public class EntityNamePlaceholderAdminRepository(ApplicationDbContext applicati
         }
 
         // AddRequiredPropertyCodePlaceholder
-        // if (string.IsNullOrWhiteSpace(EntityLowercaseNamePlaceholderAdminDto.Title))
+        // if (string.IsNullOrWhiteSpace(movieAdminDto.Title))
         // {
         //     throw new Exception("Title required.");
         // }
 
-        var EntityLowercaseNamePlaceholder = EntityNamePlaceholderAdminDto.ToEntityNamePlaceholder(user, EntityLowercaseNamePlaceholderAdminDto);
+        var movie = EntityNamePlaceholderAdminDto.ToEntityNamePlaceholder(user, movieAdminDto);
 
         // AddDatabasePropertyCodePlaceholder
 
-        var result = await _applicationDbContext.TableNamePlaceholder.AddAsync(EntityLowercaseNamePlaceholder);
+        var result = await _applicationDbContext.TableNamePlaceholder.AddAsync(movie);
         var databaseEntityNamePlaceholderAdminDto = EntityNamePlaceholderAdminDto.FromEntityNamePlaceholder(result.Entity);
         await _applicationDbContext.SaveChangesAsync();
 
@@ -71,21 +71,21 @@ public class EntityNamePlaceholderAdminRepository(ApplicationDbContext applicati
         return true;
     }
 
-    public async Task<EntityNamePlaceholderAdminDto?> EditAsync(EntityNamePlaceholderAdminDto EntityLowercaseNamePlaceholderAdminDto)
+    public async Task<EntityNamePlaceholderAdminDto?> EditAsync(EntityNamePlaceholderAdminDto movieAdminDto)
     {
-        if (string.IsNullOrWhiteSpace(EntityLowercaseNamePlaceholderAdminDto.ApplicationUserName))
+        if (string.IsNullOrWhiteSpace(movieAdminDto.ApplicationUserName))
         {
             throw new Exception("UserName is required.");
         }
 
-        var user = await _applicationDbContext.Users.FirstOrDefaultAsync(x => EntityLowercaseNamePlaceholderAdminDto.ApplicationUserName.ToUpper().Equals(x.NormalizedUserName));
+        var user = await _applicationDbContext.Users.FirstOrDefaultAsync(x => movieAdminDto.ApplicationUserName.ToUpper().Equals(x.NormalizedUserName));
 
         if (user == null)
         {
             throw new Exception("Authentication required.");
         }
 
-        var databaseEntityNamePlaceholder = await _applicationDbContext.TableNamePlaceholder.FindAsync(EntityLowercaseNamePlaceholderAdminDto.Id);
+        var databaseEntityNamePlaceholder = await _applicationDbContext.TableNamePlaceholder.FindAsync(movieAdminDto.Id);
 
         if (databaseEntityNamePlaceholder == null)
         {
@@ -93,7 +93,7 @@ public class EntityNamePlaceholderAdminRepository(ApplicationDbContext applicati
         }
 
         // EditRequiredPropertyCodePlaceholder
-        // if (string.IsNullOrWhiteSpace(EntityLowercaseNamePlaceholderAdminDto.Title))
+        // if (string.IsNullOrWhiteSpace(movieAdminDto.Title))
         // {
         //     throw new Exception("Title required.");
         // }
@@ -101,13 +101,13 @@ public class EntityNamePlaceholderAdminRepository(ApplicationDbContext applicati
         databaseEntityNamePlaceholder.ApplicationUserUpdatedBy = user;
 
         // EditDatabasePropertyCodePlaceholder
-        // databaseEntityNamePlaceholder.Title = EntityLowercaseNamePlaceholderAdminDto.Title;
-        // databaseEntityNamePlaceholder.NormalizedTitle = EntityLowercaseNamePlaceholderAdminDto.Title.ToUpperInvariant();
-        // databaseEntityNamePlaceholder.ToDoList = EntityLowercaseNamePlaceholderAdminDto.ToDoList;
+        // databaseEntityNamePlaceholder.Title = movieAdminDto.Title;
+        // databaseEntityNamePlaceholder.NormalizedTitle = movieAdminDto.Title.ToUpperInvariant();
+        // databaseEntityNamePlaceholder.ToDoList = movieAdminDto.ToDoList;
 
         await _applicationDbContext.SaveChangesAsync();
 
-        return EntityLowercaseNamePlaceholderAdminDto;
+        return movieAdminDto;
     }
 
     public async Task<List<EntityNamePlaceholder>?> GetAllAsync(string userName)
