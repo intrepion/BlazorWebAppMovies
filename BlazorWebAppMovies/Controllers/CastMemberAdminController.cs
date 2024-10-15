@@ -6,12 +6,12 @@ namespace ApplicationNamePlaceholder.Controllers;
 
 [Route("api/admin/[controller]")]
 [ApiController]
-public class EntityNamePlaceholderController(IEntityNamePlaceholderAdminRepository castMemberAdminRepository) : ControllerBase
+public class CastMemberController(ICastMemberAdminRepository castMemberAdminRepository) : ControllerBase
 {
-    private readonly IEntityNamePlaceholderAdminRepository _castMemberAdminRepository = castMemberAdminRepository;
+    private readonly ICastMemberAdminRepository _castMemberAdminRepository = castMemberAdminRepository;
 
     [HttpPost]
-    public async Task<ActionResult<EntityNamePlaceholderAdminDto?>> Add(EntityNamePlaceholderAdminDto castMemberAdminDto)
+    public async Task<ActionResult<CastMemberAdminDto?>> Add(CastMemberAdminDto castMemberAdminDto)
     {
         var userIdentityName = User.Identity?.Name;
 
@@ -25,9 +25,9 @@ public class EntityNamePlaceholderController(IEntityNamePlaceholderAdminReposito
             return Ok(null);
         }
 
-        var databaseEntityNamePlaceholderAdminDto = await _castMemberAdminRepository.AddAsync(castMemberAdminDto);
+        var databaseCastMemberAdminDto = await _castMemberAdminRepository.AddAsync(castMemberAdminDto);
 
-        return Ok(databaseEntityNamePlaceholderAdminDto);
+        return Ok(databaseCastMemberAdminDto);
     }
 
     [HttpDelete("{id}")]
@@ -51,7 +51,7 @@ public class EntityNamePlaceholderController(IEntityNamePlaceholderAdminReposito
     }
 
     [HttpPut]
-    public async Task<ActionResult<EntityNamePlaceholderAdminDto?>> Edit(EntityNamePlaceholderAdminDto castMemberAdminDto)
+    public async Task<ActionResult<CastMemberAdminDto?>> Edit(CastMemberAdminDto castMemberAdminDto)
     {
         var userIdentityName = User.Identity?.Name;
 
@@ -65,13 +65,13 @@ public class EntityNamePlaceholderController(IEntityNamePlaceholderAdminReposito
             return Ok(null);
         }
 
-        var databaseEntityNamePlaceholder = await _castMemberAdminRepository.EditAsync(castMemberAdminDto);
+        var databaseCastMember = await _castMemberAdminRepository.EditAsync(castMemberAdminDto);
 
-        return Ok(databaseEntityNamePlaceholder);
+        return Ok(databaseCastMember);
     }
 
     [HttpGet]
-    public async Task<ActionResult<EntityNamePlaceholderAdminDto>?> GetAll(string userName)
+    public async Task<ActionResult<CastMemberAdminDto>?> GetAll(string userName)
     {
         var userIdentityName = User.Identity?.Name;
 
@@ -91,7 +91,7 @@ public class EntityNamePlaceholderController(IEntityNamePlaceholderAdminReposito
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<EntityNamePlaceholderAdminDto?>> GetById(string userName, Guid id)
+    public async Task<ActionResult<CastMemberAdminDto?>> GetById(string userName, Guid id)
     {
         var userIdentityName = User.Identity?.Name;
 
