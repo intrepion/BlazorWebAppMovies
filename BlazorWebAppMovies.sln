@@ -1,10 +1,12 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.0.0
 MinimumVisualStudioVersion = 16.0.0.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWebAppMovies", "BlazorWebAppMovies\BlazorWebAppMovies.csproj", "{5B7231BB-D4A9-48E3-8070-2882C6EEFD82}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWebAppMovies.Client", "BlazorWebAppMovies.Client\BlazorWebAppMovies.Client.csproj", "{C9D41BEB-A79A-4BD0-BEEB-705E005F623D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWebAppMovies.Server.ComponentTests", "BlazorWebAppMovies.Server.ComponentTests\BlazorWebAppMovies.Server.ComponentTests.csproj", "{EFCB20AB-EF95-4E81-A55E-18B414B4CDFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +42,18 @@ Global
 		{5B7231BB-D4A9-48E3-8070-2882C6EEFD82}.Release|x64.Build.0 = Release|Any CPU
 		{5B7231BB-D4A9-48E3-8070-2882C6EEFD82}.Release|x86.ActiveCfg = Release|Any CPU
 		{5B7231BB-D4A9-48E3-8070-2882C6EEFD82}.Release|x86.Build.0 = Release|Any CPU
+		{EFCB20AB-EF95-4E81-A55E-18B414B4CDFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFCB20AB-EF95-4E81-A55E-18B414B4CDFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFCB20AB-EF95-4E81-A55E-18B414B4CDFF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EFCB20AB-EF95-4E81-A55E-18B414B4CDFF}.Debug|x64.Build.0 = Debug|Any CPU
+		{EFCB20AB-EF95-4E81-A55E-18B414B4CDFF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EFCB20AB-EF95-4E81-A55E-18B414B4CDFF}.Debug|x86.Build.0 = Debug|Any CPU
+		{EFCB20AB-EF95-4E81-A55E-18B414B4CDFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFCB20AB-EF95-4E81-A55E-18B414B4CDFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFCB20AB-EF95-4E81-A55E-18B414B4CDFF}.Release|x64.ActiveCfg = Release|Any CPU
+		{EFCB20AB-EF95-4E81-A55E-18B414B4CDFF}.Release|x64.Build.0 = Release|Any CPU
+		{EFCB20AB-EF95-4E81-A55E-18B414B4CDFF}.Release|x86.ActiveCfg = Release|Any CPU
+		{EFCB20AB-EF95-4E81-A55E-18B414B4CDFF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
