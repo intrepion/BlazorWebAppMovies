@@ -21,6 +21,7 @@ public class CastMemberMovieAdminDto
         {
             Id = castMemberMovie.Id,
 
+            CastMember = castMemberMovie.CastMember,
             // EntityToDtoPlaceholder
             // Title = castMemberMovie.Title,
             // ToDoList = castMemberMovie.ToDoList,
