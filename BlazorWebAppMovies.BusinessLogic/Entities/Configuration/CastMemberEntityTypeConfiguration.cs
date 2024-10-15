@@ -7,13 +7,13 @@ public class CastMemberEntityTypeConfiguration : IEntityTypeConfiguration<CastMe
 {
     public void Configure(EntityTypeBuilder<CastMember> builder)
     {
-        builder.ToTable("TableNamePlaceholder", x => x.IsTemporal());
+        builder.ToTable("CastMembers", x => x.IsTemporal());
 
         // EntityConfigurationCodePlaceholder
         // builder.Property(x => x.PropertyNamePlaceholder);
 
         builder.HasOne(x => x.ApplicationUserUpdatedBy)
-            .WithMany(x => x.UpdatedTableNamePlaceholder)
+            .WithMany(x => x.UpdatedCastMembers)
             .OnDelete(DeleteBehavior.Restrict);
     }
 }
