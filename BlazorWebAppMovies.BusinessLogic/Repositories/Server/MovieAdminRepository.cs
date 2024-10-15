@@ -126,7 +126,8 @@ public class MovieAdminRepository(ApplicationDbContext applicationDbContext) : I
 
         return await _applicationDbContext.Movies
 
-            // IncludeTableCodePlaceholder
+            .Include(x => x.MovieCastMembers)
+    // IncludeTableCodePlaceholder
 
             .ToListAsync();
     }
