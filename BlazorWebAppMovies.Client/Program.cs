@@ -18,6 +18,7 @@ builder.Services.AddScoped<IApplicationRoleAdminRepository, ApplicationRoleClien
 builder.Services.AddScoped<IApplicationUserAdminRepository, ApplicationUserClientAdminRepository>();
 
 builder.Services.AddScoped<ICastMemberAdminRepository, CastMemberClientAdminRepository>();
+builder.Services.AddScoped<ICastMemberMovieAdminRepository, CastMemberMovieClientAdminRepository>();
 // RegisterClientServiceCodePlaceholder
 
 await builder.Build().RunAsync();
