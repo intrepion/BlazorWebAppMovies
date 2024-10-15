@@ -100,6 +100,7 @@ public class CastMemberMovieAdminRepository(ApplicationDbContext applicationDbCo
 
         databaseCastMemberMovie.ApplicationUserUpdatedBy = user;
 
+        databaseCastMemberMovie.CastMember = castMemberMovieAdminDto.CastMember;
         // EditDatabasePropertyCodePlaceholder
         // databaseCastMemberMovie.Title = castMemberMovieAdminDto.Title;
         // databaseCastMemberMovie.NormalizedTitle = castMemberMovieAdminDto.Title.ToUpperInvariant();
