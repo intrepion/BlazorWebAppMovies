@@ -100,6 +100,7 @@ public class MovieAdminRepository(ApplicationDbContext applicationDbContext) : I
 
         databaseMovie.ApplicationUserUpdatedBy = user;
 
+        databaseMovie.Title = movieAdminDto.Title;
         // EditDatabasePropertyCodePlaceholder
         // databaseMovie.Title = movieAdminDto.Title;
         // databaseMovie.NormalizedTitle = movieAdminDto.Title.ToUpperInvariant();
