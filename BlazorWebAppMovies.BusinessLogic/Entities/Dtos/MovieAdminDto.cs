@@ -21,6 +21,7 @@ public class MovieAdminDto
         {
             Id = movie.Id,
 
+            Title = movie.Title,
             // EntityToDtoPlaceholder
             // Title = movie.Title,
             // ToDoList = movie.ToDoList,
