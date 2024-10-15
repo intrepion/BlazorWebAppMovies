@@ -3,11 +3,11 @@ using ApplicationNamePlaceholder.BusinessLogic.Entities.Dtos;
 
 namespace ApplicationNamePlaceholder.BusinessLogic.Repositories;
 
-public interface IEntityNamePlaceholderAdminRepository
+public interface IMovieAdminRepository
 {
-    Task<EntityNamePlaceholderAdminDto?> AddAsync(EntityNamePlaceholderAdminDto movie);
+    Task<MovieAdminDto?> AddAsync(MovieAdminDto movie);
     Task<bool> DeleteAsync(string userName, Guid id);
-    Task<EntityNamePlaceholderAdminDto?> EditAsync(EntityNamePlaceholderAdminDto movie);
-    Task<List<EntityNamePlaceholder>?> GetAllAsync(string userName);
-    Task<EntityNamePlaceholderAdminDto?> GetByIdAsync(string userName, Guid id);
+    Task<MovieAdminDto?> EditAsync(MovieAdminDto movie);
+    Task<List<Movie>?> GetAllAsync(string userName);
+    Task<MovieAdminDto?> GetByIdAsync(string userName, Guid id);
 }
