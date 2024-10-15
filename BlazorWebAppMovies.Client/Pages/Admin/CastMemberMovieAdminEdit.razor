@@ -3,7 +3,7 @@
 @rendermode InteractiveAuto
 @inject AuthenticationStateProvider GetAuthenticationStateAsync
 @inject NavigationManager NavigationManager
-@inject IEntityNamePlaceholderAdminRepository EntityNamePlaceholderAdminRepository
+@inject ICastMemberMovieAdminRepository CastMemberMovieAdminRepository
 @attribute [Authorize(Roles = "Admin")]
 
 @* InjectionCodePlaceholder *@
@@ -58,7 +58,7 @@
 @code {
   [Parameter]
   public Guid Id { get; set; }
-  EntityNamePlaceholderAdminEditModel castMemberMovieAdminEditModel { get; set; } = new EntityNamePlaceholderAdminEditModel();
+  CastMemberMovieAdminEditModel castMemberMovieAdminEditModel { get; set; } = new CastMemberMovieAdminEditModel();
 
   @* ListDeclarationCodePlaceholder *@
 
@@ -92,15 +92,15 @@
       return;
     }
 
-    var databaseEntityNamePlaceholderAdminDto = await EntityNamePlaceholderAdminRepository.GetByIdAsync(userName, Id);
+    var databaseCastMemberMovieAdminDto = await CastMemberMovieAdminRepository.GetByIdAsync(userName, Id);
 
-    if (databaseEntityNamePlaceholderAdminDto == null)
+    if (databaseCastMemberMovieAdminDto == null)
     {
-      castMemberMovieAdminEditModel = new EntityNamePlaceholderAdminEditModel();
+      castMemberMovieAdminEditModel = new CastMemberMovieAdminEditModel();
     }
     else
     {
-      castMemberMovieAdminEditModel = EntityNamePlaceholderAdminEditModel.FromEntityNamePlaceholderAdminDto(databaseEntityNamePlaceholderAdminDto);
+      castMemberMovieAdminEditModel = CastMemberMovieAdminEditModel.FromCastMemberMovieAdminDto(databaseCastMemberMovieAdminDto);
     }
   }
 
@@ -121,23 +121,23 @@
       return;
     } *@
 
-    var castMemberMovieAdminDto = EntityNamePlaceholderAdminEditModel.ToEntityNamePlaceholderAdminDto(castMemberMovieAdminEditModel);
+    var castMemberMovieAdminDto = CastMemberMovieAdminEditModel.ToCastMemberMovieAdminDto(castMemberMovieAdminEditModel);
     castMemberMovieAdminDto.ApplicationUserName = userName;
 
     if (Id.Equals(Guid.Empty))
     {
-      var newEntityNamePlaceholderAdminDto = await EntityNamePlaceholderAdminRepository.AddAsync(castMemberMovieAdminDto);
+      var newCastMemberMovieAdminDto = await CastMemberMovieAdminRepository.AddAsync(castMemberMovieAdminDto);
 
-      if (newEntityNamePlaceholderAdminDto == null)
+      if (newCastMemberMovieAdminDto == null)
       {
         return;
       }
 
-      NavigationManager.NavigateTo($"/admin/UrlNamePlaceholder-edit/{newEntityNamePlaceholderAdminDto.Id}");
+      NavigationManager.NavigateTo($"/admin/UrlNamePlaceholder-edit/{newCastMemberMovieAdminDto.Id}");
     }
     else
     {
-      await EntityNamePlaceholderAdminRepository.EditAsync(castMemberMovieAdminDto);
+      await CastMemberMovieAdminRepository.EditAsync(castMemberMovieAdminDto);
     }
   }
 
@@ -156,7 +156,7 @@
       return;
     }
 
-    await EntityNamePlaceholderAdminRepository.DeleteAsync(userName, Id);
+    await CastMemberMovieAdminRepository.DeleteAsync(userName, Id);
     NavigationManager.NavigateTo($"/admin/UrlNamePlaceholder-list");
   }
 
