@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace ApplicationNamePlaceholder.BusinessLogic.Entities;
+namespace BlazorWebAppMovies.BusinessLogic.Entities;
 
 public class ApplicationUser : IdentityUser<Guid>
 {
