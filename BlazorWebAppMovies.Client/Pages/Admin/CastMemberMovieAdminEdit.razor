@@ -131,6 +131,11 @@
         {
             castMemberList = castMemberListResult;
         }
+        var movieListResult = await MovieAdminRepository.GetAllAsync(userName);
+        if (movieListResult != null)
+        {
+            movieList = movieListResult;
+        }
         @* OnInitializedCodePlaceholder *@
   }
 
