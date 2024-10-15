@@ -1,4 +1,4 @@
-@page "/admin/UrlNamePlaceholder-list"
+@page "/admin/movie-list"
 @rendermode InteractiveServer
 @inject AuthenticationStateProvider GetAuthenticationStateAsync
 @inject IMovieAdminRepository MovieAdminRepository
@@ -43,14 +43,14 @@
               @* ListItemCodePlaceholder *@
 
               <td>
-                <a href="@("/admin/UrlNamePlaceholder-edit/" + movie?.Id)">Edit</a>
+                <a href="@("/admin/movie-edit/" + movie?.Id)">Edit</a>
               </td>
             </tr>
           }
         }
       </tbody>
     </table>
-    <a href="/admin/UrlNamePlaceholder-edit">Create</a>
+    <a href="/admin/movie-edit">Create</a>
   </article>
 </section>
 
