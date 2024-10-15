@@ -102,6 +102,7 @@ public class CastMemberAdminRepository(ApplicationDbContext applicationDbContext
         databaseCastMember.ApplicationUserUpdatedBy = user;
 
         databaseCastMember.Name1 = castMemberAdminDto.Name1;
+        databaseCastMember.NormalizedName1 = castMemberAdminDto.Name1.ToUpperInvariant();
         // EditDatabasePropertyCodePlaceholder
         // databaseCastMember.Title = castMemberAdminDto.Title;
         // databaseCastMember.NormalizedTitle = castMemberAdminDto.Title.ToUpperInvariant();
