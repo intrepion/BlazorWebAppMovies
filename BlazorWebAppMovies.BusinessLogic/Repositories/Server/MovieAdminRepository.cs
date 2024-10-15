@@ -1,9 +1,9 @@
-﻿using ApplicationNamePlaceholder.BusinessLogic.Data;
-using ApplicationNamePlaceholder.BusinessLogic.Entities;
-using ApplicationNamePlaceholder.BusinessLogic.Entities.Dtos;
+﻿using BlazorWebAppMovies.BusinessLogic.Data;
+using BlazorWebAppMovies.BusinessLogic.Entities;
+using BlazorWebAppMovies.BusinessLogic.Entities.Dtos;
 using Microsoft.EntityFrameworkCore;
 
-namespace ApplicationNamePlaceholder.BusinessLogic.Repositories.Server;
+namespace BlazorWebAppMovies.BusinessLogic.Repositories.Server;
 
 public class MovieAdminRepository(ApplicationDbContext applicationDbContext) : IMovieAdminRepository
 {
