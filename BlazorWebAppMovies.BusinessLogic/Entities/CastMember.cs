@@ -7,5 +7,6 @@ public class CastMember
 
     public ICollection<CastMemberMovie> CastMemberMovies { get; set; } = [];
     public string Name1 { get; set; } = string.Empty;
+    public string NormalizedName1 { get; set; } = string.Empty;
     // ActualPropertyPlaceholder
 }
