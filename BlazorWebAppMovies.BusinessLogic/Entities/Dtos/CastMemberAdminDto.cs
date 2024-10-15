@@ -38,6 +38,7 @@ public class CastMemberAdminDto
             Id = castMemberAdminDto.Id,
 
             Name1 = castMemberAdminDto.Name1,
+            Name2 = castMemberAdminDto.Name2,
             // DtoToEntityPropertyPlaceholder
             // Title = castMemberAdminDto.Title,
             // ToDoList = castMemberAdminDto.ToDoList,
