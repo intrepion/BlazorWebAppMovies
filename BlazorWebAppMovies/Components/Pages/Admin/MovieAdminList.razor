@@ -41,6 +41,24 @@
             <tr>
               <td>@movie.Id</td>
 
+              <td>
+                @if (movie?.MovieCastMembers != null)
+                {
+                  var first = true;
+                  foreach (var x in movie.MovieCastMembers)
+                  {
+                    if (first)
+                    {
+                      first = false;
+                    }
+                    else
+                    {
+                      <span>, </span>
+                    }
+                    <span>@x?.CastMember?.Name1 @x?.CastMember?.Name2</span>
+                  }
+                }
+              </td>
               @* ListItemCodePlaceholder *@
 
               <td>
