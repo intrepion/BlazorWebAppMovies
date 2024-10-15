@@ -22,7 +22,7 @@ public partial class PublicPages : PageTest
     [Test]
     public async Task MainNavigation()
     {
-        await Expect(Page).ToHaveURLAsync("ClientUriPlaceholder/");
+        await Expect(Page).ToHaveURLAsync("http://localhost:5277/");
         await Expect(Page).ToHaveTitleAsync(Home());
         await Page.GetByRole(AriaRole.Link, new() { Name = "Counter" }).ClickAsync();
         await Expect(Page).ToHaveTitleAsync(Counter());
@@ -37,6 +37,6 @@ public partial class PublicPages : PageTest
     [SetUp]
     public async Task SetUp()
     {
-        await Page.GotoAsync("ClientUriPlaceholder");
+        await Page.GotoAsync("http://localhost:5277");
     }
 }
