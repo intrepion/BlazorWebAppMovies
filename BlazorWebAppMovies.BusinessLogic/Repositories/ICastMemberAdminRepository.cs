@@ -3,11 +3,11 @@ using ApplicationNamePlaceholder.BusinessLogic.Entities.Dtos;
 
 namespace ApplicationNamePlaceholder.BusinessLogic.Repositories;
 
-public interface IEntityNamePlaceholderAdminRepository
+public interface ICastMemberAdminRepository
 {
-    Task<EntityNamePlaceholderAdminDto?> AddAsync(EntityNamePlaceholderAdminDto castMember);
+    Task<CastMemberAdminDto?> AddAsync(CastMemberAdminDto castMember);
     Task<bool> DeleteAsync(string userName, Guid id);
-    Task<EntityNamePlaceholderAdminDto?> EditAsync(EntityNamePlaceholderAdminDto castMember);
-    Task<List<EntityNamePlaceholder>?> GetAllAsync(string userName);
-    Task<EntityNamePlaceholderAdminDto?> GetByIdAsync(string userName, Guid id);
+    Task<CastMemberAdminDto?> EditAsync(CastMemberAdminDto castMember);
+    Task<List<CastMember>?> GetAllAsync(string userName);
+    Task<CastMemberAdminDto?> GetByIdAsync(string userName, Guid id);
 }
