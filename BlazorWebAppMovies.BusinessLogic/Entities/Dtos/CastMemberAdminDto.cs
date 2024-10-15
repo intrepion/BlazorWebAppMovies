@@ -1,6 +1,6 @@
 ﻿namespace ApplicationNamePlaceholder.BusinessLogic.Entities.Dtos;
 
-public class EntityNamePlaceholderAdminDto
+public class CastMemberAdminDto
 {
     public string ApplicationUserName { get; set; } = string.Empty;
     public Guid Id { get; set; }
@@ -9,14 +9,14 @@ public class EntityNamePlaceholderAdminDto
     // public string Title { get; set; } = string.Empty;
     // public ToDoList? ToDoList { get; set; }
 
-    public static EntityNamePlaceholderAdminDto FromEntityNamePlaceholder(EntityNamePlaceholder? castMember)
+    public static CastMemberAdminDto FromCastMember(CastMember? castMember)
     {
         if (castMember == null)
         {
-            return new EntityNamePlaceholderAdminDto();
+            return new CastMemberAdminDto();
         }
 
-        return new EntityNamePlaceholderAdminDto
+        return new CastMemberAdminDto
         {
             Id = castMember.Id,
 
@@ -26,9 +26,9 @@ public class EntityNamePlaceholderAdminDto
         };
     }
 
-    public static EntityNamePlaceholder ToEntityNamePlaceholder(ApplicationUser applicationUser, EntityNamePlaceholderAdminDto castMemberAdminDto)
+    public static CastMember ToCastMember(ApplicationUser applicationUser, CastMemberAdminDto castMemberAdminDto)
     {
-        return new EntityNamePlaceholder
+        return new CastMember
         {
             ApplicationUserUpdatedBy = applicationUser,
             Id = castMemberAdminDto.Id,
