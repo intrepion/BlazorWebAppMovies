@@ -1,6 +1,6 @@
-﻿using ApplicationNamePlaceholder.BusinessLogic.Repositories;
-using ApplicationNamePlaceholder.BusinessLogic.Repositories.Client;
-using ApplicationNamePlaceholder.Client;
+﻿using BlazorWebAppMovies.BusinessLogic.Repositories;
+using BlazorWebAppMovies.BusinessLogic.Repositories.Client;
+using BlazorWebAppMovies.Client;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
