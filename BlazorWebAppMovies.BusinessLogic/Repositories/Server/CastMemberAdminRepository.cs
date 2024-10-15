@@ -28,6 +28,11 @@ public class CastMemberAdminRepository(ApplicationDbContext applicationDbContext
             throw new Exception("Name 1 required.");
         }
 
+        if (string.IsNullOrWhiteSpace(castMemberAdminDto.Name2))
+        {
+            throw new Exception("Name 2 required.");
+        }
+
         // AddRequiredPropertyCodePlaceholder
         // if (string.IsNullOrWhiteSpace(castMemberAdminDto.Title))
         // {
