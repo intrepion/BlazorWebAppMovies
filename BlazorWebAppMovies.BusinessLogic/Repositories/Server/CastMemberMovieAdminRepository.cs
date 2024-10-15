@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ApplicationNamePlaceholder.BusinessLogic.Repositories.Server;
 
-public class EntityNamePlaceholderAdminRepository(ApplicationDbContext applicationDbContext) : IEntityNamePlaceholderAdminRepository
+public class CastMemberMovieAdminRepository(ApplicationDbContext applicationDbContext) : ICastMemberMovieAdminRepository
 {
     private readonly ApplicationDbContext _applicationDbContext = applicationDbContext;
 
-    public async Task<EntityNamePlaceholderAdminDto?> AddAsync(EntityNamePlaceholderAdminDto castMemberMovieAdminDto)
+    public async Task<CastMemberMovieAdminDto?> AddAsync(CastMemberMovieAdminDto castMemberMovieAdminDto)
     {
         if (string.IsNullOrWhiteSpace(castMemberMovieAdminDto.ApplicationUserName))
         {
@@ -29,15 +29,15 @@ public class EntityNamePlaceholderAdminRepository(ApplicationDbContext applicati
         //     throw new Exception("Title required.");
         // }
 
-        var castMemberMovie = EntityNamePlaceholderAdminDto.ToEntityNamePlaceholder(user, castMemberMovieAdminDto);
+        var castMemberMovie = CastMemberMovieAdminDto.ToCastMemberMovie(user, castMemberMovieAdminDto);
 
         // AddDatabasePropertyCodePlaceholder
 
         var result = await _applicationDbContext.TableNamePlaceholder.AddAsync(castMemberMovie);
-        var databaseEntityNamePlaceholderAdminDto = EntityNamePlaceholderAdminDto.FromEntityNamePlaceholder(result.Entity);
+        var databaseCastMemberMovieAdminDto = CastMemberMovieAdminDto.FromCastMemberMovie(result.Entity);
         await _applicationDbContext.SaveChangesAsync();
 
-        return databaseEntityNamePlaceholderAdminDto;
+        return databaseCastMemberMovieAdminDto;
     }
 
     public async Task<bool> DeleteAsync(string userName, Guid id)
@@ -54,24 +54,24 @@ public class EntityNamePlaceholderAdminRepository(ApplicationDbContext applicati
             throw new Exception("Authentication required.");
         }
 
-        var databaseEntityNamePlaceholder = await _applicationDbContext.TableNamePlaceholder.FindAsync(id);
+        var databaseCastMemberMovie = await _applicationDbContext.TableNamePlaceholder.FindAsync(id);
 
-        if (databaseEntityNamePlaceholder == null)
+        if (databaseCastMemberMovie == null)
         {
             return false;
         }
 
-        databaseEntityNamePlaceholder.ApplicationUserUpdatedBy = user;
+        databaseCastMemberMovie.ApplicationUserUpdatedBy = user;
         await _applicationDbContext.SaveChangesAsync();
 
-        _applicationDbContext.Remove(databaseEntityNamePlaceholder);
+        _applicationDbContext.Remove(databaseCastMemberMovie);
 
         await _applicationDbContext.SaveChangesAsync();
 
         return true;
     }
 
-    public async Task<EntityNamePlaceholderAdminDto?> EditAsync(EntityNamePlaceholderAdminDto castMemberMovieAdminDto)
+    public async Task<CastMemberMovieAdminDto?> EditAsync(CastMemberMovieAdminDto castMemberMovieAdminDto)
     {
         if (string.IsNullOrWhiteSpace(castMemberMovieAdminDto.ApplicationUserName))
         {
@@ -85,9 +85,9 @@ public class EntityNamePlaceholderAdminRepository(ApplicationDbContext applicati
             throw new Exception("Authentication required.");
         }
 
-        var databaseEntityNamePlaceholder = await _applicationDbContext.TableNamePlaceholder.FindAsync(castMemberMovieAdminDto.Id);
+        var databaseCastMemberMovie = await _applicationDbContext.TableNamePlaceholder.FindAsync(castMemberMovieAdminDto.Id);
 
-        if (databaseEntityNamePlaceholder == null)
+        if (databaseCastMemberMovie == null)
         {
             throw new Exception("HumanNamePlaceholder not found.");
         }
@@ -98,19 +98,19 @@ public class EntityNamePlaceholderAdminRepository(ApplicationDbContext applicati
         //     throw new Exception("Title required.");
         // }
 
-        databaseEntityNamePlaceholder.ApplicationUserUpdatedBy = user;
+        databaseCastMemberMovie.ApplicationUserUpdatedBy = user;
 
         // EditDatabasePropertyCodePlaceholder
-        // databaseEntityNamePlaceholder.Title = castMemberMovieAdminDto.Title;
-        // databaseEntityNamePlaceholder.NormalizedTitle = castMemberMovieAdminDto.Title.ToUpperInvariant();
-        // databaseEntityNamePlaceholder.ToDoList = castMemberMovieAdminDto.ToDoList;
+        // databaseCastMemberMovie.Title = castMemberMovieAdminDto.Title;
+        // databaseCastMemberMovie.NormalizedTitle = castMemberMovieAdminDto.Title.ToUpperInvariant();
+        // databaseCastMemberMovie.ToDoList = castMemberMovieAdminDto.ToDoList;
 
         await _applicationDbContext.SaveChangesAsync();
 
         return castMemberMovieAdminDto;
     }
 
-    public async Task<List<EntityNamePlaceholder>?> GetAllAsync(string userName)
+    public async Task<List<CastMemberMovie>?> GetAllAsync(string userName)
     {
         if (string.IsNullOrWhiteSpace(userName))
         {
@@ -131,7 +131,7 @@ public class EntityNamePlaceholderAdminRepository(ApplicationDbContext applicati
             .ToListAsync();
     }
 
-    public async Task<EntityNamePlaceholderAdminDto?> GetByIdAsync(string userName, Guid id)
+    public async Task<CastMemberMovieAdminDto?> GetByIdAsync(string userName, Guid id)
     {
         if (string.IsNullOrWhiteSpace(userName))
         {
@@ -152,6 +152,6 @@ public class EntityNamePlaceholderAdminRepository(ApplicationDbContext applicati
             return null;
         }
 
-        return EntityNamePlaceholderAdminDto.FromEntityNamePlaceholder(result);
+        return CastMemberMovieAdminDto.FromCastMemberMovie(result);
     }
 }
