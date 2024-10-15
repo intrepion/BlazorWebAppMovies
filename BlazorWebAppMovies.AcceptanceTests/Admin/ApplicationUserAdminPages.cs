@@ -31,7 +31,7 @@ public partial class ApplicationUserAdminPages : PageTest
     [SetUp]
     public async Task SetUp()
     {
-        await Page.GotoAsync("ClientUriPlaceholder");
+        await Page.GotoAsync("http://localhost:5277");
         await Page.GetByRole(AriaRole.Link, new() { Name = "Login" }).ClickAsync();
         await Expect(Page).ToHaveTitleAsync("Log in");
         await Page.GetByTestId("loginEmail").FillAsync("Admin1@BlazorWebAppMovies.com");
