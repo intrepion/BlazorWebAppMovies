@@ -1,10 +1,10 @@
-using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using BlazorWebAppMovies.Client.Pages;
+﻿using BlazorWebAppMovies.Client.Pages;
 using BlazorWebAppMovies.Components;
 using BlazorWebAppMovies.Components.Account;
 using BlazorWebAppMovies.Data;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
