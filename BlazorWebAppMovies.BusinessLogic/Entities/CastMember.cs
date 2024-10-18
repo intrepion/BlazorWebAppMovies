@@ -1,4 +1,4 @@
-﻿namespace ApplicationNamePlaceholder.BusinessLogic.Entities;
+﻿namespace BlazorWebAppMovies.BusinessLogic.Entities;
 
 public class CastMember
 {
