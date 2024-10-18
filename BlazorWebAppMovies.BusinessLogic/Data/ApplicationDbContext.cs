@@ -24,6 +24,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
         new ApplicationUserTokenEntityTypeConfiguration().Configure(builder.Entity<ApplicationUserToken>());
 
         new CastMemberEntityTypeConfiguration().Configure(builder.Entity<CastMember>());
+        new CastMemberMovieEntityTypeConfiguration().Configure(builder.Entity<CastMemberMovie>());
         // EntityTypeCfgCodePlaceholder
     }
 }
