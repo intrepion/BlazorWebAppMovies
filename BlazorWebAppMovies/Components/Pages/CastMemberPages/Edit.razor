@@ -1,0 +1,104 @@
+@page "/castmembers/edit"
+@using Microsoft.EntityFrameworkCore
+@using BlazorWebAppMovies.BusinessLogic.Entities
+@inject IDbContextFactory<BlazorWebAppMovies.BusinessLogic.Data.ApplicationDbContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Edit</PageTitle>
+
+<h1>Edit</h1>
+
+<h2>CastMember</h2>
+<hr />
+@if (CastMember is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm method="post" Model="CastMember" OnValidSubmit="UpdateCastMember" FormName="edit" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <input type="hidden" name="CastMember.Id" value="@CastMember.Id" />
+                <div class="mb-3">
+                    <label for="name1" class="form-label">Name1:</label>
+                    <InputText id="name1" @bind-Value="CastMember.Name1" class="form-control" />
+                    <ValidationMessage For="() => CastMember.Name1" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="normalizedname1" class="form-label">NormalizedName1:</label>
+                    <InputText id="normalizedname1" @bind-Value="CastMember.NormalizedName1" class="form-control" />
+                    <ValidationMessage For="() => CastMember.NormalizedName1" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="name2" class="form-label">Name2:</label>
+                    <InputText id="name2" @bind-Value="CastMember.Name2" class="form-control" />
+                    <ValidationMessage For="() => CastMember.Name2" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="normalizedname2" class="form-label">NormalizedName2:</label>
+                    <InputText id="normalizedname2" @bind-Value="CastMember.NormalizedName2" class="form-control" />
+                    <ValidationMessage For="() => CastMember.NormalizedName2" class="text-danger" />
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="/castmembers">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    private Guid Id { get; set; }
+
+    [SupplyParameterFromForm]
+    private CastMember? CastMember { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        CastMember ??= await context.CastMembers.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (CastMember is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task UpdateCastMember()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Attach(CastMember!).State = EntityState.Modified;
+
+        try
+        {
+            await context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!CastMemberExists(CastMember!.Id))
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        NavigationManager.NavigateTo("/castmembers");
+    }
+
+    private bool CastMemberExists(Guid id)
+    {
+        using var context = DbFactory.CreateDbContext();
+        return context.CastMembers.Any(e => e.Id == id);
+    }
+}

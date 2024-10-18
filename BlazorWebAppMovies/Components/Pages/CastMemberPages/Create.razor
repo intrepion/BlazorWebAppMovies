@@ -1,0 +1,59 @@
+@page "/castmembers/create"
+@using Microsoft.EntityFrameworkCore
+@using BlazorWebAppMovies.BusinessLogic.Entities
+@inject IDbContextFactory<BlazorWebAppMovies.BusinessLogic.Data.ApplicationDbContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Create</PageTitle>
+
+<h1>Create</h1>
+
+<h2>CastMember</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm method="post" Model="CastMember" OnValidSubmit="AddCastMember" FormName="create" Enhance>
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" />
+            <div class="mb-3">
+                <label for="name1" class="form-label">Name1:</label> 
+                <InputText id="name1" @bind-Value="CastMember.Name1" class="form-control" /> 
+                <ValidationMessage For="() => CastMember.Name1" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="normalizedname1" class="form-label">NormalizedName1:</label> 
+                <InputText id="normalizedname1" @bind-Value="CastMember.NormalizedName1" class="form-control" /> 
+                <ValidationMessage For="() => CastMember.NormalizedName1" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="name2" class="form-label">Name2:</label> 
+                <InputText id="name2" @bind-Value="CastMember.Name2" class="form-control" /> 
+                <ValidationMessage For="() => CastMember.Name2" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="normalizedname2" class="form-label">NormalizedName2:</label> 
+                <InputText id="normalizedname2" @bind-Value="CastMember.NormalizedName2" class="form-control" /> 
+                <ValidationMessage For="() => CastMember.NormalizedName2" class="text-danger" /> 
+            </div>        
+            <button type="submit" class="btn btn-primary">Create</button>
+        </EditForm>
+    </div>
+</div>
+
+<div>
+    <a href="/castmembers">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    private CastMember CastMember { get; set; } = new();
+
+    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task AddCastMember()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.CastMembers.Add(CastMember);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/castmembers");
+    }
+}

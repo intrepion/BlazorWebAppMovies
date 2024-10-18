@@ -1,0 +1,52 @@
+@page "/castmembers/details"
+@using Microsoft.EntityFrameworkCore
+@using BlazorWebAppMovies.BusinessLogic.Entities
+@inject IDbContextFactory<BlazorWebAppMovies.BusinessLogic.Data.ApplicationDbContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>CastMember</h2>
+    <hr />
+    @if (castmember is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">Name1</dt>
+            <dd class="col-sm-10">@castmember.Name1</dd>
+            <dt class="col-sm-2">NormalizedName1</dt>
+            <dd class="col-sm-10">@castmember.NormalizedName1</dd>
+            <dt class="col-sm-2">Name2</dt>
+            <dd class="col-sm-10">@castmember.Name2</dd>
+            <dt class="col-sm-2">NormalizedName2</dt>
+            <dd class="col-sm-10">@castmember.NormalizedName2</dd>
+        </dl>
+        <div>
+            <a href="@($"/castmembers/edit?id={castmember.Id}")">Edit</a> |
+            <a href="@($"/castmembers")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private CastMember? castmember;
+
+    [SupplyParameterFromQuery]
+    private Guid Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        castmember = await context.CastMembers.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (castmember is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}

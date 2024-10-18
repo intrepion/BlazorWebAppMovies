@@ -1,0 +1,39 @@
+@page "/castmembers"
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using BlazorWebAppMovies.BusinessLogic.Entities
+@using BlazorWebAppMovies.BusinessLogic.Data
+@implements IAsyncDisposable
+@inject IDbContextFactory<BlazorWebAppMovies.BusinessLogic.Data.ApplicationDbContext> DbFactory
+
+<PageTitle>Index</PageTitle>
+
+<h1>Index</h1>
+
+<p>
+    <a href="castmembers/create">Create New</a>
+</p>
+
+<QuickGrid Class="table" Items="context.CastMembers">
+    <PropertyColumn Property="castmember => castmember.Name1" />
+    <PropertyColumn Property="castmember => castmember.NormalizedName1" />
+    <PropertyColumn Property="castmember => castmember.Name2" />
+    <PropertyColumn Property="castmember => castmember.NormalizedName2" />
+
+    <TemplateColumn Context="castmember">
+        <a href="@($"castmembers/edit?id={castmember.Id}")">Edit</a> |
+        <a href="@($"castmembers/details?id={castmember.Id}")">Details</a> |
+        <a href="@($"castmembers/delete?id={castmember.Id}")">Delete</a>
+    </TemplateColumn>
+</QuickGrid>
+
+@code {
+    private ApplicationDbContext context = default!;
+
+    protected override void OnInitialized()
+    {
+        context = DbFactory.CreateDbContext();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+}
