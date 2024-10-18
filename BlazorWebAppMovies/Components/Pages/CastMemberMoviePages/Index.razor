@@ -1,0 +1,35 @@
+@page "/castmembermovies"
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using BlazorWebAppMovies.BusinessLogic.Entities
+@using BlazorWebAppMovies.BusinessLogic.Data
+@implements IAsyncDisposable
+@inject IDbContextFactory<BlazorWebAppMovies.BusinessLogic.Data.ApplicationDbContext> DbFactory
+
+<PageTitle>Index</PageTitle>
+
+<h1>Index</h1>
+
+<p>
+    <a href="castmembermovies/create">Create New</a>
+</p>
+
+<QuickGrid Class="table" Items="context.CastMemberMovies">
+
+    <TemplateColumn Context="castmembermovie">
+        <a href="@($"castmembermovies/edit?id={castmembermovie.Id}")">Edit</a> |
+        <a href="@($"castmembermovies/details?id={castmembermovie.Id}")">Details</a> |
+        <a href="@($"castmembermovies/delete?id={castmembermovie.Id}")">Delete</a>
+    </TemplateColumn>
+</QuickGrid>
+
+@code {
+    private ApplicationDbContext context = default!;
+
+    protected override void OnInitialized()
+    {
+        context = DbFactory.CreateDbContext();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+}

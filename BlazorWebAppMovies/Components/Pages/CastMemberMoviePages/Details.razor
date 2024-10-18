@@ -1,0 +1,44 @@
+@page "/castmembermovies/details"
+@using Microsoft.EntityFrameworkCore
+@using BlazorWebAppMovies.BusinessLogic.Entities
+@inject IDbContextFactory<BlazorWebAppMovies.BusinessLogic.Data.ApplicationDbContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>CastMemberMovie</h2>
+    <hr />
+    @if (castmembermovie is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+        </dl>
+        <div>
+            <a href="@($"/castmembermovies/edit?id={castmembermovie.Id}")">Edit</a> |
+            <a href="@($"/castmembermovies")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private CastMemberMovie? castmembermovie;
+
+    [SupplyParameterFromQuery]
+    private Guid Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        castmembermovie = await context.CastMemberMovies.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (castmembermovie is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}

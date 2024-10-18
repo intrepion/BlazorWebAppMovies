@@ -1,0 +1,51 @@
+@page "/castmembermovies/delete"
+@using Microsoft.EntityFrameworkCore
+@using BlazorWebAppMovies.BusinessLogic.Entities
+@inject IDbContextFactory<BlazorWebAppMovies.BusinessLogic.Data.ApplicationDbContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Delete</PageTitle>
+
+<h1>Delete</h1>
+
+<p>Are you sure you want to delete this?</p>
+<div>
+    <h2>CastMemberMovie</h2>
+    <hr />
+    @if (castmembermovie is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <EditForm method="post" Model="castmembermovie" OnValidSubmit="DeleteCastMemberMovie" FormName="delete" Enhance>
+            <button type="submit" class="btn btn-danger" disabled="@(castmembermovie is null)">Delete</button> |
+            <a href="/castmembermovies">Back to List</a>
+        </EditForm>
+    }
+</div>
+
+@code {
+    private CastMemberMovie? castmembermovie;
+
+    [SupplyParameterFromQuery]
+    private Guid Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        castmembermovie = await context.CastMemberMovies.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (castmembermovie is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    private async Task DeleteCastMemberMovie()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.CastMemberMovies.Remove(castmembermovie!);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/castmembermovies");
+    }
+}

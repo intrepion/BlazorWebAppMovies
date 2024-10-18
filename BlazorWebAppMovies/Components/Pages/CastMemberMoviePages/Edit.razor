@@ -1,0 +1,84 @@
+@page "/castmembermovies/edit"
+@using Microsoft.EntityFrameworkCore
+@using BlazorWebAppMovies.BusinessLogic.Entities
+@inject IDbContextFactory<BlazorWebAppMovies.BusinessLogic.Data.ApplicationDbContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Edit</PageTitle>
+
+<h1>Edit</h1>
+
+<h2>CastMemberMovie</h2>
+<hr />
+@if (CastMemberMovie is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm method="post" Model="CastMemberMovie" OnValidSubmit="UpdateCastMemberMovie" FormName="edit" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <input type="hidden" name="CastMemberMovie.Id" value="@CastMemberMovie.Id" />
+                <button type="submit" class="btn btn-primary">Save</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="/castmembermovies">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    private Guid Id { get; set; }
+
+    [SupplyParameterFromForm]
+    private CastMemberMovie? CastMemberMovie { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        CastMemberMovie ??= await context.CastMemberMovies.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (CastMemberMovie is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task UpdateCastMemberMovie()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Attach(CastMemberMovie!).State = EntityState.Modified;
+
+        try
+        {
+            await context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!CastMemberMovieExists(CastMemberMovie!.Id))
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        NavigationManager.NavigateTo("/castmembermovies");
+    }
+
+    private bool CastMemberMovieExists(Guid id)
+    {
+        using var context = DbFactory.CreateDbContext();
+        return context.CastMemberMovies.Any(e => e.Id == id);
+    }
+}
