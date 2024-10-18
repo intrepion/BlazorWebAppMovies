@@ -1,0 +1,84 @@
+@page "/applicationuserroles/edit"
+@using Microsoft.EntityFrameworkCore
+@using BlazorWebAppMovies.BusinessLogic.Entities
+@inject IDbContextFactory<BlazorWebAppMovies.BusinessLogic.Data.ApplicationDbContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Edit</PageTitle>
+
+<h1>Edit</h1>
+
+<h2>ApplicationUserRole</h2>
+<hr />
+@if (ApplicationUserRole is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm method="post" Model="ApplicationUserRole" OnValidSubmit="UpdateApplicationUserRole" FormName="edit" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <input type="hidden" name="ApplicationUserRole.UserId" value="@ApplicationUserRole.UserId" />
+                <button type="submit" class="btn btn-primary">Save</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="/applicationuserroles">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    private Guid UserId { get; set; }
+
+    [SupplyParameterFromForm]
+    private ApplicationUserRole? ApplicationUserRole { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        ApplicationUserRole ??= await context.UserRoles.FirstOrDefaultAsync(m => m.UserId == UserId);
+
+        if (ApplicationUserRole is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task UpdateApplicationUserRole()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Attach(ApplicationUserRole!).State = EntityState.Modified;
+
+        try
+        {
+            await context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!ApplicationUserRoleExists(ApplicationUserRole!.UserId))
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        NavigationManager.NavigateTo("/applicationuserroles");
+    }
+
+    private bool ApplicationUserRoleExists(Guid userid)
+    {
+        using var context = DbFactory.CreateDbContext();
+        return context.UserRoles.Any(e => e.UserId == userid);
+    }
+}

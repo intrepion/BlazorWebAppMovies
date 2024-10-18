@@ -1,0 +1,51 @@
+@page "/applicationuserroles/delete"
+@using Microsoft.EntityFrameworkCore
+@using BlazorWebAppMovies.BusinessLogic.Entities
+@inject IDbContextFactory<BlazorWebAppMovies.BusinessLogic.Data.ApplicationDbContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Delete</PageTitle>
+
+<h1>Delete</h1>
+
+<p>Are you sure you want to delete this?</p>
+<div>
+    <h2>ApplicationUserRole</h2>
+    <hr />
+    @if (applicationuserrole is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <EditForm method="post" Model="applicationuserrole" OnValidSubmit="DeleteApplicationUserRole" FormName="delete" Enhance>
+            <button type="submit" class="btn btn-danger" disabled="@(applicationuserrole is null)">Delete</button> |
+            <a href="/applicationuserroles">Back to List</a>
+        </EditForm>
+    }
+</div>
+
+@code {
+    private ApplicationUserRole? applicationuserrole;
+
+    [SupplyParameterFromQuery]
+    private Guid UserId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        applicationuserrole = await context.UserRoles.FirstOrDefaultAsync(m => m.UserId == UserId);
+
+        if (applicationuserrole is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    private async Task DeleteApplicationUserRole()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.UserRoles.Remove(applicationuserrole!);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/applicationuserroles");
+    }
+}

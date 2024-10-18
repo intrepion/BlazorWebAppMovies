@@ -1,0 +1,44 @@
+@page "/applicationuserroles/details"
+@using Microsoft.EntityFrameworkCore
+@using BlazorWebAppMovies.BusinessLogic.Entities
+@inject IDbContextFactory<BlazorWebAppMovies.BusinessLogic.Data.ApplicationDbContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>ApplicationUserRole</h2>
+    <hr />
+    @if (applicationuserrole is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+        </dl>
+        <div>
+            <a href="@($"/applicationuserroles/edit?userid={applicationuserrole.UserId}")">Edit</a> |
+            <a href="@($"/applicationuserroles")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private ApplicationUserRole? applicationuserrole;
+
+    [SupplyParameterFromQuery]
+    private Guid UserId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        applicationuserrole = await context.UserRoles.FirstOrDefaultAsync(m => m.UserId == UserId);
+
+        if (applicationuserrole is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}
