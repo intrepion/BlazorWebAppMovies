@@ -1,4 +1,4 @@
-using BlazorWebAppMovies.BusinessLogic.Data;
+﻿using BlazorWebAppMovies.BusinessLogic.Data;
 using BlazorWebAppMovies.BusinessLogic.Entities;
 using BlazorWebAppMovies.Client.Pages;
 using BlazorWebAppMovies.Components;
