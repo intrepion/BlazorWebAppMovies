@@ -1,10 +1,12 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.0.0
 MinimumVisualStudioVersion = 16.0.0.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWebAppMovies", "BlazorWebAppMovies\BlazorWebAppMovies.csproj", "{DA4D28AE-D20B-4E76-8773-4D406B5DFCC9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWebAppMovies.Client", "BlazorWebAppMovies.Client\BlazorWebAppMovies.Client.csproj", "{52674AE6-9A50-4AB3-A9D3-CDF3B79BA75E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWebAppMovies.AcceptanceTests", "BlazorWebAppMovies.AcceptanceTests\BlazorWebAppMovies.AcceptanceTests.csproj", "{DE147090-1508-4E46-804C-754901ADB7F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +42,18 @@ Global
 		{DA4D28AE-D20B-4E76-8773-4D406B5DFCC9}.Release|x64.Build.0 = Release|Any CPU
 		{DA4D28AE-D20B-4E76-8773-4D406B5DFCC9}.Release|x86.ActiveCfg = Release|Any CPU
 		{DA4D28AE-D20B-4E76-8773-4D406B5DFCC9}.Release|x86.Build.0 = Release|Any CPU
+		{DE147090-1508-4E46-804C-754901ADB7F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE147090-1508-4E46-804C-754901ADB7F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE147090-1508-4E46-804C-754901ADB7F5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DE147090-1508-4E46-804C-754901ADB7F5}.Debug|x64.Build.0 = Debug|Any CPU
+		{DE147090-1508-4E46-804C-754901ADB7F5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DE147090-1508-4E46-804C-754901ADB7F5}.Debug|x86.Build.0 = Debug|Any CPU
+		{DE147090-1508-4E46-804C-754901ADB7F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE147090-1508-4E46-804C-754901ADB7F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE147090-1508-4E46-804C-754901ADB7F5}.Release|x64.ActiveCfg = Release|Any CPU
+		{DE147090-1508-4E46-804C-754901ADB7F5}.Release|x64.Build.0 = Release|Any CPU
+		{DE147090-1508-4E46-804C-754901ADB7F5}.Release|x86.ActiveCfg = Release|Any CPU
+		{DE147090-1508-4E46-804C-754901ADB7F5}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
