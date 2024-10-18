@@ -1,0 +1,49 @@
+@page "/applicationusers"
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using BlazorWebAppMovies.BusinessLogic.Entities
+@using BlazorWebAppMovies.BusinessLogic.Data
+@implements IAsyncDisposable
+@inject IDbContextFactory<BlazorWebAppMovies.BusinessLogic.Data.ApplicationDbContext> DbFactory
+
+<PageTitle>Index</PageTitle>
+
+<h1>Index</h1>
+
+<p>
+    <a href="applicationusers/create">Create New</a>
+</p>
+
+<QuickGrid Class="table" Items="context.Users">
+    <PropertyColumn Property="applicationuser => applicationuser.UserName" />
+    <PropertyColumn Property="applicationuser => applicationuser.NormalizedUserName" />
+    <PropertyColumn Property="applicationuser => applicationuser.Email" />
+    <PropertyColumn Property="applicationuser => applicationuser.NormalizedEmail" />
+    <PropertyColumn Property="applicationuser => applicationuser.EmailConfirmed" />
+    <PropertyColumn Property="applicationuser => applicationuser.PasswordHash" />
+    <PropertyColumn Property="applicationuser => applicationuser.SecurityStamp" />
+    <PropertyColumn Property="applicationuser => applicationuser.ConcurrencyStamp" />
+    <PropertyColumn Property="applicationuser => applicationuser.PhoneNumber" />
+    <PropertyColumn Property="applicationuser => applicationuser.PhoneNumberConfirmed" />
+    <PropertyColumn Property="applicationuser => applicationuser.TwoFactorEnabled" />
+    <PropertyColumn Property="applicationuser => applicationuser.LockoutEnd" />
+    <PropertyColumn Property="applicationuser => applicationuser.LockoutEnabled" />
+    <PropertyColumn Property="applicationuser => applicationuser.AccessFailedCount" />
+
+    <TemplateColumn Context="applicationuser">
+        <a href="@($"applicationusers/edit?id={applicationuser.Id}")">Edit</a> |
+        <a href="@($"applicationusers/details?id={applicationuser.Id}")">Details</a> |
+        <a href="@($"applicationusers/delete?id={applicationuser.Id}")">Delete</a>
+    </TemplateColumn>
+</QuickGrid>
+
+@code {
+    private ApplicationDbContext context = default!;
+
+    protected override void OnInitialized()
+    {
+        context = DbFactory.CreateDbContext();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+}

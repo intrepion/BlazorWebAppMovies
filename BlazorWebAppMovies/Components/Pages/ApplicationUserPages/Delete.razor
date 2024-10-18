@@ -1,0 +1,107 @@
+@page "/applicationusers/delete"
+@using Microsoft.EntityFrameworkCore
+@using BlazorWebAppMovies.BusinessLogic.Entities
+@inject IDbContextFactory<BlazorWebAppMovies.BusinessLogic.Data.ApplicationDbContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Delete</PageTitle>
+
+<h1>Delete</h1>
+
+<p>Are you sure you want to delete this?</p>
+<div>
+    <h2>ApplicationUser</h2>
+    <hr />
+    @if (applicationuser is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">UserName</dt>
+            <dd class="col-sm-10">@applicationuser.UserName</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">NormalizedUserName</dt>
+            <dd class="col-sm-10">@applicationuser.NormalizedUserName</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">Email</dt>
+            <dd class="col-sm-10">@applicationuser.Email</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">NormalizedEmail</dt>
+            <dd class="col-sm-10">@applicationuser.NormalizedEmail</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">EmailConfirmed</dt>
+            <dd class="col-sm-10">@applicationuser.EmailConfirmed</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">PasswordHash</dt>
+            <dd class="col-sm-10">@applicationuser.PasswordHash</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">SecurityStamp</dt>
+            <dd class="col-sm-10">@applicationuser.SecurityStamp</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">ConcurrencyStamp</dt>
+            <dd class="col-sm-10">@applicationuser.ConcurrencyStamp</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">PhoneNumber</dt>
+            <dd class="col-sm-10">@applicationuser.PhoneNumber</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">PhoneNumberConfirmed</dt>
+            <dd class="col-sm-10">@applicationuser.PhoneNumberConfirmed</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">TwoFactorEnabled</dt>
+            <dd class="col-sm-10">@applicationuser.TwoFactorEnabled</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">LockoutEnd</dt>
+            <dd class="col-sm-10">@applicationuser.LockoutEnd</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">LockoutEnabled</dt>
+            <dd class="col-sm-10">@applicationuser.LockoutEnabled</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">AccessFailedCount</dt>
+            <dd class="col-sm-10">@applicationuser.AccessFailedCount</dd>
+        </dl>
+        <EditForm method="post" Model="applicationuser" OnValidSubmit="DeleteApplicationUser" FormName="delete" Enhance>
+            <button type="submit" class="btn btn-danger" disabled="@(applicationuser is null)">Delete</button> |
+            <a href="/applicationusers">Back to List</a>
+        </EditForm>
+    }
+</div>
+
+@code {
+    private ApplicationUser? applicationuser;
+
+    [SupplyParameterFromQuery]
+    private Guid Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        applicationuser = await context.Users.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (applicationuser is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    private async Task DeleteApplicationUser()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Users.Remove(applicationuser!);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/applicationusers");
+    }
+}
