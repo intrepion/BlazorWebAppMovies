@@ -1,0 +1,50 @@
+@page "/applicationroles/details"
+@using Microsoft.EntityFrameworkCore
+@using BlazorWebAppMovies.BusinessLogic.Entities
+@inject IDbContextFactory<BlazorWebAppMovies.BusinessLogic.Data.ApplicationDbContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>ApplicationRole</h2>
+    <hr />
+    @if (applicationrole is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">Name</dt>
+            <dd class="col-sm-10">@applicationrole.Name</dd>
+            <dt class="col-sm-2">NormalizedName</dt>
+            <dd class="col-sm-10">@applicationrole.NormalizedName</dd>
+            <dt class="col-sm-2">ConcurrencyStamp</dt>
+            <dd class="col-sm-10">@applicationrole.ConcurrencyStamp</dd>
+        </dl>
+        <div>
+            <a href="@($"/applicationroles/edit?id={applicationrole.Id}")">Edit</a> |
+            <a href="@($"/applicationroles")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private ApplicationRole? applicationrole;
+
+    [SupplyParameterFromQuery]
+    private Guid Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        applicationrole = await context.Roles.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (applicationrole is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}

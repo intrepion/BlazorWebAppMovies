@@ -1,0 +1,54 @@
+@page "/applicationroles/create"
+@using Microsoft.EntityFrameworkCore
+@using BlazorWebAppMovies.BusinessLogic.Entities
+@inject IDbContextFactory<BlazorWebAppMovies.BusinessLogic.Data.ApplicationDbContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Create</PageTitle>
+
+<h1>Create</h1>
+
+<h2>ApplicationRole</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm method="post" Model="ApplicationRole" OnValidSubmit="AddApplicationRole" FormName="create" Enhance>
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" />
+            <div class="mb-3">
+                <label for="name" class="form-label">Name:</label> 
+                <InputText id="name" @bind-Value="ApplicationRole.Name" class="form-control" /> 
+                <ValidationMessage For="() => ApplicationRole.Name" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="normalizedname" class="form-label">NormalizedName:</label> 
+                <InputText id="normalizedname" @bind-Value="ApplicationRole.NormalizedName" class="form-control" /> 
+                <ValidationMessage For="() => ApplicationRole.NormalizedName" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="concurrencystamp" class="form-label">ConcurrencyStamp:</label> 
+                <InputText id="concurrencystamp" @bind-Value="ApplicationRole.ConcurrencyStamp" class="form-control" /> 
+                <ValidationMessage For="() => ApplicationRole.ConcurrencyStamp" class="text-danger" /> 
+            </div>        
+            <button type="submit" class="btn btn-primary">Create</button>
+        </EditForm>
+    </div>
+</div>
+
+<div>
+    <a href="/applicationroles">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    private ApplicationRole ApplicationRole { get; set; } = new();
+
+    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task AddApplicationRole()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Roles.Add(ApplicationRole);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/applicationroles");
+    }
+}

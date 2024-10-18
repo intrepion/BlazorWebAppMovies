@@ -1,0 +1,99 @@
+@page "/applicationroles/edit"
+@using Microsoft.EntityFrameworkCore
+@using BlazorWebAppMovies.BusinessLogic.Entities
+@inject IDbContextFactory<BlazorWebAppMovies.BusinessLogic.Data.ApplicationDbContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Edit</PageTitle>
+
+<h1>Edit</h1>
+
+<h2>ApplicationRole</h2>
+<hr />
+@if (ApplicationRole is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm method="post" Model="ApplicationRole" OnValidSubmit="UpdateApplicationRole" FormName="edit" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <input type="hidden" name="ApplicationRole.Id" value="@ApplicationRole.Id" />
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name:</label>
+                    <InputText id="name" @bind-Value="ApplicationRole.Name" class="form-control" />
+                    <ValidationMessage For="() => ApplicationRole.Name" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="normalizedname" class="form-label">NormalizedName:</label>
+                    <InputText id="normalizedname" @bind-Value="ApplicationRole.NormalizedName" class="form-control" />
+                    <ValidationMessage For="() => ApplicationRole.NormalizedName" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="concurrencystamp" class="form-label">ConcurrencyStamp:</label>
+                    <InputText id="concurrencystamp" @bind-Value="ApplicationRole.ConcurrencyStamp" class="form-control" />
+                    <ValidationMessage For="() => ApplicationRole.ConcurrencyStamp" class="text-danger" />
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="/applicationroles">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    private Guid Id { get; set; }
+
+    [SupplyParameterFromForm]
+    private ApplicationRole? ApplicationRole { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        ApplicationRole ??= await context.Roles.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (ApplicationRole is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task UpdateApplicationRole()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Attach(ApplicationRole!).State = EntityState.Modified;
+
+        try
+        {
+            await context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!ApplicationRoleExists(ApplicationRole!.Id))
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        NavigationManager.NavigateTo("/applicationroles");
+    }
+
+    private bool ApplicationRoleExists(Guid id)
+    {
+        using var context = DbFactory.CreateDbContext();
+        return context.Roles.Any(e => e.Id == id);
+    }
+}

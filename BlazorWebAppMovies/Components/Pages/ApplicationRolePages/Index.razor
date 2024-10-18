@@ -1,0 +1,38 @@
+@page "/applicationroles"
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using BlazorWebAppMovies.BusinessLogic.Entities
+@using BlazorWebAppMovies.BusinessLogic.Data
+@implements IAsyncDisposable
+@inject IDbContextFactory<BlazorWebAppMovies.BusinessLogic.Data.ApplicationDbContext> DbFactory
+
+<PageTitle>Index</PageTitle>
+
+<h1>Index</h1>
+
+<p>
+    <a href="applicationroles/create">Create New</a>
+</p>
+
+<QuickGrid Class="table" Items="context.Roles">
+    <PropertyColumn Property="applicationrole => applicationrole.Name" />
+    <PropertyColumn Property="applicationrole => applicationrole.NormalizedName" />
+    <PropertyColumn Property="applicationrole => applicationrole.ConcurrencyStamp" />
+
+    <TemplateColumn Context="applicationrole">
+        <a href="@($"applicationroles/edit?id={applicationrole.Id}")">Edit</a> |
+        <a href="@($"applicationroles/details?id={applicationrole.Id}")">Details</a> |
+        <a href="@($"applicationroles/delete?id={applicationrole.Id}")">Delete</a>
+    </TemplateColumn>
+</QuickGrid>
+
+@code {
+    private ApplicationDbContext context = default!;
+
+    protected override void OnInitialized()
+    {
+        context = DbFactory.CreateDbContext();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+}
