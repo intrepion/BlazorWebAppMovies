@@ -7,37 +7,37 @@ public class EntityNamePlaceholderClientAdminRepository(HttpClient httpClient) :
 {
     private readonly HttpClient _httpClient = httpClient;
 
-    public async Task<EntityNamePlaceholderAdminDto?> AddAsync(EntityNamePlaceholderAdminDto EntityLowercaseNamePlaceholderAdminDto)
+    public async Task<EntityNamePlaceholderAdminDto?> AddAsync(EntityNamePlaceholderAdminDto movieAdminDto)
     {
-        var result = await _httpClient.PostAsJsonAsync("/api/admin/EntityLowercaseNamePlaceholderAdmin", EntityLowercaseNamePlaceholderAdminDto);
+        var result = await _httpClient.PostAsJsonAsync("/api/admin/movieAdmin", movieAdminDto);
 
         return await result.Content.ReadFromJsonAsync<EntityNamePlaceholderAdminDto>();
     }
 
     public async Task<bool> DeleteAsync(string userName, Guid id)
     {
-        var result = await _httpClient.DeleteAsync($"/api/admin/EntityLowercaseNamePlaceholderAdmin/{id}?userName={userName}");
+        var result = await _httpClient.DeleteAsync($"/api/admin/movieAdmin/{id}?userName={userName}");
 
         return await result.Content.ReadFromJsonAsync<bool>();
     }
 
-    public async Task<EntityNamePlaceholderAdminDto?> EditAsync(EntityNamePlaceholderAdminDto EntityLowercaseNamePlaceholderAdminDto)
+    public async Task<EntityNamePlaceholderAdminDto?> EditAsync(EntityNamePlaceholderAdminDto movieAdminDto)
     {
-        var result = await _httpClient.PutAsJsonAsync($"/api/admin/EntityLowercaseNamePlaceholderAdmin/{EntityLowercaseNamePlaceholderAdminDto.Id}", EntityLowercaseNamePlaceholderAdminDto);
+        var result = await _httpClient.PutAsJsonAsync($"/api/admin/movieAdmin/{movieAdminDto.Id}", movieAdminDto);
 
         return await result.Content.ReadFromJsonAsync<EntityNamePlaceholderAdminDto>();
     }
 
     public async Task<List<EntityNamePlaceholderAdminDto>?> GetAllAsync(string userName)
     {
-        var result = await _httpClient.GetFromJsonAsync<List<EntityNamePlaceholderAdminDto>>($"/api/admin/EntityLowercaseNamePlaceholderAdmin?userName={userName}");
+        var result = await _httpClient.GetFromJsonAsync<List<EntityNamePlaceholderAdminDto>>($"/api/admin/movieAdmin?userName={userName}");
 
         return result;
     }
 
     public async Task<EntityNamePlaceholderAdminDto?> GetByIdAsync(string userName, Guid id)
     {
-        var result = await _httpClient.GetFromJsonAsync<EntityNamePlaceholderAdminDto>($"/api/admin/EntityLowercaseNamePlaceholderAdmin/{id}?userName={userName}");
+        var result = await _httpClient.GetFromJsonAsync<EntityNamePlaceholderAdminDto>($"/api/admin/movieAdmin/{id}?userName={userName}");
 
         return result;
     }
