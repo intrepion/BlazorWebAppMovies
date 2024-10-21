@@ -30,6 +30,30 @@
   <article>
     <EditForm class="container" Model="castMemberMovieAdminEditViewModel" OnSubmit="HandleSubmit">
 
+      <div class="row">
+        <div class="col">
+          <label>
+            Cast Member:
+            <select @onchange="CastMemberOnChange">
+              <option>Select cast member...</option>
+                @if (castMemberAdminDtos != null)
+                {
+                  @foreach (var castMember in castMemberAdminDtos)
+                  {
+                    if (castMemberMovieAdminEditViewModel.CastMember != null && castMemberMovieAdminEditViewModel.CastMember.Id.Equals(castMember.Id))
+                    {
+                      <option value="@castMember.Id" selected>@castMember?.Name1 @castMember?.Name2</option>
+                    }
+                    else
+                    {
+                      <option value="@castMember.Id">@castMember?.Name1 @castMember?.Name2</option>
+                    }
+                  }
+                }
+              </select>
+          </label>
+        </div>
+      </div>
       @* EditRowCodePlaceholder *@
 
       <div class="row">
