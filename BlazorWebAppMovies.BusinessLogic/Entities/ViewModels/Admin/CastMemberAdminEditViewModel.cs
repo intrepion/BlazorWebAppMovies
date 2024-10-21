@@ -7,6 +7,7 @@ public class CastMemberAdminEditViewModel
     public Guid Id { get; set; }
 
     public string Name1 { get; set; } = string.Empty;
+    public string Name2 { get; set; } = string.Empty;
     // JustModelPropertyPlaceholder
 
     public static CastMemberAdminEditViewModel FromCastMemberAdminDto(CastMemberAdminDto castMemberAdminDto)
