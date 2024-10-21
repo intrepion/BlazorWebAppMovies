@@ -9,6 +9,9 @@ public class CastMemberMovieEntityTypeConfiguration : IEntityTypeConfiguration<C
     {
         builder.ToTable("CastMemberMovies", x => x.IsTemporal());
 
+        builder.HasOne(x => x.CastMember)
+            .WithMany(x => x.CastMemberMovies)
+            .OnDelete(DeleteBehavior.Restrict);
         // EntityConfigurationCodePlaceholder
 
         builder.HasOne(x => x.ApplicationUserUpdatedBy)
