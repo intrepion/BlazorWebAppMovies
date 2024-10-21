@@ -227,5 +227,16 @@
         castMemberMovieAdminEditViewModel.CastMember = CastMemberAdminDto.ToCastMember(null, castMemberAdminDtos?.Where(x => x.Id.ToString().Equals(id)).FirstOrDefault());
     }
 
+    void MovieOnChange(ChangeEventArgs args)
+    {
+        if (args.Value == null)
+        {
+            return;
+        }
+
+        var id = (string)args.Value;
+        castMemberMovieAdminEditViewModel.Movie = MovieAdminDto.ToMovie(null, movieAdminDtos?.Where(x => x.Id.ToString().Equals(id)).FirstOrDefault());
+    }
+
     @* OnChangeCodePlaceholder *@
 }
