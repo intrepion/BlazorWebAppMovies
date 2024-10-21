@@ -114,6 +114,7 @@ public class CastMemberAdminRepository(ApplicationDbContext applicationDbContext
 
         return await _applicationDbContext.CastMembers
 
+            .Include(x => x.CastMemberMovies)
             // IncludeTableCodePlaceholder
 
             .Select(x => CastMemberAdminDto.FromCastMember(x))
