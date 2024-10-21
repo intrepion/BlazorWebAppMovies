@@ -29,6 +29,14 @@
   <article>
     <EditForm class="container" Model="movieAdminEditViewModel" OnSubmit="HandleSubmit">
 
+      <div class="row">
+        <div class="col">
+          <label>
+            Title:
+            <InputText @bind-Value="movieAdminEditViewModel.Title" data-testid="movieAdminEditTitle" />
+          </label>
+        </div>
+      </div>
       @* EditRowCodePlaceholder *@
 
       <div class="row">
