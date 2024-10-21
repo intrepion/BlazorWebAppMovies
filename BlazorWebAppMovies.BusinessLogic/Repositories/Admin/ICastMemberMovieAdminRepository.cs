@@ -2,11 +2,11 @@
 
 namespace ApplicationNamePlaceholder.BusinessLogic.Repositories.Admin;
 
-public interface IEntityNamePlaceholderAdminRepository
+public interface ICastMemberMovieAdminRepository
 {
-    Task<EntityNamePlaceholderAdminDto?> AddAsync(EntityNamePlaceholderAdminDto castMemberMovie);
+    Task<CastMemberMovieAdminDto?> AddAsync(CastMemberMovieAdminDto castMemberMovie);
     Task<bool> DeleteAsync(string userName, Guid id);
-    Task<EntityNamePlaceholderAdminDto?> EditAsync(EntityNamePlaceholderAdminDto castMemberMovie);
-    Task<List<EntityNamePlaceholderAdminDto>?> GetAllAsync(string userName);
-    Task<EntityNamePlaceholderAdminDto?> GetByIdAsync(string userName, Guid id);
+    Task<CastMemberMovieAdminDto?> EditAsync(CastMemberMovieAdminDto castMemberMovie);
+    Task<List<CastMemberMovieAdminDto>?> GetAllAsync(string userName);
+    Task<CastMemberMovieAdminDto?> GetByIdAsync(string userName, Guid id);
 }
