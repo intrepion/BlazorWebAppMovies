@@ -21,6 +21,7 @@ public class CastMemberMovieAdminDto
             Id = castMemberMovie.Id,
 
             CastMember = castMemberMovie.CastMember,
+            Movie = castMemberMovie.Movie,
             // EntityToDtoPlaceholder
         };
     }
