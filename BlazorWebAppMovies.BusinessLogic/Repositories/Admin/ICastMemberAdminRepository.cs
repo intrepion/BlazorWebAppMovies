@@ -1,6 +1,6 @@
-﻿using ApplicationNamePlaceholder.BusinessLogic.Entities.Dtos.Admin;
+﻿using BlazorWebAppMovies.BusinessLogic.Entities.Dtos.Admin;
 
-namespace ApplicationNamePlaceholder.BusinessLogic.Repositories.Admin;
+namespace BlazorWebAppMovies.BusinessLogic.Repositories.Admin;
 
 public interface ICastMemberAdminRepository
 {
