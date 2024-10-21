@@ -22,6 +22,11 @@ public class MovieAdminRepository(ApplicationDbContext applicationDbContext) : I
             throw new Exception("Authentication required.");
         }
 
+        if (string.IsNullOrWhiteSpace(movieAdminDto.Title))
+        {
+            throw new Exception("Title required.");
+        }
+
         // AddRequiredPropertyCodePlaceholder
 
         var movie = MovieAdminDto.ToMovie(user, movieAdminDto);
