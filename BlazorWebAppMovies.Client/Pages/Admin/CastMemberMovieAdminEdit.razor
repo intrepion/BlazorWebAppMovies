@@ -99,7 +99,12 @@
 
     await base.OnInitializedAsync();
 
-    @* OnInitializedCodePlaceholder *@
+    var castMemberAdminDtosResult = await CastMemberAdminRepository.GetAllAsync(userName);
+        if (castMemberAdminDtosResult != null)
+        {
+            castMemberAdminDtos = castMemberAdminDtosResult;
+        }
+        @* OnInitializedCodePlaceholder *@
   }
 
   protected override async Task OnParametersSetAsync()
