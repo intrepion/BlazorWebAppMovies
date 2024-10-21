@@ -62,6 +62,7 @@ builder.Services.AddScoped<IApplicationRoleAdminRepository, ApplicationRoleAdmin
 builder.Services.AddScoped<IApplicationUserAdminRepository, ApplicationUserAdminRepository>();
 
 builder.Services.AddScoped<ICastMemberAdminRepository, CastMemberAdminRepository>();
+builder.Services.AddScoped<ICastMemberMovieAdminRepository, CastMemberMovieAdminRepository>();
 // RegisterServerServiceCodePlaceholder
 
 var app = builder.Build();
