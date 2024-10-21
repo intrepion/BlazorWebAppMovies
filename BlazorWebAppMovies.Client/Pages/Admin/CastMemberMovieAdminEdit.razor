@@ -185,5 +185,16 @@
     NavigationManager.NavigateTo($"/admin/cast-member-movie-list");
   }
 
-  @* OnChangeCodePlaceholder *@
+  void CastMemberOnChange(ChangeEventArgs args)
+    {
+        if (args.Value == null)
+        {
+            return;
+        }
+
+        var id = (string)args.Value;
+        castMemberMovieAdminEditViewModel.CastMember = CastMemberAdminDto.ToCastMember(null, castMemberAdminDtos?.Where(x => x.Id.ToString().Equals(id)).FirstOrDefault());
+    }
+
+    @* OnChangeCodePlaceholder *@
 }
