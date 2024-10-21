@@ -31,6 +31,7 @@ public class CastMemberMovieAdminDto
             ApplicationUserUpdatedBy = applicationUser ?? new ApplicationUser(),
             Id = castMemberMovieAdminDto?.Id ?? new Guid(),
 
+            CastMember = castMemberMovieAdminDto.CastMember,
             // DtoToEntityPropertyPlaceholder
         };
     }
