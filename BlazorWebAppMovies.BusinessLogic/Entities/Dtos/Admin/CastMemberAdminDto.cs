@@ -5,6 +5,7 @@ public class CastMemberAdminDto
     public string ApplicationUserName { get; set; } = string.Empty;
     public Guid Id { get; set; }
 
+    public string Name1 { get; set; } = string.Empty;
     // DtoPropertyPlaceholder
 
     public static CastMemberAdminDto FromCastMember(CastMember? castMember)
