@@ -22,6 +22,7 @@ public class CastMemberMovieAdminEditViewModel
             Id = castMemberMovieAdminDto.Id,
 
             CastMember = castMemberMovieAdminDto.CastMember,
+            Movie = castMemberMovieAdminDto.Movie,
             // DtoToModelPlaceholder
         };
     }
