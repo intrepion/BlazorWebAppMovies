@@ -28,7 +28,7 @@ public class MovieAdminRepository(ApplicationDbContext applicationDbContext) : I
 
         // AddDatabasePropertyCodePlaceholder
 
-        var result = await _applicationDbContext.TableNamePlaceholder.AddAsync(movie);
+        var result = await _applicationDbContext.Movies.AddAsync(movie);
         var databaseMovieAdminDto = MovieAdminDto.FromMovie(result.Entity);
         await _applicationDbContext.SaveChangesAsync();
 
@@ -49,7 +49,7 @@ public class MovieAdminRepository(ApplicationDbContext applicationDbContext) : I
             throw new Exception("Authentication required.");
         }
 
-        var databaseMovie = await _applicationDbContext.TableNamePlaceholder.FindAsync(id);
+        var databaseMovie = await _applicationDbContext.Movies.FindAsync(id);
 
         if (databaseMovie == null)
         {
@@ -80,7 +80,7 @@ public class MovieAdminRepository(ApplicationDbContext applicationDbContext) : I
             throw new Exception("Authentication required.");
         }
 
-        var databaseMovie = await _applicationDbContext.TableNamePlaceholder.FindAsync(movieAdminDto.Id);
+        var databaseMovie = await _applicationDbContext.Movies.FindAsync(movieAdminDto.Id);
 
         if (databaseMovie == null)
         {
@@ -112,7 +112,7 @@ public class MovieAdminRepository(ApplicationDbContext applicationDbContext) : I
             throw new Exception("Authentication required.");
         }
 
-        return await _applicationDbContext.TableNamePlaceholder
+        return await _applicationDbContext.Movies
 
             // IncludeTableCodePlaceholder
 
@@ -134,7 +134,7 @@ public class MovieAdminRepository(ApplicationDbContext applicationDbContext) : I
             throw new Exception("Authentication required.");
         }
 
-        var result = await _applicationDbContext.TableNamePlaceholder.FindAsync(id);
+        var result = await _applicationDbContext.Movies.FindAsync(id);
 
         if (result == null)
         {
