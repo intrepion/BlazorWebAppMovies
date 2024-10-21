@@ -26,6 +26,7 @@ public class MovieAdminRepository(ApplicationDbContext applicationDbContext) : I
 
         var movie = MovieAdminDto.ToMovie(user, movieAdminDto);
 
+        movie.NormalizedTitle = movieAdminDto.Title.ToUpperInvariant();
         // AddDatabasePropertyCodePlaceholder
 
         var result = await _applicationDbContext.Movies.AddAsync(movie);
