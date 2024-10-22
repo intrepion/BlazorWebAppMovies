@@ -130,6 +130,11 @@
         {
             castMemberAdminDtos = castMemberAdminDtosResult;
         }
+        var movieAdminDtosResult = await MovieAdminRepository.GetAllAsync(userName);
+        if (movieAdminDtosResult != null)
+        {
+            movieAdminDtos = movieAdminDtosResult;
+        }
         @* OnInitializedCodePlaceholder *@
   }
 
