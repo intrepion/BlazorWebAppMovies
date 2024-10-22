@@ -21,13 +21,13 @@
         </tr>
       </thead>
       <tbody>
-        @if (TableLowercaseNamePlaceholder == null)
+        @if (movies == null)
         {
           <tr>
             @* LoadingCountCodePlaceholder *@
           </tr>
         }
-        else if (TableLowercaseNamePlaceholder.Count == 0)
+        else if (movies.Count == 0)
         {
           <tr>
             @* ZeroCountCodePlaceholder *@
@@ -35,7 +35,7 @@
         }
         else
         {
-          @foreach (var movie in TableLowercaseNamePlaceholder)
+          @foreach (var movie in movies)
           {
             <tr>
               <td>@movie.Id</td>
@@ -55,7 +55,7 @@
 </section>
 
 @code {
-  List<MovieAdminDto>? TableLowercaseNamePlaceholder = null;
+  List<MovieAdminDto>? movies = null;
 
   protected override async Task OnInitializedAsync()
   {
@@ -67,6 +67,6 @@
       return;
     }
 
-    TableLowercaseNamePlaceholder = await MovieAdminRepository.GetAllAsync(userName);
+    movies = await MovieAdminRepository.GetAllAsync(userName);
   }
 }
