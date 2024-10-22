@@ -84,7 +84,8 @@
   public Guid Id { get; set; }
   CastMemberMovieAdminEditViewModel castMemberMovieAdminEditViewModel { get; set; } = new CastMemberMovieAdminEditViewModel();
 
-  @* ListDeclarationCodePlaceholder *@
+  List<CastMemberAdminDto> castMemberAdminDtos { get; set; } = [];
+    @* ListDeclarationCodePlaceholder *@
 
   protected override async Task OnInitializedAsync()
   {
