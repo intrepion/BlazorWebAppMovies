@@ -36,6 +36,7 @@ public class CastMemberAdminEditViewModel
         {
             Id = castMemberAdminEditViewModel.Id,
 
+            Name1 = castMemberAdminEditViewModel.Name1,
             // ModelToDtoPlaceholder
         };
     }
