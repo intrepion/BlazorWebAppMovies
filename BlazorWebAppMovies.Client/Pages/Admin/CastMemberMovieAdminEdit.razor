@@ -55,6 +55,30 @@
           </label>
         </div>
       </div>
+      <div class="row">
+        <div class="col">
+          <label>
+            Movie:
+            <select @onchange="MovieOnChange">
+              <option>Select movie...</option>
+                @if (movieAdminDtos != null)
+                {
+                  @foreach (var movie in movieAdminDtos)
+                  {
+                    if (castMemberMovieAdminEditViewModel.Movie != null && castMemberMovieAdminEditViewModel.Movie.Id.Equals(movie.Id))
+                    {
+                      <option value="@movie.Id" selected>@movie?.Title</option>
+                    }
+                    else
+                    {
+                      <option value="@movie.Id">@movie?.Title</option>
+                    }
+                  }
+                }
+              </select>
+          </label>
+        </div>
+      </div>
       @* EditRowCodePlaceholder *@
 
       <div class="row">
