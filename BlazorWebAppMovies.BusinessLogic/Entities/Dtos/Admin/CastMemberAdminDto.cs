@@ -31,6 +31,7 @@ public class CastMemberAdminDto
             ApplicationUserUpdatedBy = applicationUser ?? new ApplicationUser(),
             Id = castMemberAdminDto?.Id ?? new Guid(),
 
+            Name1 = castMemberAdminDto?.Name1 ?? string.Empty,
             // DtoToEntityPropertyPlaceholder
         };
     }
