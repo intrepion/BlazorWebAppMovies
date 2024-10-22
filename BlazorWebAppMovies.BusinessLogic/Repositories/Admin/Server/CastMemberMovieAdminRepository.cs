@@ -91,6 +91,7 @@ public class CastMemberMovieAdminRepository(ApplicationDbContext applicationDbCo
 
         databaseCastMemberMovie.ApplicationUserUpdatedBy = user;
 
+        databaseCastMemberMovie.CastMember = castMemberMovieAdminDto?.CastMember;
         // EditDatabasePropertyCodePlaceholder
 
         await _applicationDbContext.SaveChangesAsync();
