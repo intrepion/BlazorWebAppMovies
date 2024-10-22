@@ -34,6 +34,7 @@ public class CastMemberAdminDto
             Id = castMemberAdminDto?.Id ?? new Guid(),
 
             Name1 = castMemberAdminDto?.Name1 ?? string.Empty,
+            Name2 = castMemberAdminDto?.Name2 ?? string.Empty,
             // DtoToEntityPropertyPlaceholder
         };
     }
