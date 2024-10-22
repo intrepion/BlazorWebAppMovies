@@ -36,6 +36,7 @@ public class CastMemberMovieAdminEditViewModel
         {
             Id = castMemberMovieAdminEditViewModel.Id,
 
+            CastMember = castMemberMovieAdminEditViewModel.CastMember,
             // ModelToDtoPlaceholder
         };
     }
