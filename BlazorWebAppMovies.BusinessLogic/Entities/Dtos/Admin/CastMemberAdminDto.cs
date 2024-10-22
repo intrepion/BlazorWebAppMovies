@@ -1,4 +1,4 @@
-﻿namespace ApplicationNamePlaceholder.BusinessLogic.Entities.Dtos.Admin;
+﻿namespace BlazorWebAppMovies.BusinessLogic.Entities.Dtos.Admin;
 
 public class CastMemberAdminDto
 {
