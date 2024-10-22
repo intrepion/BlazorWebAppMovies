@@ -93,6 +93,11 @@ public class MovieAdminRepository(ApplicationDbContext applicationDbContext) : I
             throw new Exception("HumanNamePlaceholder not found.");
         }
 
+        if (string.IsNullOrWhiteSpace(movieAdminDto?.Title ?? string.Empty))
+        {
+            throw new Exception("Title required.");
+        }
+
         // EditRequiredPropertyCodePlaceholder
 
         databaseMovie.ApplicationUserUpdatedBy = user;
