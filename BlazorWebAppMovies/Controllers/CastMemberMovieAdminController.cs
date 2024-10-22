@@ -1,8 +1,8 @@
-﻿using ApplicationNamePlaceholder.BusinessLogic.Entities.Dtos.Admin;
-using ApplicationNamePlaceholder.BusinessLogic.Repositories.Admin;
+﻿using BlazorWebAppMovies.BusinessLogic.Entities.Dtos.Admin;
+using BlazorWebAppMovies.BusinessLogic.Repositories.Admin;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ApplicationNamePlaceholder.Controllers;
+namespace BlazorWebAppMovies.Controllers;
 
 [Route("api/admin/[controller]")]
 [ApiController]
