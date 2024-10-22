@@ -106,6 +106,7 @@ public class CastMemberAdminRepository(ApplicationDbContext applicationDbContext
         databaseCastMember.Name1 = castMemberAdminDto?.Name1 ?? string.Empty;
         databaseCastMember.NormalizedName1 = castMemberAdminDto?.Name1 ?? string.Empty.ToUpperInvariant();
         databaseCastMember.Name2 = castMemberAdminDto?.Name2 ?? string.Empty;
+        databaseCastMember.NormalizedName2 = castMemberAdminDto?.Name2 ?? string.Empty.ToUpperInvariant();
         // EditDatabasePropertyCodePlaceholder
 
         await _applicationDbContext.SaveChangesAsync();
