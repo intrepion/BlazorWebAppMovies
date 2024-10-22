@@ -19,6 +19,7 @@ public class MovieAdminDto
         {
             Id = movie.Id,
 
+            Title = movie.Title,
             // EntityToDtoPlaceholder
         };
     }
