@@ -2,7 +2,7 @@
 @rendermode InteractiveAuto
 @inject AuthenticationStateProvider GetAuthenticationStateAsync
 @inject NavigationManager NavigationManager
-@inject IEntityNamePlaceholderAdminRepository EntityNamePlaceholderAdminRepository
+@inject ICastMemberAdminRepository CastMemberAdminRepository
 @attribute [Authorize(Roles = "Admin")]
 
 @* InjectionCodePlaceholder *@
@@ -57,7 +57,7 @@
 @code {
   [Parameter]
   public Guid Id { get; set; }
-  EntityNamePlaceholderAdminEditViewModel castMemberAdminEditViewModel { get; set; } = new EntityNamePlaceholderAdminEditViewModel();
+  CastMemberAdminEditViewModel castMemberAdminEditViewModel { get; set; } = new CastMemberAdminEditViewModel();
 
   @* ListDeclarationCodePlaceholder *@
 
@@ -91,15 +91,15 @@
       return;
     }
 
-    var databaseEntityNamePlaceholderAdminDto = await EntityNamePlaceholderAdminRepository.GetByIdAsync(userName, Id);
+    var databaseCastMemberAdminDto = await CastMemberAdminRepository.GetByIdAsync(userName, Id);
 
-    if (databaseEntityNamePlaceholderAdminDto == null)
+    if (databaseCastMemberAdminDto == null)
     {
-      castMemberAdminEditViewModel = new EntityNamePlaceholderAdminEditViewModel();
+      castMemberAdminEditViewModel = new CastMemberAdminEditViewModel();
     }
     else
     {
-      castMemberAdminEditViewModel = EntityNamePlaceholderAdminEditViewModel.FromEntityNamePlaceholderAdminDto(databaseEntityNamePlaceholderAdminDto);
+      castMemberAdminEditViewModel = CastMemberAdminEditViewModel.FromCastMemberAdminDto(databaseCastMemberAdminDto);
     }
   }
 
@@ -115,23 +115,23 @@
 
     @* RequiredPropertyPlaceholder *@
 
-    var castMemberAdminDto = EntityNamePlaceholderAdminEditViewModel.ToEntityNamePlaceholderAdminDto(castMemberAdminEditViewModel);
+    var castMemberAdminDto = CastMemberAdminEditViewModel.ToCastMemberAdminDto(castMemberAdminEditViewModel);
     castMemberAdminDto.ApplicationUserName = userName;
 
     if (Id.Equals(Guid.Empty))
     {
-      var newEntityNamePlaceholderAdminDto = await EntityNamePlaceholderAdminRepository.AddAsync(castMemberAdminDto);
+      var newCastMemberAdminDto = await CastMemberAdminRepository.AddAsync(castMemberAdminDto);
 
-      if (newEntityNamePlaceholderAdminDto == null)
+      if (newCastMemberAdminDto == null)
       {
         return;
       }
 
-      NavigationManager.NavigateTo($"/admin/UrlNamePlaceholder-edit/{newEntityNamePlaceholderAdminDto.Id}");
+      NavigationManager.NavigateTo($"/admin/UrlNamePlaceholder-edit/{newCastMemberAdminDto.Id}");
     }
     else
     {
-      await EntityNamePlaceholderAdminRepository.EditAsync(castMemberAdminDto);
+      await CastMemberAdminRepository.EditAsync(castMemberAdminDto);
     }
   }
 
@@ -150,7 +150,7 @@
       return;
     }
 
-    await EntityNamePlaceholderAdminRepository.DeleteAsync(userName, Id);
+    await CastMemberAdminRepository.DeleteAsync(userName, Id);
     NavigationManager.NavigateTo($"/admin/UrlNamePlaceholder-list");
   }
 
