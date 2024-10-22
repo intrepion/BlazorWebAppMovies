@@ -91,6 +91,7 @@ public class CastMemberAdminRepository(ApplicationDbContext applicationDbContext
 
         databaseCastMember.ApplicationUserUpdatedBy = user;
 
+        databaseCastMember.Name1 = castMemberAdminDto?.Name1 ?? string.Empty;
         // EditDatabasePropertyCodePlaceholder
 
         await _applicationDbContext.SaveChangesAsync();
