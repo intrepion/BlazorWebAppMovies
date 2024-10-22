@@ -19,6 +19,7 @@ public class CastMemberAdminDto
         {
             Id = castMember.Id,
 
+            Name1 = castMember.Name1,
             // EntityToDtoPlaceholder
         };
     }
