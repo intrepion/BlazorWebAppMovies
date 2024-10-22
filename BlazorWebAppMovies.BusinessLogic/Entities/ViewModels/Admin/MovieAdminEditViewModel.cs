@@ -36,6 +36,7 @@ public class MovieAdminEditViewModel
         {
             Id = movieAdminEditViewModel.Id,
 
+            Title = movieAdminEditViewModel.Title,
             // ModelToDtoPlaceholder
         };
     }
