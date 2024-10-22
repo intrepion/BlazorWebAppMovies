@@ -91,6 +91,7 @@ public class MovieAdminRepository(ApplicationDbContext applicationDbContext) : I
 
         databaseMovie.ApplicationUserUpdatedBy = user;
 
+        databaseMovie.Title = movieAdminDto?.Title ?? string.Empty;
         // EditDatabasePropertyCodePlaceholder
 
         await _applicationDbContext.SaveChangesAsync();
