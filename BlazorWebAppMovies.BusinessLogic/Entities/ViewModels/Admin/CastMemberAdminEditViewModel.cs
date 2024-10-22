@@ -22,6 +22,7 @@ public class CastMemberAdminEditViewModel
             Id = castMemberAdminDto.Id,
 
             Name1 = castMemberAdminDto?.Name1 ?? string.Empty,
+            Name2 = castMemberAdminDto?.Name2 ?? string.Empty,
             // DtoToModelPlaceholder
         };
     }
