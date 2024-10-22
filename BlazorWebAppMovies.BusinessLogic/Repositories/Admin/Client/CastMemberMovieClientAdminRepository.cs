@@ -1,7 +1,7 @@
 ﻿using System.Net.Http.Json;
-using ApplicationNamePlaceholder.BusinessLogic.Entities.Dtos.Admin;
+using BlazorWebAppMovies.BusinessLogic.Entities.Dtos.Admin;
 
-namespace ApplicationNamePlaceholder.BusinessLogic.Repositories.Admin.Client;
+namespace BlazorWebAppMovies.BusinessLogic.Repositories.Admin.Client;
 
 public class CastMemberMovieClientAdminRepository(HttpClient httpClient) : ICastMemberMovieAdminRepository
 {
