@@ -6,12 +6,12 @@ namespace ApplicationNamePlaceholder.Controllers;
 
 [Route("api/admin/[controller]")]
 [ApiController]
-public class EntityNamePlaceholderController(IEntityNamePlaceholderAdminRepository movieAdminRepository) : ControllerBase
+public class MovieController(IMovieAdminRepository movieAdminRepository) : ControllerBase
 {
-    private readonly IEntityNamePlaceholderAdminRepository _movieAdminRepository = movieAdminRepository;
+    private readonly IMovieAdminRepository _movieAdminRepository = movieAdminRepository;
 
     [HttpPost]
-    public async Task<ActionResult<EntityNamePlaceholderAdminDto?>> Add(EntityNamePlaceholderAdminDto movieAdminDto)
+    public async Task<ActionResult<MovieAdminDto?>> Add(MovieAdminDto movieAdminDto)
     {
         var userIdentityName = User.Identity?.Name;
 
@@ -25,9 +25,9 @@ public class EntityNamePlaceholderController(IEntityNamePlaceholderAdminReposito
             return Ok(null);
         }
 
-        var databaseEntityNamePlaceholderAdminDto = await _movieAdminRepository.AddAsync(movieAdminDto);
+        var databaseMovieAdminDto = await _movieAdminRepository.AddAsync(movieAdminDto);
 
-        return Ok(databaseEntityNamePlaceholderAdminDto);
+        return Ok(databaseMovieAdminDto);
     }
 
     [HttpDelete("{id}")]
@@ -51,7 +51,7 @@ public class EntityNamePlaceholderController(IEntityNamePlaceholderAdminReposito
     }
 
     [HttpPut]
-    public async Task<ActionResult<EntityNamePlaceholderAdminDto?>> Edit(EntityNamePlaceholderAdminDto movieAdminDto)
+    public async Task<ActionResult<MovieAdminDto?>> Edit(MovieAdminDto movieAdminDto)
     {
         var userIdentityName = User.Identity?.Name;
 
@@ -65,13 +65,13 @@ public class EntityNamePlaceholderController(IEntityNamePlaceholderAdminReposito
             return Ok(null);
         }
 
-        var databaseEntityNamePlaceholder = await _movieAdminRepository.EditAsync(movieAdminDto);
+        var databaseMovie = await _movieAdminRepository.EditAsync(movieAdminDto);
 
-        return Ok(databaseEntityNamePlaceholder);
+        return Ok(databaseMovie);
     }
 
     [HttpGet]
-    public async Task<ActionResult<EntityNamePlaceholderAdminDto>?> GetAll(string userName)
+    public async Task<ActionResult<MovieAdminDto>?> GetAll(string userName)
     {
         var userIdentityName = User.Identity?.Name;
 
@@ -91,7 +91,7 @@ public class EntityNamePlaceholderController(IEntityNamePlaceholderAdminReposito
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<EntityNamePlaceholderAdminDto?>> GetById(string userName, Guid id)
+    public async Task<ActionResult<MovieAdminDto?>> GetById(string userName, Guid id)
     {
         var userIdentityName = User.Identity?.Name;
 
