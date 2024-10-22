@@ -114,6 +114,7 @@ public class MovieAdminRepository(ApplicationDbContext applicationDbContext) : I
 
         return await _applicationDbContext.Movies
 
+            .Include(x => x.MovieCastMembers)
             // IncludeTableCodePlaceholder
 
             .Select(x => MovieAdminDto.FromMovie(x))
