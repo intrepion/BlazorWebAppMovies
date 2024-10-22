@@ -5,5 +5,6 @@ public class CastMemberMovie
     public ApplicationUser? ApplicationUserUpdatedBy { get; set; }
     public Guid Id { get; set; }
 
+    public CastMember? CastMember { get; set; }
     // ActualPropertyPlaceholder
 }
