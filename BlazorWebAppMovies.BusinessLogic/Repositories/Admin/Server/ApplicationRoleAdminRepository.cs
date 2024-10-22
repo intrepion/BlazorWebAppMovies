@@ -1,9 +1,9 @@
-﻿using ApplicationNamePlaceholder.BusinessLogic.Data;
-using ApplicationNamePlaceholder.BusinessLogic.Entities;
-using ApplicationNamePlaceholder.BusinessLogic.Entities.Dtos.Admin;
+﻿using BlazorWebAppMovies.BusinessLogic.Data;
+using BlazorWebAppMovies.BusinessLogic.Entities;
+using BlazorWebAppMovies.BusinessLogic.Entities.Dtos.Admin;
 using Microsoft.EntityFrameworkCore;
 
-namespace ApplicationNamePlaceholder.BusinessLogic.Repositories.Admin.Server;
+namespace BlazorWebAppMovies.BusinessLogic.Repositories.Admin.Server;
 
 public class ApplicationRoleAdminRepository(ApplicationDbContext applicationDbContext) : IApplicationRoleAdminRepository
 {
