@@ -93,6 +93,7 @@ public class MovieAdminRepository(ApplicationDbContext applicationDbContext) : I
         databaseMovie.ApplicationUserUpdatedBy = user;
 
         databaseMovie.Title = movieAdminDto?.Title ?? string.Empty;
+        databaseMovie.NormalizedTitle = movieAdminDto?.Title ?? string.Empty.ToUpperInvariant();
         // EditDatabasePropertyCodePlaceholder
 
         await _applicationDbContext.SaveChangesAsync();
