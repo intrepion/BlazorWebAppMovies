@@ -2,20 +2,20 @@
 
 namespace ApplicationNamePlaceholder.BusinessLogic.Entities.ViewModels.Admin;
 
-public class EntityNamePlaceholderAdminEditViewModel
+public class MovieAdminEditViewModel
 {
     public Guid Id { get; set; }
 
     // JustModelPropertyPlaceholder
 
-    public static EntityNamePlaceholderAdminEditViewModel FromEntityNamePlaceholderAdminDto(EntityNamePlaceholderAdminDto movieAdminDto)
+    public static MovieAdminEditViewModel FromMovieAdminDto(MovieAdminDto movieAdminDto)
     {
         if (movieAdminDto == null)
         {
-            return new EntityNamePlaceholderAdminEditViewModel();
+            return new MovieAdminEditViewModel();
         }
 
-        return new EntityNamePlaceholderAdminEditViewModel
+        return new MovieAdminEditViewModel
         {
             Id = movieAdminDto.Id,
 
@@ -23,14 +23,14 @@ public class EntityNamePlaceholderAdminEditViewModel
         };
     }
 
-    public static EntityNamePlaceholderAdminDto ToEntityNamePlaceholderAdminDto(EntityNamePlaceholderAdminEditViewModel movieAdminEditViewModel)
+    public static MovieAdminDto ToMovieAdminDto(MovieAdminEditViewModel movieAdminEditViewModel)
     {
         if (movieAdminEditViewModel == null)
         {
-            return new EntityNamePlaceholderAdminDto();
+            return new MovieAdminDto();
         }
 
-        return new EntityNamePlaceholderAdminDto
+        return new MovieAdminDto
         {
             Id = movieAdminEditViewModel.Id,
 
