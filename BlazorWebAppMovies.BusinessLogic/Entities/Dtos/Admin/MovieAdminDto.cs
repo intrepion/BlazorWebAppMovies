@@ -31,6 +31,7 @@ public class MovieAdminDto
             ApplicationUserUpdatedBy = applicationUser ?? new ApplicationUser(),
             Id = movieAdminDto?.Id ?? new Guid(),
 
+            Title = movieAdminDto?.Title ?? string.Empty,
             // DtoToEntityPropertyPlaceholder
         };
     }
