@@ -7,6 +7,7 @@ public class CastMemberMovieAdminEditViewModel
     public Guid Id { get; set; }
 
     public CastMember? CastMember { get; set; }
+    public Movie? Movie { get; set; }
     // JustModelPropertyPlaceholder
 
     public static CastMemberMovieAdminEditViewModel FromCastMemberMovieAdminDto(CastMemberMovieAdminDto castMemberMovieAdminDto)
