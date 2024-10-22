@@ -9,5 +9,6 @@ public class CastMember
     public string Name1 { get; set; } = string.Empty;
     public string NormalizedName1 { get; set; } = string.Empty;
     public string Name2 { get; set; } = string.Empty;
+    public string NormalizedName2 { get; set; } = string.Empty;
     // ActualPropertyPlaceholder
 }
