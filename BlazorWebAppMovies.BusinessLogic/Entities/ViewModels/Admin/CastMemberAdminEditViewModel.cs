@@ -20,6 +20,7 @@ public class CastMemberAdminEditViewModel
         {
             Id = castMemberAdminDto.Id,
 
+            Name1 = castMemberAdminDto?.Name1 ?? string.Empty,
             // DtoToModelPlaceholder
         };
     }
