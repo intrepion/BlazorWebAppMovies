@@ -34,6 +34,7 @@ public class CastMemberMovieAdminDto
             Id = castMemberMovieAdminDto?.Id ?? new Guid(),
 
             CastMember = castMemberMovieAdminDto?.CastMember,
+            Movie = castMemberMovieAdminDto?.Movie,
             // DtoToEntityPropertyPlaceholder
         };
     }
