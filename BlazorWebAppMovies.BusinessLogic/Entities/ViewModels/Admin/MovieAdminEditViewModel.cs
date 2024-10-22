@@ -20,6 +20,7 @@ public class MovieAdminEditViewModel
         {
             Id = movieAdminDto.Id,
 
+            Title = movieAdminDto?.Title ?? string.Empty,
             // DtoToModelPlaceholder
         };
     }
