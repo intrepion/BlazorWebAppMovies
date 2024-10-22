@@ -93,6 +93,11 @@ public class CastMemberAdminRepository(ApplicationDbContext applicationDbContext
             throw new Exception("HumanNamePlaceholder not found.");
         }
 
+        if (string.IsNullOrWhiteSpace(castMemberAdminDto?.Name1 ?? string.Empty))
+        {
+            throw new Exception("Name 1 required.");
+        }
+
         // EditRequiredPropertyCodePlaceholder
 
         databaseCastMember.ApplicationUserUpdatedBy = user;
