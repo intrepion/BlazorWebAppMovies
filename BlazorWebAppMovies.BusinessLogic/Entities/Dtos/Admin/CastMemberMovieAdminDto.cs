@@ -1,20 +1,20 @@
 ﻿namespace ApplicationNamePlaceholder.BusinessLogic.Entities.Dtos.Admin;
 
-public class EntityNamePlaceholderAdminDto
+public class CastMemberMovieAdminDto
 {
     public string ApplicationUserName { get; set; } = string.Empty;
     public Guid Id { get; set; }
 
     // DtoPropertyPlaceholder
 
-    public static EntityNamePlaceholderAdminDto FromEntityNamePlaceholder(EntityNamePlaceholder? castMemberMovie)
+    public static CastMemberMovieAdminDto FromCastMemberMovie(CastMemberMovie? castMemberMovie)
     {
         if (castMemberMovie == null)
         {
-            return new EntityNamePlaceholderAdminDto();
+            return new CastMemberMovieAdminDto();
         }
 
-        return new EntityNamePlaceholderAdminDto
+        return new CastMemberMovieAdminDto
         {
             Id = castMemberMovie.Id,
 
@@ -22,9 +22,9 @@ public class EntityNamePlaceholderAdminDto
         };
     }
 
-    public static EntityNamePlaceholder ToEntityNamePlaceholder(ApplicationUser? applicationUser, EntityNamePlaceholderAdminDto? castMemberMovieAdminDto)
+    public static CastMemberMovie ToCastMemberMovie(ApplicationUser? applicationUser, CastMemberMovieAdminDto? castMemberMovieAdminDto)
     {
-        return new EntityNamePlaceholder
+        return new CastMemberMovie
         {
             ApplicationUserUpdatedBy = applicationUser ?? new ApplicationUser(),
             Id = castMemberMovieAdminDto?.Id ?? new Guid(),
