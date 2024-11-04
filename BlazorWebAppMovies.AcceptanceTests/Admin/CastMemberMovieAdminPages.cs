@@ -15,27 +15,27 @@ public partial class CastMemberMovieAdminPages : PageTest
         string aRandomString = faker.Random.String2(10);
         string someRandomString = faker.Random.String2(10);
         await Page.GetByRole(AriaRole.Link, new() { Name = "PluralNamePlaceholder" }).ClickAsync();
-        await Expect(Page).ToHaveTitleAsync("HumanNamePlaceholder Home");
+        await Expect(Page).ToHaveTitleAsync("Cast Member Movie Home");
         await Page.GetByRole(AriaRole.Link, new() { Name = "Create New" }).ClickAsync();
-        await Expect(Page).ToHaveTitleAsync("HumanNamePlaceholder Add");
+        await Expect(Page).ToHaveTitleAsync("Cast Member Movie Add");
 
         // CreatePropertyCodePlaceholder
 
         await Page.GetByRole(AriaRole.Button, new() { Name = "Submit" }).ClickAsync();
-        await Expect(Page).ToHaveTitleAsync("HumanNamePlaceholder Add");
+        await Expect(Page).ToHaveTitleAsync("Cast Member Movie Add");
         await Page.GetByRole(AriaRole.Button, new() { Name = "Cancel" }).ClickAsync();
-        await Expect(Page).ToHaveTitleAsync("HumanNamePlaceholder Home");
+        await Expect(Page).ToHaveTitleAsync("Cast Member Movie Home");
         await Page.GetByRole(AriaRole.Link, new() { Name = "aId" + aRandomString }).ClickAsync();
         await Page.GetByRole(AriaRole.Link, new() { Name = "Edit" }).ClickAsync();
 
         // ModifyPropertyCodePlaceholder
 
         await Page.GetByRole(AriaRole.Button, new() { Name = "Submit" }).ClickAsync();
-        await Expect(Page).ToHaveTitleAsync("HumanNamePlaceholder View");
+        await Expect(Page).ToHaveTitleAsync("Cast Member Movie View");
         await Page.GetByRole(AriaRole.Button, new() { Name = "Delete" }).ClickAsync();
         await Page.GetByRole(AriaRole.Button, new() { Name = "Confirm" }).ClickAsync();
         await Page.GetByRole(AriaRole.Link, new() { Name = "Back to Grid" }).ClickAsync();
-        await Expect(Page).ToHaveTitleAsync("HumanNamePlaceholder Home");
+        await Expect(Page).ToHaveTitleAsync("Cast Member Movie Home");
     }
 
     [SetUp]
