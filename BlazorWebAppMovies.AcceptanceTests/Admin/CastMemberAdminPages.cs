@@ -31,6 +31,7 @@ public partial class CastMemberAdminPages : PageTest
         await Page.GetByRole(AriaRole.Link, new() { Name = "Edit" }).ClickAsync();
 
         await Page.GetByLabel("Name 1:").FillAsync("someName1" + someRandomString);
+        await Page.GetByLabel("Name 2:").FillAsync("someName2" + someRandomString);
         // ModifyPropertyCodePlaceholder
 
         await Page.GetByRole(AriaRole.Button, new() { Name = "Submit" }).ClickAsync();
