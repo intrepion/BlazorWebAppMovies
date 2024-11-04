@@ -15,6 +15,7 @@ public class MovieGridQueryAdapter
     private readonly Dictionary<MovieFilterColumns, Expression<Func<Movie, string>>> expressions =
         new()
         {
+            { MovieFilterColumns.Title, c => c != null && c.Title != null ? c.Title : string.Empty },
             // SortExpressionCodePlaceholder
             // { MovieFilterColumns.Name, c => c != null && c.Name != null ? c.Name : string.Empty },
         };
