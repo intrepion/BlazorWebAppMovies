@@ -3,28 +3,28 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using BlazorWebAppMovies.BusinessLogic.Entities;
 
-namespace BlazorWebAppMovies.BusinessLogic.Grid.Admin.EntityNamePlaceholderGrid;
+namespace BlazorWebAppMovies.BusinessLogic.Grid.Admin.MovieGrid;
 
 // Creates the correct expressions to filter and sort.
-public class EntityNamePlaceholderGridQueryAdapter
+public class MovieGridQueryAdapter
 {
     // Holds state of the grid.
-    private readonly IEntityNamePlaceholderFilters controls;
+    private readonly IMovieFilters controls;
 
     // Expressions for sorting.
-    private readonly Dictionary<EntityNamePlaceholderFilterColumns, Expression<Func<EntityNamePlaceholder, string>>> expressions =
+    private readonly Dictionary<MovieFilterColumns, Expression<Func<Movie, string>>> expressions =
         new()
         {
             // SortExpressionCodePlaceholder
-            // { EntityNamePlaceholderFilterColumns.Name, c => c != null && c.Name != null ? c.Name : string.Empty },
+            // { MovieFilterColumns.Name, c => c != null && c.Name != null ? c.Name : string.Empty },
         };
 
     // Queryables for filtering.
-    private readonly Dictionary<EntityNamePlaceholderFilterColumns, Func<IQueryable<EntityNamePlaceholder>, IQueryable<EntityNamePlaceholder>>> filterQueries = [];
+    private readonly Dictionary<MovieFilterColumns, Func<IQueryable<Movie>, IQueryable<Movie>>> filterQueries = [];
 
     // Creates a new instance of the GridQueryAdapter class.
-    // controls: The IEntityNamePlaceholderFilters" to use.
-    public EntityNamePlaceholderGridQueryAdapter(IEntityNamePlaceholderFilters controls)
+    // controls: The IMovieFilters" to use.
+    public MovieGridQueryAdapter(IMovieFilters controls)
     {
         this.controls = controls;
 
@@ -33,14 +33,14 @@ public class EntityNamePlaceholderGridQueryAdapter
             new()
             {
                 // QueryExpressionCodePlaceholder
-                // { EntityNamePlaceholderFilterColumns.Name, cs => cs.Where(c => c != null && c.Name != null && this.controls.FilterText != null && c.Name.Contains(this.controls.FilterText) ) },
+                // { MovieFilterColumns.Name, cs => cs.Where(c => c != null && c.Name != null && this.controls.FilterText != null && c.Name.Contains(this.controls.FilterText) ) },
             };
     }
 
     // Uses the query to return a count and a page.
-    // query: The IQueryable{EntityNamePlaceholder} to work from.
-    // Returns the resulting ICollection{EntityNamePlaceholder}.
-    public async Task<ICollection<EntityNamePlaceholder>> FetchAsync(IQueryable<EntityNamePlaceholder> query)
+    // query: The IQueryable{Movie} to work from.
+    // Returns the resulting ICollection{Movie}.
+    public async Task<ICollection<Movie>> FetchAsync(IQueryable<Movie> query)
     {
         query = FilterAndQuery(query);
         await CountAsync(query);
@@ -50,23 +50,23 @@ public class EntityNamePlaceholderGridQueryAdapter
     }
 
     // Get total filtered items count.
-    // query: The IQueryable{EntityNamePlaceholder} to use.
-    public async Task CountAsync(IQueryable<EntityNamePlaceholder> query) =>
+    // query: The IQueryable{Movie} to use.
+    public async Task CountAsync(IQueryable<Movie> query) =>
         controls.PageHelper.TotalItemCount = await query.CountAsync();
 
     // Build the query to bring back a single page.
-    // query: The <see IQueryable{EntityNamePlaceholder} to modify.
-    // Returns the new IQueryable{EntityNamePlaceholder} for a page.
-    public IQueryable<EntityNamePlaceholder> FetchPageQuery(IQueryable<EntityNamePlaceholder> query) =>
+    // query: The <see IQueryable{Movie} to modify.
+    // Returns the new IQueryable{Movie} for a page.
+    public IQueryable<Movie> FetchPageQuery(IQueryable<Movie> query) =>
         query
             .Skip(controls.PageHelper.Skip)
             .Take(controls.PageHelper.PageSize)
             .AsNoTracking();
 
     // Builds the query.
-    // root: The IQueryable{EntityNamePlaceholder} to start with.
-    // Returns the resulting IQueryable{EntityNamePlaceholder} with sorts and filters applied.
-    private IQueryable<EntityNamePlaceholder> FilterAndQuery(IQueryable<EntityNamePlaceholder> root)
+    // root: The IQueryable{Movie} to start with.
+    // Returns the resulting IQueryable{Movie} with sorts and filters applied.
+    private IQueryable<Movie> FilterAndQuery(IQueryable<Movie> root)
     {
         var sb = new System.Text.StringBuilder();
 
