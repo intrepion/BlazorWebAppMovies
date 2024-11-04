@@ -74,6 +74,15 @@
 
     private void HandleName1Change(ChangeEventArgs changeEventArgs)
     {
+        if (changeEventArgs != null && changeEventArgs.Value != null)
+        {
+            CastMember.NormalizedName1 = ((string)changeEventArgs.Value).ToUpperInvariant();
+        }
+        else
+        {
+            CastMember.NormalizedName1 = "";
+        }
+
         // NormalizedCodeName1Placeholder
     }
 
