@@ -40,6 +40,10 @@
         <div class="row contact-header">
             <div class="col-2">&nbsp;</div>
 
+            <div class="col-3" @onclick="@(async ()=>await ToggleAsync(MovieFilterColumns.Title))">
+                <SortIndicator Column="@(MovieFilterColumns.Title)" />&nbsp;Title
+            </div>
+
             @* SortIndicatorCodePlaceholder *@
             @* <div class="col-3" @onclick="@(async ()=>await ToggleAsync(MovieFilterColumns.Name))">
                 <SortIndicator Column="@(MovieFilterColumns.Name)" />&nbsp;Name
