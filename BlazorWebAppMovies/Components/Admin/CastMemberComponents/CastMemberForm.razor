@@ -9,6 +9,14 @@
         <DataAnnotationsValidator />
         <ValidationSummary />
 
+        <h2>Name 1</h2>
+        <p>
+            <label>
+                Name 1:
+                <InputText @bind-Value="CastMember.Name1" @oninput="HandleName1Change"/>
+                <ConcurrencyField Model="CastMember" DbModel="DbCastMember" Property="obj => obj?.Name1" />
+            </label>
+        </p>
         @* PropertyFormCodePlaceholder *@
         @* <h2>Name</h2>
         <p>
