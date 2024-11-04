@@ -16,6 +16,7 @@ public class CastMemberGridQueryAdapter
         new()
         {
             { CastMemberFilterColumns.Name1, c => c != null && c.Name1 != null ? c.Name1 : string.Empty },
+            { CastMemberFilterColumns.Name2, c => c != null && c.Name2 != null ? c.Name2 : string.Empty },
             // SortExpressionCodePlaceholder
             // { CastMemberFilterColumns.Name, c => c != null && c.Name != null ? c.Name : string.Empty },
         };
