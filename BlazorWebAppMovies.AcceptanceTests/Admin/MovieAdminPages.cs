@@ -25,7 +25,7 @@ public partial class EntityNamePlaceholderAdminPages : PageTest
         await Expect(Page).ToHaveTitleAsync("HumanNamePlaceholder Add");
         await Page.GetByRole(AriaRole.Button, new() { Name = "Cancel" }).ClickAsync();
         await Expect(Page).ToHaveTitleAsync("HumanNamePlaceholder Home");
-        await Page.GetByRole(AriaRole.Link, new() { Name = "aDefaultFilterNamePlaceholder" + aRandomString }).ClickAsync();
+        await Page.GetByRole(AriaRole.Link, new() { Name = "aTitle" + aRandomString }).ClickAsync();
         await Page.GetByRole(AriaRole.Link, new() { Name = "Edit" }).ClickAsync();
 
         // ModifyPropertyCodePlaceholder
