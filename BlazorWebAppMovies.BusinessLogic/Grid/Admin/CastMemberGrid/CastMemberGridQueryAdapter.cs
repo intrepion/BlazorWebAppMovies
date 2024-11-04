@@ -15,6 +15,7 @@ public class CastMemberGridQueryAdapter
     private readonly Dictionary<CastMemberFilterColumns, Expression<Func<CastMember, string>>> expressions =
         new()
         {
+            { CastMemberFilterColumns.Name1, c => c != null && c.Name1 != null ? c.Name1 : string.Empty },
             // SortExpressionCodePlaceholder
             // { CastMemberFilterColumns.Name, c => c != null && c.Name != null ? c.Name : string.Empty },
         };
