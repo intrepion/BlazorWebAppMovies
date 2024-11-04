@@ -1,10 +1,10 @@
 @page "/admin/UrlNamePlaceholder"
 @page "/admin/UrlNamePlaceholder/{Page:int}"
 @rendermode InteractiveServer
-@inject IEntityNamePlaceholderFilters Filters
+@inject IMovieFilters Filters
 @inject IDbContextFactory<ApplicationDbContext> DbFactory
 @inject NavigationManager Navigation
-@inject EntityNamePlaceholderGridQueryAdapter QueryAdapter
+@inject MovieGridQueryAdapter QueryAdapter
 
 <PageTitle>HumanNamePlaceholder Home</PageTitle>
 
@@ -41,12 +41,12 @@
             <div class="col-2">&nbsp;</div>
 
             @* SortIndicatorCodePlaceholder *@
-            @* <div class="col-3" @onclick="@(async ()=>await ToggleAsync(EntityNamePlaceholderFilterColumns.Name))">
-                <SortIndicator Column="@(EntityNamePlaceholderFilterColumns.Name)" />&nbsp;Name
+            @* <div class="col-3" @onclick="@(async ()=>await ToggleAsync(MovieFilterColumns.Name))">
+                <SortIndicator Column="@(MovieFilterColumns.Name)" />&nbsp;Name
             </div> *@
 
         </div>
-        @if (Filters.Loading || EntityNamePlaceholders is null)
+        @if (Filters.Loading || Movies is null)
         {
             <div class="row">
                 <div class="col-12 alert alert-info">
@@ -54,7 +54,7 @@
                 </div>
             </div>
         }
-        @if (EntityNamePlaceholders is not null && EntityNamePlaceholders.Count == 0)
+        @if (Movies is not null && Movies.Count == 0)
         {
             <div class="row">
                 <div class="col-12 alert alert-warning">
@@ -62,12 +62,12 @@
                 </div>
             </div>
         }
-        @if (EntityNamePlaceholders is not null)
+        @if (Movies is not null)
         {
-            @foreach (var contact in EntityNamePlaceholders)
+            @foreach (var contact in Movies)
             {
-                <EntityNamePlaceholderRow @key=contact CurrentEntityNamePlaceholder="contact"
-                            DeleteEntityNamePlaceholder="DeleteEntityNamePlaceholderAsync" />
+                <MovieRow @key=contact CurrentMovie="contact"
+                            DeleteMovie="DeleteMovieAsync" />
             }
         }
     </div>
@@ -88,8 +88,8 @@
     // A wrapper for grid-related activity (like delete).
     private GridWrapper Wrapper { get; set; } = new GridWrapper();
 
-    // Current page of EntityNamePlaceholder.
-    private ICollection<EntityNamePlaceholder>? EntityNamePlaceholders { get; set; }
+    // Current page of Movie.
+    private ICollection<Movie>? Movies { get; set; }
 
     // Helper method to set disabled on class for paging.
     // condition: When the element is active (and therefore should not be disabled).
@@ -140,7 +140,7 @@
     // Used to toggle the grid sort. Will either switch to "ascending" on a new
     // column, or toggle between "ascending" and "descending" on a column with the
     // sort already set.
-    private Task ToggleAsync(EntityNamePlaceholderFilterColumns col)
+    private Task ToggleAsync(MovieFilterColumns col)
     {
         if (Filters.SortColumn == col)
         {
@@ -155,7 +155,7 @@
 
     // Deletes a contact.
     // <snippet1>
-    private async Task DeleteEntityNamePlaceholderAsync()
+    private async Task DeleteMovieAsync()
     {
         using var context = DbFactory.CreateDbContext();
         Filters.Loading = true;
@@ -193,7 +193,7 @@
             Wrapper.DeleteRequestId = Guid.Empty;
         }
 
-        EntityNamePlaceholders = new List<EntityNamePlaceholder>();
+        Movies = new List<Movie>();
 
         using var context = DbFactory.CreateDbContext();
         var query = context.TableNamePlaceholder?.AsQueryable();
@@ -201,7 +201,7 @@
         if (query is not null)
         {
             // Run the query to load the current page.
-            EntityNamePlaceholders = await QueryAdapter.FetchAsync(query);
+            Movies = await QueryAdapter.FetchAsync(query);
         }
 
         Filters.Loading = false;
