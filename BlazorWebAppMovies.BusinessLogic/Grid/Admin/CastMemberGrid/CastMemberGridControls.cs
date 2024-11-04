@@ -1,4 +1,4 @@
-namespace BlazorWebAppMovies.BusinessLogic.Grid.Admin.CastMemberGrid;
+﻿namespace BlazorWebAppMovies.BusinessLogic.Grid.Admin.CastMemberGrid;
 
 // State of grid filters.
 public class CastMemberGridControls(IPageHelper pageHelper) : ICastMemberFilters
