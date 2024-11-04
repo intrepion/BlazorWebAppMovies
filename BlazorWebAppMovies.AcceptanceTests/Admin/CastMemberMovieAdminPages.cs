@@ -14,7 +14,7 @@ public partial class CastMemberMovieAdminPages : PageTest
         var faker = new Faker();
         string aRandomString = faker.Random.String2(10);
         string someRandomString = faker.Random.String2(10);
-        await Page.GetByRole(AriaRole.Link, new() { Name = "PluralNamePlaceholder" }).ClickAsync();
+        await Page.GetByRole(AriaRole.Link, new() { Name = "Cast Member Movies" }).ClickAsync();
         await Expect(Page).ToHaveTitleAsync("Cast Member Movie Home");
         await Page.GetByRole(AriaRole.Link, new() { Name = "Create New" }).ClickAsync();
         await Expect(Page).ToHaveTitleAsync("Cast Member Movie Add");
