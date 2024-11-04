@@ -9,6 +9,14 @@
         <DataAnnotationsValidator />
         <ValidationSummary />
 
+        <h2>Title</h2>
+        <p>
+            <label>
+                Title:
+                <InputText @bind-Value="Movie.Title" @oninput="HandleTitleChange"/>
+                <ConcurrencyField Model="Movie" DbModel="DbMovie" Property="obj => obj?.Title" />
+            </label>
+        </p>
         @* PropertyFormCodePlaceholder *@
         @* <h2>Name</h2>
         <p>
