@@ -17,6 +17,14 @@
                 <ConcurrencyField Model="CastMember" DbModel="DbCastMember" Property="obj => obj?.Name1" />
             </label>
         </p>
+        <h2>Name 2</h2>
+        <p>
+            <label>
+                Name 2:
+                <InputText @bind-Value="CastMember.Name2" @oninput="HandleName2Change"/>
+                <ConcurrencyField Model="CastMember" DbModel="DbCastMember" Property="obj => obj?.Name2" />
+            </label>
+        </p>
         @* PropertyFormCodePlaceholder *@
         @* <h2>Name</h2>
         <p>
