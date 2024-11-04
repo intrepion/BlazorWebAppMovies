@@ -1,4 +1,4 @@
-@page "/admin/UrlNamePlaceholder/view/{EntityNamePlaceholderId:guid}"
+@page "/admin/UrlNamePlaceholder/view/{CastMemberId:guid}"
 @rendermode InteractiveServer
 @inject IDbContextFactory<ApplicationDbContext> DbFactory
 @inject IPageHelper PageHelper
@@ -12,14 +12,14 @@
 }
 else
 {
-    @if (EntityNamePlaceholder is null || Loading)
+    @if (CastMember is null || Loading)
     {
         <div class="alert alert-info">Loading...</div>
     }
     else
     {
         @* PageHeaderCodePlaceholder *@
-        @* <h1>@EntityNamePlaceholder.Name</h1> *@
+        @* <h1>@CastMember.Name</h1> *@
 
         <br />
         @if (EditSuccess)
@@ -33,7 +33,7 @@ else
         <span>&nbsp;</span>
         @if (!Deleted)
         {
-            <a class="btn btn-primary" href="admin/UrlNamePlaceholder/edit/@EntityNamePlaceholder.Id" title="Edit">Edit</a>
+            <a class="btn btn-primary" href="admin/UrlNamePlaceholder/edit/@CastMember.Id" title="Edit">Edit</a>
 
             <span>&nbsp;</span>
             @if (!ShowConfirmation)
@@ -60,17 +60,17 @@ else
 
     // Id from route of contact.
     [Parameter]
-    public Guid EntityNamePlaceholderId { get; set; }
+    public Guid CastMemberId { get; set; }
 
     // Navigation check.
-    private Guid _lastEntityNamePlaceholderId;
+    private Guid _lastCastMemberId;
 
     // True with redirect from successful edit.
     [Parameter]
     public bool EditSuccess { get; set; }
 
-    // EntityNamePlaceholder entity.
-    private EntityNamePlaceholder? EntityNamePlaceholder { get; set; }
+    // CastMember entity.
+    private CastMember? CastMember { get; set; }
 
     // Set to true when not found.
     private bool NotFound = false;
@@ -84,12 +84,12 @@ else
     // Navigated
     protected override async Task OnParametersSetAsync()
     {
-        if (_lastEntityNamePlaceholderId != EntityNamePlaceholderId)
+        if (_lastCastMemberId != CastMemberId)
         {
             EditSuccess = EditSuccessState.Success;
             EditSuccessState.Success = false;
-            _lastEntityNamePlaceholderId = EntityNamePlaceholderId;
-            await LoadEntityNamePlaceholderAsync();
+            _lastCastMemberId = CastMemberId;
+            await LoadCastMemberAsync();
         }
     }
 
@@ -109,7 +109,7 @@ else
     }
 
     // Loads the contact.
-    private async Task LoadEntityNamePlaceholderAsync()
+    private async Task LoadCastMemberAsync()
     {
         if (Loading)
         {
@@ -117,7 +117,7 @@ else
         }
 
         NotFound = false;
-        EntityNamePlaceholder = null;
+        CastMember = null;
 
         Loading = true;
 
@@ -125,12 +125,12 @@ else
 
         if (context.TableNamePlaceholder is not null)
         {
-            EntityNamePlaceholder = await context.TableNamePlaceholder
+            CastMember = await context.TableNamePlaceholder
                 .AsNoTracking()
                 .SingleOrDefaultAsync(
-                    c => c.Id == EntityNamePlaceholderId);
+                    c => c.Id == CastMemberId);
 
-            if (EntityNamePlaceholder is null)
+            if (CastMember is null)
             {
                 NotFound = true;
             }
@@ -154,7 +154,7 @@ else
         if (context?.Roles is not null)
         {
             var contact = await context.TableNamePlaceholder
-                .SingleOrDefaultAsync(c => c.Id == EntityNamePlaceholderId);
+                .SingleOrDefaultAsync(c => c.Id == CastMemberId);
 
             if (contact is not null)
             {
@@ -167,14 +167,14 @@ else
             {
                 Loading = false;
                 // Show not found.
-                await LoadEntityNamePlaceholderAsync();
+                await LoadCastMemberAsync();
             }
         }
         else
         {
             Loading = false;
             // Show not found.
-            await LoadEntityNamePlaceholderAsync();
+            await LoadCastMemberAsync();
         }
     }
 }
