@@ -1,4 +1,4 @@
-﻿namespace ApplicationNamePlaceholder.BusinessLogic.Grid;
+﻿namespace BlazorWebAppMovies.BusinessLogic.Grid;
 
 // Holds the state for paging.
 public class PageHelper : IPageHelper
