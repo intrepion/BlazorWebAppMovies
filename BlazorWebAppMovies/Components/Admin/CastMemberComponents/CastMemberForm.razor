@@ -1,9 +1,9 @@
-<h1>@Mode EntityNamePlaceholder</h1>
+<h1>@Mode CastMember</h1>
 
 <hr />
-@if (EntityNamePlaceholder is not null)
+@if (CastMember is not null)
 {
-    <EditForm Model="EntityNamePlaceholder" OnInvalidSubmit="(async () => await HandleSubmitAsync(false))" OnValidSubmit="(async () => await HandleSubmitAsync(true))">
+    <EditForm Model="CastMember" OnInvalidSubmit="(async () => await HandleSubmitAsync(false))" OnValidSubmit="(async () => await HandleSubmitAsync(true))">
         <DataAnnotationsValidator />
         <ValidationSummary />
 
@@ -32,13 +32,13 @@
     [Parameter]
     public bool IsAdd { get; set; }
 
-    // The EntityNamePlaceholder to upsert.
+    // The CastMember to upsert.
     [Parameter]
-    public EntityNamePlaceholder? EntityNamePlaceholder { get; set; }
+    public CastMember? CastMember { get; set; }
 
-    // The database version of EntityNamePlaceholder if a concurrency issue.
+    // The database version of CastMember if a concurrency issue.
     [Parameter]
-    public EntityNamePlaceholder? DbEntityNamePlaceholder { get; set; }
+    public CastMember? DbCastMember { get; set; }
 
     // Prevent multiple asynchronous operations at the same time.
     [Parameter]
