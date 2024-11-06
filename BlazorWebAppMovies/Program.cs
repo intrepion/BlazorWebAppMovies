@@ -1,16 +1,16 @@
-﻿using ApplicationNamePlaceholder.BusinessLogic.Data;
-using ApplicationNamePlaceholder.BusinessLogic.Entities;
-using ApplicationNamePlaceholder.BusinessLogic.Grid;
-using ApplicationNamePlaceholder.BusinessLogic.Grid.Admin.ApplicationRoleGrid;
-using ApplicationNamePlaceholder.BusinessLogic.Grid.Admin.ApplicationUserGrid;
+﻿using BlazorWebAppMovies.BusinessLogic.Data;
+using BlazorWebAppMovies.BusinessLogic.Entities;
+using BlazorWebAppMovies.BusinessLogic.Grid;
+using BlazorWebAppMovies.BusinessLogic.Grid.Admin.ApplicationRoleGrid;
+using BlazorWebAppMovies.BusinessLogic.Grid.Admin.ApplicationUserGrid;
 
 using BlazorWebAppMovies.BusinessLogic.Grid.Admin.CastMemberGrid;
 using BlazorWebAppMovies.BusinessLogic.Grid.Admin.CastMemberMovieGrid;
 using BlazorWebAppMovies.BusinessLogic.Grid.Admin.MovieGrid;
 // GridNamespaceCodePlaceholder
 
-using ApplicationNamePlaceholder.Components;
-using ApplicationNamePlaceholder.Components.Account;
+using BlazorWebAppMovies.Components;
+using BlazorWebAppMovies.Components.Account;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -114,7 +114,7 @@ app.UseAntiforgery();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
     .AddInteractiveWebAssemblyRenderMode()
-    .AddAdditionalAssemblies(typeof(ApplicationNamePlaceholder.Client._Imports).Assembly);
+    .AddAdditionalAssemblies(typeof(BlazorWebAppMovies.Client._Imports).Assembly);
 
 app.MapAdditionalIdentityEndpoints();
 
