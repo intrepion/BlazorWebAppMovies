@@ -1,4 +1,4 @@
-namespace BlazorWebAppMovies.AcceptanceTests;
+﻿namespace BlazorWebAppMovies.AcceptanceTests;
 
 public class Tests
 {
