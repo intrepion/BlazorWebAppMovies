@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWebAppMovies.Acceptan
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWebAppMovies.BusinessLogic", "BlazorWebAppMovies.BusinessLogic\BlazorWebAppMovies.BusinessLogic.csproj", "{6FB72F5E-7EA1-4266-B50D-91BC67C0C4AA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWebAppMovies.BusinessLogic.UnitTests", "BlazorWebAppMovies.BusinessLogic.UnitTests\BlazorWebAppMovies.BusinessLogic.UnitTests.csproj", "{5CD34F86-2528-4888-922B-42E2E6FF034B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +70,18 @@ Global
 		{6FB72F5E-7EA1-4266-B50D-91BC67C0C4AA}.Release|x64.Build.0 = Release|Any CPU
 		{6FB72F5E-7EA1-4266-B50D-91BC67C0C4AA}.Release|x86.ActiveCfg = Release|Any CPU
 		{6FB72F5E-7EA1-4266-B50D-91BC67C0C4AA}.Release|x86.Build.0 = Release|Any CPU
+		{5CD34F86-2528-4888-922B-42E2E6FF034B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CD34F86-2528-4888-922B-42E2E6FF034B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CD34F86-2528-4888-922B-42E2E6FF034B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5CD34F86-2528-4888-922B-42E2E6FF034B}.Debug|x64.Build.0 = Debug|Any CPU
+		{5CD34F86-2528-4888-922B-42E2E6FF034B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5CD34F86-2528-4888-922B-42E2E6FF034B}.Debug|x86.Build.0 = Debug|Any CPU
+		{5CD34F86-2528-4888-922B-42E2E6FF034B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CD34F86-2528-4888-922B-42E2E6FF034B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CD34F86-2528-4888-922B-42E2E6FF034B}.Release|x64.ActiveCfg = Release|Any CPU
+		{5CD34F86-2528-4888-922B-42E2E6FF034B}.Release|x64.Build.0 = Release|Any CPU
+		{5CD34F86-2528-4888-922B-42E2E6FF034B}.Release|x86.ActiveCfg = Release|Any CPU
+		{5CD34F86-2528-4888-922B-42E2E6FF034B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
