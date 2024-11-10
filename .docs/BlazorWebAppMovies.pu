@@ -45,6 +45,13 @@ entity ApplicationUserRole {
     --
 }
 
+entity CastMember {
+    Id : Guid
+    --
+    ' IdCodePlaceholder--
+    ' PropertyCodePlaceholder
+}
+
 ' EntityCodePlaceholder
 
 ApplicationRole ||--o{ ApplicationUserRole
