@@ -1,0 +1,55 @@
+@startuml
+
+entity ApplicationRole {
+    Id : Guid
+    --
+    ApplicationUserId : Guid
+    --
+    Name : string
+    NormalizedName : string
+}
+
+entity ApplicationRoleClaim {
+    --
+    ApplicationUserId : Guid
+    RoleId : Guid
+    ClaimId : Guid
+    --
+}
+
+entity ApplicationUser {
+    Id : Guid
+    --
+    ApplicationUserId : Guid
+    --
+    Email : string
+    NormalizedEmail : string
+    NormalizedUserName : string
+    PhoneNumber : string
+    UserName : string
+}
+
+entity ApplicationUserClaim {
+    --
+    ApplicationUserId : Guid
+    ClaimId : Guid
+    UserId : Guid
+    --
+}
+
+entity ApplicationUserRole {
+    --
+    ApplicationUserId : Guid
+    RoleId : Guid
+    UserId : Guid
+    --
+}
+
+' EntityCodePlaceholder
+
+ApplicationRole ||--o{ ApplicationUserRole
+ApplicationUser ||--o{ ApplicationUserRole
+
+' RelationshipCodePlaceholder
+
+@enduml
