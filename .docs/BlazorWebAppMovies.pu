@@ -92,6 +92,7 @@ entity CastMember {
     ' CastMemberKeyCodePlaceholder
     --
     Name1 : string
+    Name2 : string
     ' CastMemberPropertyCodePlaceholder
 }
 
