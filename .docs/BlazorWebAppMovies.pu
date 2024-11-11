@@ -114,6 +114,7 @@ entity Movie {
     MovieCastMembers : ICollection<Movie>
     ' MovieKeyCodePlaceholder
     --
+    Title : string
     ' MoviePropertyCodePlaceholder
 }
 
