@@ -96,6 +96,15 @@ entity CastMember {
     ' CastMemberPropertyCodePlaceholder
 }
 
+entity CastMemberMovie {
+    Id : Guid
+    --
+    ApplicationUserUpdatedBy : ApplicationUser
+    ' CastMemberMovieKeyCodePlaceholder
+    --
+    ' CastMemberMoviePropertyCodePlaceholder
+}
+
 ' EntityCodePlaceholder
 
 ApplicationRole ||--o{ ApplicationUserRole
