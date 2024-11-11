@@ -133,6 +133,7 @@ CastMember }o--|| ApplicationUser
 CastMemberMovie }o--|| ApplicationUser
 CastMemberMovie }o--|| CastMember
 CastMemberMovie }o--|| Movie
+Movie }o--|| ApplicationUser
 ' RelationshipCodePlaceholder
 
 @enduml
