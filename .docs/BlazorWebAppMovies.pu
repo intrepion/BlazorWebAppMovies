@@ -84,6 +84,15 @@ entity ApplicationUserToken {
     Value : string
 }
 
+entity CastMember {
+    Id : Guid
+    --
+    ApplicationUserUpdatedBy : ApplicationUser
+    ' CastMemberKeyCodePlaceholder
+    --
+    ' CastMemberPropertyCodePlaceholder
+}
+
 ' EntityCodePlaceholder
 
 ApplicationRole ||--o{ ApplicationUserRole
