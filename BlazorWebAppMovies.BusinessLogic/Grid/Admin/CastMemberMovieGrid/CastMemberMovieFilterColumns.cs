@@ -1,6 +1,6 @@
-﻿namespace BlazorWebAppMovies.BusinessLogic.Grid.Admin.EntityNamePlaceholderGrid;
+﻿namespace BlazorWebAppMovies.BusinessLogic.Grid.Admin.CastMemberMovieGrid;
 
-public enum EntityNamePlaceholderFilterColumns
+public enum CastMemberMovieFilterColumns
 {
     Id,
 
