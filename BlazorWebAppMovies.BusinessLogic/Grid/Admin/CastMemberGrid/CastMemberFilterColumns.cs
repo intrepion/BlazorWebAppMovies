@@ -4,5 +4,6 @@ public enum CastMemberFilterColumns
 {
     Id,
 
+    Name1,
     // FilterColumnCodePlaceholder
 }
