@@ -91,6 +91,7 @@ entity CastMember {
     CastMemberMovies : ICollection<CastMember>
     ' CastMemberKeyCodePlaceholder
     --
+    Name1 : string
     ' CastMemberPropertyCodePlaceholder
 }
 
