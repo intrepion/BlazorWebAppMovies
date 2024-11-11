@@ -100,6 +100,7 @@ entity CastMemberMovie {
     Id : Guid
     --
     ApplicationUserUpdatedBy : ApplicationUser
+    CastMember : CastMemberMovie
     ' CastMemberMovieKeyCodePlaceholder
     --
     ' CastMemberMoviePropertyCodePlaceholder
