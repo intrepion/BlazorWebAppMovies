@@ -106,6 +106,7 @@ ApplicationUserLogin }o--|| ApplicationUser
 ApplicationUserRole }o--|| ApplicationUser
 ApplicationUserToken }o--|| ApplicationUser
 
+CastMember }o--|| ApplicationUser
 ' RelationshipCodePlaceholder
 
 @enduml
