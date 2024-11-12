@@ -8,5 +8,6 @@ public class Movie
     public Guid Id { get; set; }
 
     public ICollection<CastMemberMovie> MovieCastMembers { get; set; } = [];
+    [Required]
     // ActualPropertyPlaceholder
 }
