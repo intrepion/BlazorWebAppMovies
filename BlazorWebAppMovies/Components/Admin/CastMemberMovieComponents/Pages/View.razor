@@ -129,9 +129,9 @@ else
 
         using var context = DbFactory.CreateDbContext();
 
-        if (context.TableNamePlaceholder is not null)
+        if (context.CastMemberMovies is not null)
         {
-            CastMemberMovie = await context.TableNamePlaceholder
+            CastMemberMovie = await context.CastMemberMovies
                 .AsNoTracking()
                 .SingleOrDefaultAsync(
                     x => x.Id == CastMemberMovieId);
@@ -159,12 +159,12 @@ else
 
         if (context?.Roles is not null)
         {
-            var LowercaseNamePlaceholder = await context.TableNamePlaceholder
+            var LowercaseNamePlaceholder = await context.CastMemberMovies
                 .SingleOrDefaultAsync(x => x.Id == CastMemberMovieId);
 
             if (LowercaseNamePlaceholder is not null)
             {
-                context.TableNamePlaceholder?.Remove(LowercaseNamePlaceholder);
+                context.CastMemberMovies?.Remove(LowercaseNamePlaceholder);
                 await context.SaveChangesAsync();
                 Loading = false;
                 Deleted = true;
