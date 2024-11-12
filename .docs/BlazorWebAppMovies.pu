@@ -110,6 +110,7 @@ entity CastMemberMovie {
     --
     ApplicationUserUpdatedBy : ApplicationUser
     CastMember : CastMember
+    Movie : Movie
     ' CastMemberMovieKeyCodePlaceholder
     --
     ' CastMemberMoviePropertyCodePlaceholder
