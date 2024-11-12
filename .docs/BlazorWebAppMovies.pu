@@ -121,6 +121,7 @@ entity Movie {
     Id : Guid
     --
     ApplicationUserUpdatedBy : ApplicationUser
+    MovieCastMembers : ICollection<CastMemberMovie>
     ' MovieKeyCodePlaceholder
     --
     ' MoviePropertyCodePlaceholder
