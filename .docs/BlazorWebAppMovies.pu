@@ -128,6 +128,7 @@ ApplicationUserRole }o--|| ApplicationUser
 ApplicationUserToken }o--|| ApplicationUser
 
 CastMember }o--|| ApplicationUser
+CastMemberMovie }o--|| ApplicationUser
 ' RelationshipCodePlaceholder
 
 @enduml
