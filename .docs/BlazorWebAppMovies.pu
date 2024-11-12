@@ -35,6 +35,7 @@ entity ApplicationUser {
     UpdatedApplicationUserTokens : ICollection<ApplicationUserToken>
     UpdatedCastMembers : ICollection<CastMember>
     UpdatedCastMemberMovies : ICollection<CastMemberMovie>
+    UpdatedMovies : ICollection<Movie>
     ' ApplicationUserKeyCodePlaceholder
     --
     AccessFailedCount : int
