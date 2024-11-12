@@ -130,6 +130,7 @@ ApplicationUserToken }o--|| ApplicationUser
 
 CastMember }o--|| ApplicationUser
 CastMemberMovie }o--|| ApplicationUser
+CastMemberMovie }o--|| CastMember
 ' RelationshipCodePlaceholder
 
 @enduml
