@@ -1,7 +1,7 @@
-﻿using ApplicationNamePlaceholder.BusinessLogic.Entities;
+﻿using BlazorWebAppMovies.BusinessLogic.Entities;
 using Microsoft.AspNetCore.Identity;
 
-namespace ApplicationNamePlaceholder.Components.Account;
+namespace BlazorWebAppMovies.Components.Account;
 
 internal sealed class IdentityUserAccessor(UserManager<ApplicationUser> userManager, IdentityRedirectManager redirectManager)
 {
