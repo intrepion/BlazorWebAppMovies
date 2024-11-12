@@ -1,4 +1,4 @@
-﻿namespace ApplicationNamePlaceholder.BusinessLogic.Grid.Admin.ApplicationUserGrid;
+﻿namespace BlazorWebAppMovies.BusinessLogic.Grid.Admin.ApplicationUserGrid;
 
 // Interface for filtering.
 public interface IApplicationUserFilters
