@@ -96,6 +96,7 @@ entity CastMember {
     Id : Guid
     --
     ApplicationUserUpdatedBy : ApplicationUser
+    CastMemberMovies : ICollection<CastMemberMovie>
     ' CastMemberKeyCodePlaceholder
     --
     ' CastMemberPropertyCodePlaceholder
