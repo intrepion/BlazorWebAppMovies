@@ -2,7 +2,7 @@
 using Microsoft.Playwright;
 using Microsoft.Playwright.NUnit;
 
-namespace ApplicationNamePlaceholder.AcceptanceTests.Admin;
+namespace BlazorWebAppMovies.AcceptanceTests.Admin;
 
 [Parallelizable(ParallelScope.Self)]
 [TestFixture]
@@ -48,8 +48,8 @@ public partial class CastMemberMovieAdminPages : PageTest
 
         await Page.GetByRole(AriaRole.Link, new() { Name = "Login" }).ClickAsync();
         await Expect(Page).ToHaveTitleAsync("Log in");
-        await Page.GetByTestId("loginEmail").FillAsync("Admin1@ApplicationNamePlaceholder.com");
-        await Page.GetByTestId("loginPassword").FillAsync("Admin1@ApplicationNamePlaceholder.com");
+        await Page.GetByTestId("loginEmail").FillAsync("Admin1@BlazorWebAppMovies.com");
+        await Page.GetByTestId("loginPassword").FillAsync("Admin1@BlazorWebAppMovies.com");
         await Page.GetByRole(AriaRole.Button, new() { Name = "Log in" }).ClickAsync();
     }
 
