@@ -9,6 +9,7 @@ public sealed class CastMemberMap : ClassMap<CastMember>
         Map(m => m.ApplicationUserUpdatedBy).Ignore();
         Map(m => m.Id).Ignore();
 
+        Map(m => m.Name1).Name("Name1");
         // MappingCodePlaceholder
         // Map(m => m.Name).Name("Name");
         // Map(m => m.NormalizedName)
