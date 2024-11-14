@@ -11,6 +11,7 @@ public sealed class MovieMap : ClassMap<Movie>
 
         Map(m => m.Title).Name("Title");
         Map(m => m.NormalizedTitle).Name("Title").Convert(args => args.Row.GetField("Title")?.ToUpperInvariant());
+        Map(m => m.Year).Name("Year");
         // MappingCodePlaceholder
         // Map(m => m.Name).Name("Name");
         // Map(m => m.NormalizedName)
