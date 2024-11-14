@@ -4,5 +4,6 @@ public enum MovieFilterColumns
 {
     Id,
 
+    Title,
     // FilterColumnCodePlaceholder
 }
