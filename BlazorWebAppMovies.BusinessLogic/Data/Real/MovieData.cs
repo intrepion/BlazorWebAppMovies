@@ -9,12 +9,12 @@ public static class MovieData
 {
     public static async Task SeedAsync(ApplicationDbContext applicationDbContext, ApplicationUser adminUser)
     {
-        if (applicationDbContext.TableNamePlaceholder is null)
+        if (applicationDbContext.Movies is null)
         {
             return;
         }
 
-        var fileName = @"..\..\..\..\.data\TableNamePlaceholder.csv";
+        var fileName = @"..\..\..\..\.data\Movies.csv";
         var baseDirectoryPath = AppDomain.CurrentDomain.BaseDirectory;
         var csvFilePath = Path.Combine(baseDirectoryPath, fileName);
 
@@ -34,7 +34,7 @@ public static class MovieData
             record.ApplicationUserUpdatedBy = adminUser;
         }
 
-        applicationDbContext.TableNamePlaceholder.AddRange(records);
+        applicationDbContext.Movies.AddRange(records);
         await applicationDbContext.SaveChangesAsync();
     }
 }
