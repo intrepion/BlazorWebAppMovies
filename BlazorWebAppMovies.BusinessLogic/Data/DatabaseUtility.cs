@@ -1,11 +1,11 @@
-﻿using ApplicationNamePlaceholder.BusinessLogic.Data.Real;
-using ApplicationNamePlaceholder.BusinessLogic.Entities;
+﻿using BlazorWebAppMovies.BusinessLogic.Data.Real;
+using BlazorWebAppMovies.BusinessLogic.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace ApplicationNamePlaceholder.BusinessLogic.Data;
+namespace BlazorWebAppMovies.BusinessLogic.Data;
 
 public static class DatabaseUtility
 {
@@ -20,7 +20,7 @@ public static class DatabaseUtility
         if (await applicationDbContext.Database.EnsureCreatedAsync())
         {
             var adminName = "Admin";
-            var adminUserPass = adminName + "1@ApplicationNamePlaceholder.com";
+            var adminUserPass = adminName + "1@BlazorWebAppMovies.com";
             var adminUser = (await applicationDbContext.Users.AddAsync(new ApplicationUser
             {
                 Email = adminUserPass,
