@@ -5,7 +5,7 @@ using CsvHelper;
 
 namespace ApplicationNamePlaceholder.BusinessLogic.Data.Real;
 
-public static class EntityNamePlaceholderData
+public static class MovieData
 {
     public static async Task SeedAsync(ApplicationDbContext applicationDbContext, ApplicationUser adminUser)
     {
@@ -25,9 +25,9 @@ public static class EntityNamePlaceholderData
 
         using var reader = new StreamReader(csvFilePath);
         using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
-        csv.Context.RegisterClassMap<EntityNamePlaceholderMap>();
+        csv.Context.RegisterClassMap<MovieMap>();
 
-        var records = csv.GetRecords<EntityNamePlaceholder>().ToList();
+        var records = csv.GetRecords<Movie>().ToList();
 
         foreach (var record in records)
         {
