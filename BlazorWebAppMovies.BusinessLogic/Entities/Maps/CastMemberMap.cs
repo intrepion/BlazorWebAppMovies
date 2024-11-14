@@ -1,6 +1,6 @@
 ﻿using CsvHelper.Configuration;
 
-namespace ApplicationNamePlaceholder.BusinessLogic.Entities.Maps;
+namespace BlazorWebAppMovies.BusinessLogic.Entities.Maps;
 
 public sealed class CastMemberMap : ClassMap<CastMember>
 {
