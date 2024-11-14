@@ -1,5 +1,5 @@
+﻿using BlazorWebAppMovies.Data;
 using Microsoft.AspNetCore.Identity;
-using BlazorWebAppMovies.Data;
 
 namespace BlazorWebAppMovies.Components.Account;
 
