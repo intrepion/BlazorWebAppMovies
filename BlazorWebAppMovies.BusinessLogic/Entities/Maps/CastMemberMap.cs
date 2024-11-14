@@ -2,9 +2,9 @@
 
 namespace ApplicationNamePlaceholder.BusinessLogic.Entities.Maps;
 
-public sealed class EntityNamePlaceholderMap : ClassMap<EntityNamePlaceholder>
+public sealed class CastMemberMap : ClassMap<CastMember>
 {
-    public EntityNamePlaceholderMap()
+    public CastMemberMap()
     {
         Map(m => m.ApplicationUserUpdatedBy).Ignore();
         Map(m => m.Id).Ignore();
