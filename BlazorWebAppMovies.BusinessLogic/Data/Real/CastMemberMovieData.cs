@@ -1,9 +1,9 @@
 ﻿using System.Globalization;
-using ApplicationNamePlaceholder.BusinessLogic.Entities;
-using ApplicationNamePlaceholder.BusinessLogic.Entities.Maps;
+using BlazorWebAppMovies.BusinessLogic.Entities;
+using BlazorWebAppMovies.BusinessLogic.Entities.Maps;
 using CsvHelper;
 
-namespace ApplicationNamePlaceholder.BusinessLogic.Data.Real;
+namespace BlazorWebAppMovies.BusinessLogic.Data.Real;
 
 public static class CastMemberMovieData
 {
