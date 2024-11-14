@@ -22,6 +22,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
         new ApplicationUserRoleEtc().Configure(builder.Entity<ApplicationUserRole>());
         new ApplicationUserTokenEtc().Configure(builder.Entity<ApplicationUserToken>());
 
+        new CastMemberEtc().Configure(builder.Entity<CastMember>());
         // EntityTypeCfgCodePlaceholder
     }
 }
