@@ -9,6 +9,7 @@ public sealed class MovieMap : ClassMap<Movie>
         Map(m => m.ApplicationUserUpdatedBy).Ignore();
         Map(m => m.Id).Ignore();
 
+        Map(m => m.Title).Name("Title");
         // MappingCodePlaceholder
         // Map(m => m.Name).Name("Name");
         // Map(m => m.NormalizedName)
