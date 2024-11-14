@@ -50,6 +50,7 @@ public static class DatabaseUtility
 
             await ApplicationRoleData.SeedAsync(applicationDbContext, adminUser);
 
+            await CastMemberData.SeedAsync(applicationDbContext, adminUser);
             // ReadDataCodePlaceholder
 
             await FakeData.SeedAsync(applicationDbContext, adminUser);
