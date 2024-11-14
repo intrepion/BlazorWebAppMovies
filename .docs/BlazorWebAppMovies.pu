@@ -24,6 +24,7 @@ entity CastMemberMovie {
 entity Movie {
     Id : Guid
     --
+    MovieCastMembers : ICollection<CastMemberMovie>
     ' MovieKeyCodePlaceholder
     --
     ' MoviePropertyCodePlaceholder
