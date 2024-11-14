@@ -52,6 +52,7 @@ public static class DatabaseUtility
 
             await CastMemberData.SeedAsync(applicationDbContext, adminUser);
             await CastMemberMovieData.SeedAsync(applicationDbContext, adminUser);
+            await MovieData.SeedAsync(applicationDbContext, adminUser);
             // ReadDataCodePlaceholder
 
             await FakeData.SeedAsync(applicationDbContext, adminUser);
