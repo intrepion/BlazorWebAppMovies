@@ -9,6 +9,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
 {
     public DbSet<CastMember>? CastMembers { get; set; }
     public DbSet<CastMemberMovie>? CastMemberMovies { get; set; }
+    public DbSet<Movie>? Movies { get; set; }
     // DbSetCodePlaceholder
 
     protected override void OnModelCreating(ModelBuilder builder)
