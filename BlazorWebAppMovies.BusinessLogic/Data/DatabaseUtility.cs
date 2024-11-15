@@ -66,22 +66,22 @@ public static class DatabaseUtility
         var baseDirectoryPath = AppDomain.CurrentDomain.BaseDirectory;
 
         var applicationRoleImporter = serviceProvider.GetRequiredService<ApplicationRoleImporter>();
-        var applicationRoleFileName = @"..\..\..\..\.data\ApplicationRoles.csv";
+        var applicationRoleFileName = @"..\..\..\..\.data\ApplicationRole.csv";
         var applicationRoleCsvFilePath = Path.Combine(baseDirectoryPath, applicationRoleFileName);
         await applicationRoleImporter.ImportAsync(adminUserPass, applicationRoleCsvFilePath);
 
         var castMemberImporter = serviceProvider.GetRequiredService<CastMemberImporter>();
-        var castMemberFileName = @"..\..\..\..\.data\CastMembers.csv";
+        var castMemberFileName = @"..\..\..\..\.data\CastMember.csv";
         var castMemberCsvFilePath = Path.Combine(baseDirectoryPath, castMemberFileName);
         await castMemberImporter.ImportAsync(adminUserPass, castMemberCsvFilePath);
 
         var castMemberMovieImporter = serviceProvider.GetRequiredService<CastMemberMovieImporter>();
-        var castMemberMovieFileName = @"..\..\..\..\.data\CastMemberMovies.csv";
+        var castMemberMovieFileName = @"..\..\..\..\.data\CastMemberMovie.csv";
         var castMemberMovieCsvFilePath = Path.Combine(baseDirectoryPath, castMemberMovieFileName);
         await castMemberMovieImporter.ImportAsync(adminUserPass, castMemberMovieCsvFilePath);
 
         var movieImporter = serviceProvider.GetRequiredService<MovieImporter>();
-        var movieFileName = @"..\..\..\..\.data\Movies.csv";
+        var movieFileName = @"..\..\..\..\.data\Movie.csv";
         var movieCsvFilePath = Path.Combine(baseDirectoryPath, movieFileName);
         await movieImporter.ImportAsync(adminUserPass, movieCsvFilePath);
 

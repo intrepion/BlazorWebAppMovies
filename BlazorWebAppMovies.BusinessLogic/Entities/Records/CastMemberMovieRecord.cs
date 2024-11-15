@@ -1,4 +1,4 @@
-namespace BlazorWebAppMovies.BusinessLogic.Entities.Records;
+﻿namespace BlazorWebAppMovies.BusinessLogic.Entities.Records;
 
 public class CastMemberMovieRecord
 {
