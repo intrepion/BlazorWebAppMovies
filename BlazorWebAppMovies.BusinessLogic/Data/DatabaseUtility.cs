@@ -1,5 +1,5 @@
-﻿using BlazorWebAppMovies.BusinessLogic.Data.Real;
-using BlazorWebAppMovies.BusinessLogic.Entities;
+﻿using BlazorWebAppMovies.BusinessLogic.Entities;
+using BlazorWebAppMovies.BusinessLogic.Entities.Importers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,18 +9,28 @@ namespace BlazorWebAppMovies.BusinessLogic.Data;
 
 public static class DatabaseUtility
 {
-    public static async Task EnsureDbCreatedAndSeedAsync(DbContextOptions<ApplicationDbContext> options, IServiceProvider serviceProvider)
+    public static async Task EnsureDbCreatedAndSeedAsync(
+        DbContextOptions<ApplicationDbContext> options,
+        IServiceProvider serviceProvider
+    )
     {
+        Console.WriteLine("EnsureDbCreatedAndSeedAsync");
         var factory = new LoggerFactory();
         var builder = new DbContextOptionsBuilder<ApplicationDbContext>(options)
             .UseLoggerFactory(factory);
 
         using var applicationDbContext = new ApplicationDbContext(builder.Options);
 
-        if (await applicationDbContext.Database.EnsureCreatedAsync())
+        var isNewDatabase = await applicationDbContext.Database.EnsureCreatedAsync();
+
+        var adminName = "Admin";
+        var adminUserPass = adminName + "1@BlazorWebAppMovies.com";
+        var adminNormalizedUserName = adminUserPass.ToUpperInvariant();
+
+        Console.WriteLine("Before check for new database");
+        if (isNewDatabase)
         {
-            var adminName = "Admin";
-            var adminUserPass = adminName + "1@BlazorWebAppMovies.com";
+            Console.WriteLine("database is new");
             var adminUser = (await applicationDbContext.Users.AddAsync(new ApplicationUser
             {
                 Email = adminUserPass,
@@ -48,14 +58,38 @@ public static class DatabaseUtility
                 ApplicationUserUpdatedBy = adminUser,
             });
 
-            await ApplicationRoleData.SeedAsync(applicationDbContext, adminUser);
-
-            await CastMemberData.SeedAsync(applicationDbContext, adminUser);
-            await CastMemberMovieData.SeedAsync(applicationDbContext, adminUser);
-            await MovieData.SeedAsync(applicationDbContext, adminUser);
             // ReadDataCodePlaceholder
 
-            await FakeData.SeedAsync(applicationDbContext, adminUser);
+            // await FakeData.SeedAsync(applicationDbContext, adminUser);
         }
+
+        var baseDirectoryPath = AppDomain.CurrentDomain.BaseDirectory;
+
+        var applicationRoleImporter = serviceProvider.GetRequiredService<ApplicationRoleImporter>();
+        var applicationRoleFileName = @"..\..\..\..\.data\ApplicationRoles.csv";
+        var applicationRoleCsvFilePath = Path.Combine(baseDirectoryPath, applicationRoleFileName);
+        await applicationRoleImporter.ImportAsync(adminUserPass, applicationRoleCsvFilePath);
+
+        var castMemberImporter = serviceProvider.GetRequiredService<CastMemberImporter>();
+        var castMemberFileName = @"..\..\..\..\.data\CastMembers.csv";
+        var castMemberCsvFilePath = Path.Combine(baseDirectoryPath, castMemberFileName);
+        await castMemberImporter.ImportAsync(adminUserPass, castMemberCsvFilePath);
+
+        var castMemberMovieImporter = serviceProvider.GetRequiredService<CastMemberMovieImporter>();
+        var castMemberMovieFileName = @"..\..\..\..\.data\CastMemberMovies.csv";
+        var castMemberMovieCsvFilePath = Path.Combine(baseDirectoryPath, castMemberMovieFileName);
+        await castMemberMovieImporter.ImportAsync(adminUserPass, castMemberMovieCsvFilePath);
+
+        var movieImporter = serviceProvider.GetRequiredService<MovieImporter>();
+        var movieFileName = @"..\..\..\..\.data\Movies.csv";
+        var movieCsvFilePath = Path.Combine(baseDirectoryPath, movieFileName);
+        await movieImporter.ImportAsync(adminUserPass, movieCsvFilePath);
+
+        await applicationRoleImporter.ImportAsync(adminUserPass, applicationRoleCsvFilePath);
+        await castMemberImporter.ImportAsync(adminUserPass, castMemberCsvFilePath);
+        await castMemberMovieImporter.ImportAsync(adminUserPass, castMemberMovieCsvFilePath);
+        await movieImporter.ImportAsync(adminUserPass, movieCsvFilePath);
+
+        // ImporterCodePlaceholder
     }
 }

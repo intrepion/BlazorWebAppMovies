@@ -1,5 +1,6 @@
 ﻿using BlazorWebAppMovies.BusinessLogic.Data;
 using BlazorWebAppMovies.BusinessLogic.Entities;
+using BlazorWebAppMovies.BusinessLogic.Entities.Importers;
 using BlazorWebAppMovies.BusinessLogic.Grid;
 using BlazorWebAppMovies.BusinessLogic.Grid.Admin.ApplicationRoleGrid;
 using BlazorWebAppMovies.BusinessLogic.Grid.Admin.ApplicationUserGrid;
@@ -68,18 +69,22 @@ builder.Services.AddScoped<EditSuccess>();
 
 builder.Services.AddScoped<IApplicationRoleFilters, ApplicationRoleGridControls>();
 builder.Services.AddScoped<ApplicationRoleGridQueryAdapter>();
+builder.Services.AddTransient<ApplicationRoleImporter>();
 
 builder.Services.AddScoped<IApplicationUserFilters, ApplicationUserGridControls>();
 builder.Services.AddScoped<ApplicationUserGridQueryAdapter>();
 
 builder.Services.AddScoped<ICastMemberFilters, CastMemberGridControls>();
 builder.Services.AddScoped<CastMemberGridQueryAdapter>();
+builder.Services.AddTransient<CastMemberImporter>();
 
 builder.Services.AddScoped<ICastMemberMovieFilters, CastMemberMovieGridControls>();
 builder.Services.AddScoped<CastMemberMovieGridQueryAdapter>();
+builder.Services.AddTransient<CastMemberMovieImporter>();
 
 builder.Services.AddScoped<IMovieFilters, MovieGridControls>();
 builder.Services.AddScoped<MovieGridQueryAdapter>();
+builder.Services.AddTransient<MovieImporter>();
 
 // RegisterServerServiceCodePlaceholder
 
