@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlazorWebAppMovies.BusinessLogic.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241114084047_Initial")]
+    [Migration("20241115161140_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

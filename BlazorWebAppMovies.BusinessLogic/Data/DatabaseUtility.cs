@@ -61,34 +61,32 @@ public static class DatabaseUtility
             // ReadDataCodePlaceholder
 
             // await FakeData.SeedAsync(applicationDbContext, adminUser);
+
+            await applicationDbContext.SaveChangesAsync();
         }
 
         var baseDirectoryPath = AppDomain.CurrentDomain.BaseDirectory;
 
-        var applicationRoleImporter = serviceProvider.GetRequiredService<ApplicationRoleImporter>();
         var applicationRoleFileName = @"..\..\..\..\.data\ApplicationRole.csv";
         var applicationRoleCsvFilePath = Path.Combine(baseDirectoryPath, applicationRoleFileName);
-        await applicationRoleImporter.ImportAsync(adminUserPass, applicationRoleCsvFilePath);
+        await ApplicationRoleImporter.ImportAsync(applicationDbContext, adminUserPass, applicationRoleCsvFilePath);
 
-        var castMemberImporter = serviceProvider.GetRequiredService<CastMemberImporter>();
         var castMemberFileName = @"..\..\..\..\.data\CastMember.csv";
         var castMemberCsvFilePath = Path.Combine(baseDirectoryPath, castMemberFileName);
-        await castMemberImporter.ImportAsync(adminUserPass, castMemberCsvFilePath);
+        await CastMemberImporter.ImportAsync(applicationDbContext, adminUserPass, castMemberCsvFilePath);
 
-        var castMemberMovieImporter = serviceProvider.GetRequiredService<CastMemberMovieImporter>();
         var castMemberMovieFileName = @"..\..\..\..\.data\CastMemberMovie.csv";
         var castMemberMovieCsvFilePath = Path.Combine(baseDirectoryPath, castMemberMovieFileName);
-        await castMemberMovieImporter.ImportAsync(adminUserPass, castMemberMovieCsvFilePath);
+        await CastMemberMovieImporter.ImportAsync(applicationDbContext, adminUserPass, castMemberMovieCsvFilePath);
 
-        var movieImporter = serviceProvider.GetRequiredService<MovieImporter>();
         var movieFileName = @"..\..\..\..\.data\Movie.csv";
         var movieCsvFilePath = Path.Combine(baseDirectoryPath, movieFileName);
-        await movieImporter.ImportAsync(adminUserPass, movieCsvFilePath);
+        await MovieImporter.ImportAsync(applicationDbContext, adminUserPass, movieCsvFilePath);
 
-        await applicationRoleImporter.ImportAsync(adminUserPass, applicationRoleCsvFilePath);
-        await castMemberImporter.ImportAsync(adminUserPass, castMemberCsvFilePath);
-        await castMemberMovieImporter.ImportAsync(adminUserPass, castMemberMovieCsvFilePath);
-        await movieImporter.ImportAsync(adminUserPass, movieCsvFilePath);
+        await ApplicationRoleImporter.ImportAsync(applicationDbContext, adminUserPass, applicationRoleCsvFilePath);
+        await CastMemberImporter.ImportAsync(applicationDbContext, adminUserPass, castMemberCsvFilePath);
+        await CastMemberMovieImporter.ImportAsync(applicationDbContext, adminUserPass, castMemberMovieCsvFilePath);
+        await MovieImporter.ImportAsync(applicationDbContext, adminUserPass, movieCsvFilePath);
 
         // ImporterCodePlaceholder
     }

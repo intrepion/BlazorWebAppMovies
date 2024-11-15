@@ -7,24 +7,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BlazorWebAppMovies.BusinessLogic.Entities.Importers;
 
-public class CastMemberMovieImporter
+public static class CastMemberMovieImporter
 {
-    private readonly IDbContextFactory<ApplicationDbContext> _contextFactory;
-
-    public CastMemberMovieImporter(IDbContextFactory<ApplicationDbContext> contextFactory)
-    {
-        _contextFactory = contextFactory;
-    }
-
-    public async Task ImportAsync(string userName, string csvPath)
+    public static async Task ImportAsync(
+       ApplicationDbContext context,
+       string userName, string csvPath
+    )
     {
         if (!File.Exists(csvPath))
         {
             Console.WriteLine($"CastMemberMovie CSV file not found: {csvPath}");
             return;
         }
-
-        using var context = await _contextFactory.CreateDbContextAsync();
 
         if (context.CastMembers is null)
         {
