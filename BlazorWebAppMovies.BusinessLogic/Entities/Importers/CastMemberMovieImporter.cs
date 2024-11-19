@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ApplicationNamePlaceholder.BusinessLogic.Entities.Importers;
 
-public static class EntityNamePlaceholderImporter
+public static class CastMemberMovieImporter
 {
     public static async Task ImportAsync(
        ApplicationDbContext context,
@@ -41,7 +41,7 @@ public static class EntityNamePlaceholderImporter
             PrepareHeaderForMatch = x => x.Header.ToUpper(CultureInfo.InvariantCulture)
         });
 
-        var records = csv.GetRecords<EntityNamePlaceholderRecord>();
+        var records = csv.GetRecords<CastMemberMovieRecord>();
 
         // EntityListCodePlaceholder
 
@@ -49,25 +49,25 @@ public static class EntityNamePlaceholderImporter
         {
             // ManyToOneCodePlaceholder
 
-            var LowercaseNamePlaceholder = new EntityNamePlaceholder
+            var LowercaseNamePlaceholder = new CastMemberMovie
             {
                 ApplicationUserUpdatedBy = applicationUserUpdatedBy,
 
                 // NewEntityCodePlaceholder
             };
 
-            var dbEntityNamePlaceholder = await context.TableNamePlaceholder.SingleOrDefaultAsync(
+            var dbCastMemberMovie = await context.TableNamePlaceholder.SingleOrDefaultAsync(
                 x => true
                 // CompositeKeyCodePlaceholder
             );
 
-            if (dbEntityNamePlaceholder is null)
+            if (dbCastMemberMovie is null)
             {
                 await context.TableNamePlaceholder.AddAsync(LowercaseNamePlaceholder);
             }
             else
             {
-                dbEntityNamePlaceholder.ApplicationUserUpdatedBy = applicationUserUpdatedBy;
+                dbCastMemberMovie.ApplicationUserUpdatedBy = applicationUserUpdatedBy;
 
                 // ExistingEntityCodePlaceholder
             }
