@@ -88,6 +88,7 @@ public static class CastMemberMovieImporter
                 dbCastMemberMovie.ApplicationUserUpdatedBy = applicationUserUpdatedBy;
 
                 dbCastMemberMovie.CastMember = castMember;
+                dbCastMemberMovie.Movie = movie;
                 // ExistingEntityCodePlaceholder
             }
         }
