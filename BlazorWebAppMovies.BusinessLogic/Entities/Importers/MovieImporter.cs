@@ -53,6 +53,7 @@ public static class MovieImporter
             {
                 ApplicationUserUpdatedBy = applicationUserUpdatedBy,
 
+                Title = record.Title,
                 // NewEntityCodePlaceholder
             };
 
