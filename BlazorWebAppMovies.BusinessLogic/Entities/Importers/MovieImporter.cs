@@ -20,9 +20,9 @@ public static class MovieImporter
             return;
         }
 
-        if (context.TableNamePlaceholder is null)
+        if (context.Movies is null)
         {
-            Console.WriteLine("Database table not found: context.TableNamePlaceholder");
+            Console.WriteLine("Database table not found: context.Movies");
             return;
         }
 
@@ -56,14 +56,14 @@ public static class MovieImporter
                 // NewEntityCodePlaceholder
             };
 
-            var dbMovie = await context.TableNamePlaceholder.SingleOrDefaultAsync(
+            var dbMovie = await context.Movies.SingleOrDefaultAsync(
                 x => true
                 // CompositeKeyCodePlaceholder
             );
 
             if (dbMovie is null)
             {
-                await context.TableNamePlaceholder.AddAsync(movie);
+                await context.Movies.AddAsync(movie);
             }
             else
             {
