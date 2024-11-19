@@ -49,7 +49,7 @@ public static class CastMemberImporter
         {
             // ManyToOneCodePlaceholder
 
-            var LowercaseNamePlaceholder = new CastMember
+            var castMember = new CastMember
             {
                 ApplicationUserUpdatedBy = applicationUserUpdatedBy,
 
@@ -63,7 +63,7 @@ public static class CastMemberImporter
 
             if (dbCastMember is null)
             {
-                await context.TableNamePlaceholder.AddAsync(LowercaseNamePlaceholder);
+                await context.TableNamePlaceholder.AddAsync(castMember);
             }
             else
             {
