@@ -53,6 +53,7 @@ public static class CastMemberImporter
             {
                 ApplicationUserUpdatedBy = applicationUserUpdatedBy,
 
+                Name1 = record.Name1,
                 // NewEntityCodePlaceholder
             };
 
