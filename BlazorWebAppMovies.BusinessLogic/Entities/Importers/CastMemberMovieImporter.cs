@@ -1,11 +1,11 @@
 ﻿using System.Globalization;
 using CsvHelper;
 using CsvHelper.Configuration;
-using ApplicationNamePlaceholder.BusinessLogic.Data;
-using ApplicationNamePlaceholder.BusinessLogic.Entities.Records;
+using BlazorWebAppMovies.BusinessLogic.Data;
+using BlazorWebAppMovies.BusinessLogic.Entities.Records;
 using Microsoft.EntityFrameworkCore;
 
-namespace ApplicationNamePlaceholder.BusinessLogic.Entities.Importers;
+namespace BlazorWebAppMovies.BusinessLogic.Entities.Importers;
 
 public static class CastMemberMovieImporter
 {
