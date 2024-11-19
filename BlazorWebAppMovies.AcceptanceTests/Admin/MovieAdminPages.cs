@@ -29,6 +29,7 @@ public partial class MovieAdminPages : PageTest
         await Expect(Page).ToHaveTitleAsync("Movie Edit");
 
         await Page.GetByLabel("Title:", new() { Exact = true }).FillAsync("someTitle" + someRandomString);
+        await Page.GetByLabel("Year:", new() { Exact = true }).FillAsync("someYear" + someRandomString);
         // ModifyPropertyCodePlaceholder
 
         await Page.GetByRole(AriaRole.Button, new() { Name = "Submit" }).ClickAsync();
