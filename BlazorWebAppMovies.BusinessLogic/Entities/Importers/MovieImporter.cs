@@ -72,6 +72,7 @@ public static class MovieImporter
             {
                 dbMovie.ApplicationUserUpdatedBy = applicationUserUpdatedBy;
 
+                dbMovie.Title = record.Title;
                 // ExistingEntityCodePlaceholder
             }
         }
