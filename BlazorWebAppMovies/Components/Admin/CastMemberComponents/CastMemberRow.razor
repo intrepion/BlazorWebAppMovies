@@ -4,7 +4,7 @@
 {
     <div class="row CastMember-detail">
         <div class="col-2 text-right">
-            <a title="Edit" href="admin/UrlNamePlaceholder/edit/@CurrentCastMember.Id" style="text-decoration:none">
+            <a title="Edit" href="admin/cast-member/edit/@CurrentCastMember.Id" style="text-decoration:none">
                 &nbsp;📝&nbsp;
             </a>
             @if (CanDelete)
@@ -65,7 +65,7 @@
     private bool CanDelete =>
         !DeleteConfirmation && (Wrapper?.DeleteRequestId.Equals(Guid.Empty) == true || Wrapper?.DeleteRequestId.Equals(CurrentCastMember?.Id) == true);
 
-    private string ViewLink => $"admin/UrlNamePlaceholder/view/{CurrentCastMember?.Id}";
+    private string ViewLink => $"admin/cast-member/view/{CurrentCastMember?.Id}";
 
     private bool DeleteConfirmation { get; set; }
 
