@@ -6,10 +6,10 @@
 
 <PageTitle>HumanNamePlaceholder Add</PageTitle>
 
-@if (EntityNamePlaceholder is not null)
+@if (Movie is not null)
 {
-    <EntityNamePlaceholderForm Busy="Busy" 
-                 EntityNamePlaceholder="EntityNamePlaceholder" 
+    <MovieForm Busy="Busy" 
+                 Movie="Movie" 
                  IsAdd="true"
                  CancelRequest="Cancel"
                  ValidationResult="@(async (success) => await ValidationResultAsync(success))" />
@@ -28,7 +28,7 @@
 }
 
 @code {
-    private EntityNamePlaceholder? EntityNamePlaceholder { get; set; }
+    private Movie? Movie { get; set; }
 
     private bool Busy;
 
@@ -40,7 +40,7 @@
 
     protected override void OnInitialized()
     {
-        EntityNamePlaceholder = new();
+        Movie = new();
     }
 
     private async Task ValidationResultAsync(bool success)
@@ -61,9 +61,9 @@
 
         using var context = DbFactory.CreateDbContext();
 
-        if (EntityNamePlaceholder is not null)
+        if (Movie is not null)
         {
-            context.TableNamePlaceholder?.Add(EntityNamePlaceholder);
+            context.TableNamePlaceholder?.Add(Movie);
         }
 
         try
@@ -72,7 +72,7 @@
             Success = true;
             Error = false;
 
-            Navigation.NavigateTo($"/admin/UrlNamePlaceholder/view/{EntityNamePlaceholder?.Id}");
+            Navigation.NavigateTo($"/admin/UrlNamePlaceholder/view/{Movie?.Id}");
         }
         catch (Exception ex)
         {
