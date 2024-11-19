@@ -15,6 +15,7 @@ public class MovieGridQueryAdapter
             { MovieFilterColumns.Id, x => !x.Id.Equals(Guid.Empty) ? x.Id.ToString() : string.Empty },
 
             { MovieFilterColumns.Title, x => x != null && x.Title != null ? x.Title : string.Empty },
+            { MovieFilterColumns.Year, x => x != null && x.Year != null ? x.Year : string.Empty },
             // SortExpressionCodePlaceholder
         };
 
