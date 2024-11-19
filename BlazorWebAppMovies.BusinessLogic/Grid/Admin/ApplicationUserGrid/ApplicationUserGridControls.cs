@@ -1,4 +1,4 @@
-namespace BlazorWebAppMovies.BusinessLogic.Grid.Admin.ApplicationUserGrid;
+﻿namespace BlazorWebAppMovies.BusinessLogic.Grid.Admin.ApplicationUserGrid;
 
 public class ApplicationUserGridControls(IPageHelper pageHelper) : IApplicationUserFilters
 {
