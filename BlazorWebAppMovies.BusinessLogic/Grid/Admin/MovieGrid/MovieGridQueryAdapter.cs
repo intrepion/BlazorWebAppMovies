@@ -1,9 +1,9 @@
 using System.Diagnostics;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using ApplicationNamePlaceholder.BusinessLogic.Entities;
+using BlazorWebAppMovies.BusinessLogic.Entities;
 
-namespace ApplicationNamePlaceholder.BusinessLogic.Grid.Admin.EntityNamePlaceholderGrid;
+namespace BlazorWebAppMovies.BusinessLogic.Grid.Admin.EntityNamePlaceholderGrid;
 
 public class EntityNamePlaceholderGridQueryAdapter
 {
