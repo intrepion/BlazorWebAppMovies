@@ -15,6 +15,7 @@ entity CastMemberMovie {
     Id : Guid
     --
     CastMember : CastMember
+    Movie : Movie
     ' CastMemberMovieKeyCodePlaceholder
     --
     ' CastMemberMoviePropertyCodePlaceholder
