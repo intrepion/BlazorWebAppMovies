@@ -2,5 +2,6 @@
 
 public class MovieRecord
 {
+    public string Title { get; set; } = string.Empty;
     // RecordPropertyCodePlaceholder
 }
