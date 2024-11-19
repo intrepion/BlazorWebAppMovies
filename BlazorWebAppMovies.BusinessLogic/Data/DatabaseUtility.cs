@@ -74,6 +74,10 @@ public static class DatabaseUtility
         var castMemberCsvFilePath = Path.Combine(baseDirectoryPath, castMemberFileName);
         await CastMemberImporter.ImportAsync(applicationDbContext, adminUserPass, castMemberCsvFilePath);
 
+        var castMemberMovieFileName = @"..\..\..\..\.data\CastMemberMovie.csv";
+        var castMemberMovieCsvFilePath = Path.Combine(baseDirectoryPath, castMemberMovieFileName);
+        await CastMemberMovieImporter.ImportAsync(applicationDbContext, adminUserPass, castMemberMovieCsvFilePath);
+
         // ImporterFirstCodePlaceholder
 
         await ApplicationRoleImporter.ImportAsync(applicationDbContext, adminUserPass, applicationRoleCsvFilePath);
