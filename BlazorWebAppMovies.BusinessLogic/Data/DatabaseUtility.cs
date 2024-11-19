@@ -90,6 +90,7 @@ public static class DatabaseUtility
 
         await CastMemberImporter.ImportAsync(applicationDbContext, adminUserPass, castMemberCsvFilePath);
         await CastMemberMovieImporter.ImportAsync(applicationDbContext, adminUserPass, castMemberMovieCsvFilePath);
+        await MovieImporter.ImportAsync(applicationDbContext, adminUserPass, movieCsvFilePath);
         // ImporterSecondCodePlaceholder
     }
 }
