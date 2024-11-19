@@ -1,16 +1,16 @@
-namespace BlazorWebAppMovies.BusinessLogic.Grid.Admin.EntityNamePlaceholderGrid;
+namespace BlazorWebAppMovies.BusinessLogic.Grid.Admin.MovieGrid;
 
-public class EntityNamePlaceholderGridControls(IPageHelper pageHelper) : IEntityNamePlaceholderFilters
+public class MovieGridControls(IPageHelper pageHelper) : IMovieFilters
 {
     public IPageHelper PageHelper { get; set; } = pageHelper;
 
     public bool Loading { get; set; }
 
-    public EntityNamePlaceholderFilterColumns SortColumn { get; set; } = EntityNamePlaceholderFilterColumns.Id;
+    public MovieFilterColumns SortColumn { get; set; } = MovieFilterColumns.Id;
 
     public bool SortAscending { get; set; } = true;
 
-    public EntityNamePlaceholderFilterColumns FilterColumn { get; set; } = EntityNamePlaceholderFilterColumns.Id;
+    public MovieFilterColumns FilterColumn { get; set; } = MovieFilterColumns.Id;
 
     public string? FilterText { get; set; }
 }
