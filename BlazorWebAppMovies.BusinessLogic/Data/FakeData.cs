@@ -1,7 +1,7 @@
-﻿using ApplicationNamePlaceholder.BusinessLogic.Entities;
+﻿using BlazorWebAppMovies.BusinessLogic.Entities;
 using Bogus;
 
-namespace ApplicationNamePlaceholder.BusinessLogic.Data;
+namespace BlazorWebAppMovies.BusinessLogic.Data;
 
 public static class FakeData
 {
