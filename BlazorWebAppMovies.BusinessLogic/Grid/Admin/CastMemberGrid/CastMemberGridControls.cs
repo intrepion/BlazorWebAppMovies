@@ -1,4 +1,4 @@
-namespace ApplicationNamePlaceholder.BusinessLogic.Grid.Admin.EntityNamePlaceholderGrid;
+namespace BlazorWebAppMovies.BusinessLogic.Grid.Admin.EntityNamePlaceholderGrid;
 
 public class EntityNamePlaceholderGridControls(IPageHelper pageHelper) : IEntityNamePlaceholderFilters
 {
