@@ -44,6 +44,7 @@ public static class CastMemberMovieImporter
 
         var records = csv.GetRecords<CastMemberMovieRecord>();
 
+        var castMemberList = await context.CastMembers.ToListAsync();
         // EntityListCodePlaceholder
 
         foreach (var record in records)
