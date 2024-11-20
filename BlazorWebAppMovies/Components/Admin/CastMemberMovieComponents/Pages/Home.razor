@@ -14,7 +14,7 @@
 <GridWrapper @ref="Wrapper"
              FilterChanged="ReloadAsync"
              DeleteRequested="id => Wrapper.DeleteRequestId = id">
-    <div class="container-fluid TableNamePlaceholder-grid">
+    <div class="container-fluid CastMemberMovies-grid">
         <div class="row">
             <div class="col-8"><TextFilter /></div>
         </div>
@@ -144,14 +144,14 @@
         using var context = DbFactory.CreateDbContext();
         Filters.Loading = true;
 
-        if (Wrapper is not null && context.TableNamePlaceholder is not null)
+        if (Wrapper is not null && context.CastMemberMovies is not null)
         {
-            var castMemberMovie = await context.TableNamePlaceholder
+            var castMemberMovie = await context.CastMemberMovies
                 .FirstAsync(x => x.Id == Wrapper.DeleteRequestId);
 
             if (castMemberMovie is not null)
             {
-                context.TableNamePlaceholder?.Remove(castMemberMovie);
+                context.CastMemberMovies?.Remove(castMemberMovie);
                 await context.SaveChangesAsync();
             }
         }
@@ -178,7 +178,7 @@
         CastMemberMovies = new List<CastMemberMovie>();
 
         using var context = DbFactory.CreateDbContext();
-        var query = context.TableNamePlaceholder?.AsQueryable();
+        var query = context.CastMemberMovies?.AsQueryable();
 
         if (query is not null)
         {
