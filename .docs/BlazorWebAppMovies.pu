@@ -21,6 +21,14 @@ entity CastMemberMovie {
     ' CastMemberMoviePropertyCodePlaceholder
 }
 
+entity Movie {
+    Id : Guid
+    --
+    ' MovieKeyCodePlaceholder
+    --
+    ' MoviePropertyCodePlaceholder
+}
+
 ' EntityCodePlaceholder
 
 CastMemberMovie }o--o| CastMember
