@@ -49,6 +49,8 @@ public static class CastMemberMovieImporter
 
         foreach (var record in records)
         {
+            var castMember = castMemberList.FirstOrDefault(x =>
+                true
             // ManyToOneCodePlaceholder
 
             if (true
