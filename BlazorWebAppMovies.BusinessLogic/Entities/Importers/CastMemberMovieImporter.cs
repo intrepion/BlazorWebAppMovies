@@ -60,6 +60,8 @@ public static class CastMemberMovieImporter
                 true
                 && x.NormalizedTitle == record.Movie_NormalizedTitle
                 && x.Year == record.Movie_Year
+            );
+
             // ManyToOneCodePlaceholder
 
             if (true
