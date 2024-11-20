@@ -20,9 +20,9 @@ public static class CastMemberImporter
             return;
         }
 
-        if (context.TableNamePlaceholder is null)
+        if (context.CastMembers is null)
         {
-            Console.WriteLine("Database table not found: context.TableNamePlaceholder");
+            Console.WriteLine("Database table not found: context.CastMembers");
             return;
         }
 
@@ -61,14 +61,14 @@ public static class CastMemberImporter
                     // NewEntityCodePlaceholder
                 };
 
-                var dbCastMember = await context.TableNamePlaceholder.SingleOrDefaultAsync(
+                var dbCastMember = await context.CastMembers.SingleOrDefaultAsync(
                     x => true
                     // CompositeKeyCodePlaceholder
                 );
 
                 if (dbCastMember is null)
                 {
-                    await context.TableNamePlaceholder.AddAsync(castMember);
+                    await context.CastMembers.AddAsync(castMember);
                 }
                 else
                 {
