@@ -19,6 +19,7 @@ public partial class MovieAdminPages : PageTest
         await Page.GetByRole(AriaRole.Link, new() { Name = "Create New" }).ClickAsync();
         await Expect(Page).ToHaveTitleAsync("Movie Add");
 
+        await Page.GetByLabel("Title:", new() { Exact = true }).FillAsync("aTitle" + aRandomString);
         // CreatePropertyCodePlaceholder
 
         await Page.GetByRole(AriaRole.Button, new() { Name = "Submit" }).ClickAsync();
