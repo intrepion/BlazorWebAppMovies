@@ -59,6 +59,7 @@ public static class MovieImporter
                     ApplicationUserUpdatedBy = applicationUserUpdatedBy,
 
                     Title = record.Title,
+                    NormalizedTitle = record.Title.ToUpper(CultureInfo.InvariantCulture),
                     // NewEntityCodePlaceholder
                 };
 
