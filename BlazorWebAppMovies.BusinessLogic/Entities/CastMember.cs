@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ApplicationNamePlaceholder.BusinessLogic.Entities;
+namespace BlazorWebAppMovies.BusinessLogic.Entities;
 
 public class CastMember
 {
