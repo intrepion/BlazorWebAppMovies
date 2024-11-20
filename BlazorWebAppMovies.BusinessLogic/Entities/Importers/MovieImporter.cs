@@ -60,6 +60,7 @@ public static class MovieImporter
 
                     Title = record.Title,
                     NormalizedTitle = record.Title.ToUpper(CultureInfo.InvariantCulture),
+                    Year = record.Year,
                     // NewEntityCodePlaceholder
                 };
 
