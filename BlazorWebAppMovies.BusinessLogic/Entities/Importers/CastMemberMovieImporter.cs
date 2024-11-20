@@ -56,6 +56,8 @@ public static class CastMemberMovieImporter
                 && x.NormalizedName2 == record.CastMember_NormalizedName2
             );
 
+            var movie = movieList.FirstOrDefault(x =>
+                true
             // ManyToOneCodePlaceholder
 
             if (true
