@@ -1,4 +1,4 @@
-namespace BlazorWebAppMovies.BusinessLogic.UnitTests;
+﻿namespace BlazorWebAppMovies.BusinessLogic.UnitTests;
 
 public class Tests
 {
