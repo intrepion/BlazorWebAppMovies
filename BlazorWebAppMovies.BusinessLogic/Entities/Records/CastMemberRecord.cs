@@ -2,5 +2,6 @@
 
 public class CastMemberRecord
 {
+    public string Name1 { get; set; } = string.Empty;
     // RecordPropertyCodePlaceholder
 }
