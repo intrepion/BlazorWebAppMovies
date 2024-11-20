@@ -59,6 +59,7 @@ public static class CastMemberMovieImporter
             var movie = movieList.FirstOrDefault(x =>
                 true
                 && x.NormalizedTitle == record.Movie_NormalizedTitle
+                && x.Year == record.Movie_Year
             // ManyToOneCodePlaceholder
 
             if (true
