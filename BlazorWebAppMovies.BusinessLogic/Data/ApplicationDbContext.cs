@@ -26,6 +26,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
 
         new CastMemberEtc().Configure(builder.Entity<CastMember>());
         new CastMemberMovieEtc().Configure(builder.Entity<CastMemberMovie>());
+        new MovieEtc().Configure(builder.Entity<Movie>());
         // EntityTypeCfgCodePlaceholder
     }
 }
