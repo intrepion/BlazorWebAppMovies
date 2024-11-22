@@ -3,36 +3,36 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using BlazorWebAppMovies.BusinessLogic.Entities;
 
-namespace BlazorWebAppMovies.BusinessLogic.Grid.Admin.EntityNamePlaceholderGrid;
+namespace BlazorWebAppMovies.BusinessLogic.Grid.Admin.MovieGrid;
 
-public class EntityNamePlaceholderGridQueryAdapter
+public class MovieGridQueryAdapter
 {
-    private readonly IEntityNamePlaceholderFilters controls;
+    private readonly IMovieFilters controls;
 
-    private readonly Dictionary<EntityNamePlaceholderFilterColumns, Expression<Func<EntityNamePlaceholder, string>>> expressions =
+    private readonly Dictionary<MovieFilterColumns, Expression<Func<Movie, string>>> expressions =
         new()
         {
-            { EntityNamePlaceholderFilterColumns.Id, x => !x.Id.Equals(Guid.Empty) ? x.Id.ToString() : string.Empty },
+            { MovieFilterColumns.Id, x => !x.Id.Equals(Guid.Empty) ? x.Id.ToString() : string.Empty },
 
             // SortExpressionCodePlaceholder
         };
 
-    private readonly Dictionary<EntityNamePlaceholderFilterColumns, Func<IQueryable<EntityNamePlaceholder>, IQueryable<EntityNamePlaceholder>>> filterQueries = [];
+    private readonly Dictionary<MovieFilterColumns, Func<IQueryable<Movie>, IQueryable<Movie>>> filterQueries = [];
 
-    public EntityNamePlaceholderGridQueryAdapter(IEntityNamePlaceholderFilters controls)
+    public MovieGridQueryAdapter(IMovieFilters controls)
     {
         this.controls = controls;
 
         filterQueries =
             new()
             {
-                { EntityNamePlaceholderFilterColumns.Id, x => x.Where(y => y != null && !y.Id.Equals(Guid.Empty) && this.controls.FilterText != null && y.Id.ToString().Contains(this.controls.FilterText) ) },
+                { MovieFilterColumns.Id, x => x.Where(y => y != null && !y.Id.Equals(Guid.Empty) && this.controls.FilterText != null && y.Id.ToString().Contains(this.controls.FilterText) ) },
 
                 // QueryExpressionCodePlaceholder
             };
     }
 
-    public async Task<ICollection<EntityNamePlaceholder>> FetchAsync(IQueryable<EntityNamePlaceholder> query)
+    public async Task<ICollection<Movie>> FetchAsync(IQueryable<Movie> query)
     {
         query = FilterAndQuery(query);
         await CountAsync(query);
@@ -41,16 +41,16 @@ public class EntityNamePlaceholderGridQueryAdapter
         return collection;
     }
 
-    public async Task CountAsync(IQueryable<EntityNamePlaceholder> query) =>
+    public async Task CountAsync(IQueryable<Movie> query) =>
         controls.PageHelper.TotalItemCount = await query.CountAsync();
 
-    public IQueryable<EntityNamePlaceholder> FetchPageQuery(IQueryable<EntityNamePlaceholder> query) =>
+    public IQueryable<Movie> FetchPageQuery(IQueryable<Movie> query) =>
         query
             .Skip(controls.PageHelper.Skip)
             .Take(controls.PageHelper.PageSize)
             .AsNoTracking();
 
-    private IQueryable<EntityNamePlaceholder> FilterAndQuery(IQueryable<EntityNamePlaceholder> root)
+    private IQueryable<Movie> FilterAndQuery(IQueryable<Movie> root)
     {
         var sb = new System.Text.StringBuilder();
 
