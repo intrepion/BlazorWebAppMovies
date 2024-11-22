@@ -69,11 +69,11 @@ else
 
             if (Context is not null && Context.TableNamePlaceholder is not null)
             {
-                var LowercaseNamePlaceholder = await Context.TableNamePlaceholder.SingleOrDefaultAsync(x => x.Id == MovieId);
+                var movie = await Context.TableNamePlaceholder.SingleOrDefaultAsync(x => x.Id == MovieId);
 
-                if (LowercaseNamePlaceholder is not null)
+                if (movie is not null)
                 {
-                    Movie = LowercaseNamePlaceholder;
+                    Movie = movie;
                 }
             }
         }
