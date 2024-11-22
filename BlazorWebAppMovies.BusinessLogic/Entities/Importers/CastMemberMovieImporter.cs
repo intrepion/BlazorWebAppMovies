@@ -75,6 +75,7 @@ public static class CastMemberMovieImporter
                     ApplicationUserUpdatedBy = applicationUserUpdatedBy,
 
                     CastMember = castMember,
+                    Movie = movie,
                     // NewEntityCodePlaceholder
                 };
 
