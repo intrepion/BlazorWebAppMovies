@@ -8,5 +8,6 @@ public class CastMemberMovie
     public Guid Id { get; set; }
 
     public CastMember? CastMember { get; set; }
+    public Movie? Movie { get; set; }
     // ActualPropertyPlaceholder
 }
