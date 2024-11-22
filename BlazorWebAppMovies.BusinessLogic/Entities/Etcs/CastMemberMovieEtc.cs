@@ -16,6 +16,9 @@ public class CastMemberMovieEtc : IEntityTypeConfiguration<CastMemberMovie>
         builder.HasOne(x => x.CastMember)
             .WithMany(x => x.CastMemberMovies)
             .OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(x => x.Movie)
+            .WithMany(x => x.MovieCastMembers)
+            .OnDelete(DeleteBehavior.Restrict);
         // EntityConfigurationCodePlaceholder
     }
 }
