@@ -54,7 +54,7 @@ public static class CastMemberImporter
                 // NullCheckCodePlaceholder
             )
             {
-                var LowercaseNamePlaceholder = new CastMember
+                var castMember = new CastMember
                 {
                     ApplicationUserUpdatedBy = applicationUserUpdatedBy,
 
@@ -68,7 +68,7 @@ public static class CastMemberImporter
 
                 if (dbCastMember is null)
                 {
-                    await context.TableNamePlaceholder.AddAsync(LowercaseNamePlaceholder);
+                    await context.TableNamePlaceholder.AddAsync(castMember);
                 }
                 else
                 {
