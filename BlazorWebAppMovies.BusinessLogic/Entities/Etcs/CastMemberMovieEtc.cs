@@ -7,10 +7,10 @@ public class CastMemberMovieEtc : IEntityTypeConfiguration<CastMemberMovie>
 {
     public void Configure(EntityTypeBuilder<CastMemberMovie> builder)
     {
-        builder.ToTable("TableNamePlaceholder", x => x.IsTemporal());
+        builder.ToTable("CastMemberMovies", x => x.IsTemporal());
 
         builder.HasOne(x => x.ApplicationUserUpdatedBy)
-            .WithMany(x => x.UpdatedTableNamePlaceholder)
+            .WithMany(x => x.UpdatedCastMemberMovies)
             .OnDelete(DeleteBehavior.Restrict);
 
         // EntityConfigurationCodePlaceholder
