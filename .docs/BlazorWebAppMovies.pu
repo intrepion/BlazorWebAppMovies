@@ -3,6 +3,7 @@
 entity CastMember {
     Id : Guid
     --
+    CastMemberMovies : ICollection<CastMemberMovie>
     ' CastMemberKeyCodePlaceholder
     --
     ' CastMemberPropertyCodePlaceholder
