@@ -1,4 +1,4 @@
-namespace BlazorWebAppMovies.Server.ControllerTests;
+﻿namespace BlazorWebAppMovies.Server.ControllerTests;
 
 public class Tests
 {
