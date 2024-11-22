@@ -54,7 +54,7 @@ public static class CastMemberMovieImporter
                 // NullCheckCodePlaceholder
             )
             {
-                var LowercaseNamePlaceholder = new CastMemberMovie
+                var castMemberMovie = new CastMemberMovie
                 {
                     ApplicationUserUpdatedBy = applicationUserUpdatedBy,
 
@@ -68,7 +68,7 @@ public static class CastMemberMovieImporter
 
                 if (dbCastMemberMovie is null)
                 {
-                    await context.TableNamePlaceholder.AddAsync(LowercaseNamePlaceholder);
+                    await context.TableNamePlaceholder.AddAsync(castMemberMovie);
                 }
                 else
                 {
