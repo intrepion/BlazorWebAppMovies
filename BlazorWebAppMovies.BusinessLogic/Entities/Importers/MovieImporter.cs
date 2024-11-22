@@ -64,6 +64,7 @@ public static class MovieImporter
                 var dbMovie = await context.Movies.SingleOrDefaultAsync(
                     x => true
                     && x.NormalizedTitle.Equals(movie.NormalizedTitle)
+                    && x.Year.Equals(movie.Year)
                     // CompositeKeyCodePlaceholder
                 );
 
