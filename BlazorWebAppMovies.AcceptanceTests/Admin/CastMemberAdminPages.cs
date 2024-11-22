@@ -29,6 +29,7 @@ public partial class CastMemberAdminPages : PageTest
         await Expect(Page).ToHaveTitleAsync("Cast Member Edit");
 
         await Page.GetByLabel("Name 1:", new() { Exact = true }).FillAsync("someName1" + someRandomString);
+        await Page.GetByLabel("Name 2:", new() { Exact = true }).FillAsync("someName2" + someRandomString);
         // ModifyPropertyCodePlaceholder
 
         await Page.GetByRole(AriaRole.Button, new() { Name = "Submit" }).ClickAsync();
