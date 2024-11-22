@@ -1,8 +1,8 @@
-﻿namespace BlazorWebAppMovies.BusinessLogic.Grid.Admin.EntityNamePlaceholderGrid;
+﻿namespace BlazorWebAppMovies.BusinessLogic.Grid.Admin.CastMemberGrid;
 
-public interface IEntityNamePlaceholderFilters
+public interface ICastMemberFilters
 {
-    EntityNamePlaceholderFilterColumns FilterColumn { get; set; }
+    CastMemberFilterColumns FilterColumn { get; set; }
 
     bool Loading { get; set; }
 
@@ -12,5 +12,5 @@ public interface IEntityNamePlaceholderFilters
 
     bool SortAscending { get; set; }
 
-    EntityNamePlaceholderFilterColumns SortColumn { get; set; }
+    CastMemberFilterColumns SortColumn { get; set; }
 }
