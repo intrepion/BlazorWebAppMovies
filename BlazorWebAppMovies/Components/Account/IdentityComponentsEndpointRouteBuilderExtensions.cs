@@ -1,14 +1,14 @@
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Text.Json;
+using BlazorWebAppMovies.Components.Account.Pages;
+using BlazorWebAppMovies.Components.Account.Pages.Manage;
+using BlazorWebAppMovies.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
-using BlazorWebAppMovies.Components.Account.Pages;
-using BlazorWebAppMovies.Components.Account.Pages.Manage;
-using BlazorWebAppMovies.Data;
 
 namespace Microsoft.AspNetCore.Routing;
 
