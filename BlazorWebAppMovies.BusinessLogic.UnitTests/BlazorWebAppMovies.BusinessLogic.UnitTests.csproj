@@ -21,4 +21,8 @@
     <Using Include="NUnit.Framework" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BlazorWebAppMovies.BusinessLogic\BlazorWebAppMovies.BusinessLogic.csproj" />
+  </ItemGroup>
+
 </Project>
