@@ -1,4 +1,4 @@
-﻿namespace ApplicationNamePlaceholder.BusinessLogic.Data;
+﻿namespace BlazorWebAppMovies.BusinessLogic.Data;
 
 public class EditSuccess
 {
