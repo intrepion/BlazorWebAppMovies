@@ -1,4 +1,4 @@
-@page "/admin/UrlNamePlaceholder/edit/{EntityNamePlaceholderId:guid}"
+@page "/admin/UrlNamePlaceholder/edit/{CastMemberMovieId:guid}"
 @rendermode InteractiveServer
 @implements IDisposable
 @inject IDbContextFactory<ApplicationDbContext> DbFactory
@@ -8,15 +8,15 @@
 
 <PageTitle>HumanNamePlaceholder Edit</PageTitle>
 
-@if (EntityNamePlaceholder is null && !Busy)
+@if (CastMemberMovie is null && !Busy)
 {
-    <p>Could not find HumanNamePlaceholder with id @EntityNamePlaceholderId.</p>
+    <p>Could not find HumanNamePlaceholder with id @CastMemberMovieId.</p>
 }
 else
 {
-    <EntityNamePlaceholderForm Busy="Busy" 
-                 EntityNamePlaceholder="EntityNamePlaceholder" 
-                 DbEntityNamePlaceholder="DbEntityNamePlaceholder" 
+    <CastMemberMovieForm Busy="Busy" 
+                 CastMemberMovie="CastMemberMovie" 
+                 DbCastMemberMovie="DbCastMemberMovie" 
                  IsAdd="false" 
                  CancelRequest="Cancel" 
                  ValidationResult="@(async (success) => await ValidationResultAsync(success))" />
@@ -43,13 +43,13 @@ else
 
 @code {
     [Parameter]
-    public Guid EntityNamePlaceholderId { get; set; }
+    public Guid CastMemberMovieId { get; set; }
 
     private ApplicationDbContext? Context { get; set; }
 
-    private EntityNamePlaceholder EntityNamePlaceholder { get; set; } = new EntityNamePlaceholder();
+    private CastMemberMovie CastMemberMovie { get; set; } = new CastMemberMovie();
 
-    private EntityNamePlaceholder DbEntityNamePlaceholder { get; set; } = new EntityNamePlaceholder();
+    private CastMemberMovie DbCastMemberMovie { get; set; } = new CastMemberMovie();
 
     private bool Busy;
 
@@ -69,11 +69,11 @@ else
 
             if (Context is not null && Context.TableNamePlaceholder is not null)
             {
-                var LowercaseNamePlaceholder = await Context.TableNamePlaceholder.SingleOrDefaultAsync(x => x.Id == EntityNamePlaceholderId);
+                var LowercaseNamePlaceholder = await Context.TableNamePlaceholder.SingleOrDefaultAsync(x => x.Id == CastMemberMovieId);
 
                 if (LowercaseNamePlaceholder is not null)
                 {
-                    EntityNamePlaceholder = LowercaseNamePlaceholder;
+                    CastMemberMovie = LowercaseNamePlaceholder;
                 }
             }
         }
@@ -106,7 +106,7 @@ else
             }
 
             EditSuccessState.Success = true;
-            Navigation.NavigateTo($"/admin/UrlNamePlaceholder/view/{EntityNamePlaceholder.Id}");
+            Navigation.NavigateTo($"/admin/UrlNamePlaceholder/view/{CastMemberMovie.Id}");
         }
         catch (DbUpdateConcurrencyException dbex)
         {
@@ -118,11 +118,11 @@ else
 
             if (dbValues is null)
             {
-                Navigation.NavigateTo($"/admin/UrlNamePlaceholder/view/{EntityNamePlaceholder.Id}");
+                Navigation.NavigateTo($"/admin/UrlNamePlaceholder/view/{CastMemberMovie.Id}");
                 return;
             }
 
-            DbEntityNamePlaceholder = (EntityNamePlaceholder)dbValues.ToObject();
+            DbCastMemberMovie = (CastMemberMovie)dbValues.ToObject();
 
             dbex.Entries[0].OriginalValues.SetValues(dbValues);
             Error = false;
