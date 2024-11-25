@@ -5,5 +5,6 @@ public enum MovieFilterColumns
     Id,
 
     Title,
+    Year,
     // FilterColumnCodePlaceholder
 }
