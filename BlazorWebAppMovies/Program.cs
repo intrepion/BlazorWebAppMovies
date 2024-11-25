@@ -6,6 +6,7 @@ using ApplicationNamePlaceholder.BusinessLogic.Grid.Admin.ApplicationUserGrid;
 
 using BlazorWebAppMovies.BusinessLogic.Grid.Admin.CastMemberGrid;
 using BlazorWebAppMovies.BusinessLogic.Grid.Admin.CastMemberMovieGrid;
+using BlazorWebAppMovies.BusinessLogic.Grid.Admin.MovieGrid;
 // GridNamespaceCodePlaceholder
 
 using ApplicationNamePlaceholder.Components;
