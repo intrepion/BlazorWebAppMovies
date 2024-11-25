@@ -48,6 +48,10 @@
                 <SortIndicator Column="@(MovieFilterColumns.Title)" />&nbsp;Title
             </div>
 
+            <div class="col-3" @onclick="@(async ()=>await ToggleAsync(MovieFilterColumns.Year))">
+                <SortIndicator Column="@(MovieFilterColumns.Year)" />&nbsp;Year
+            </div>
+
             @* SortIndicatorCodePlaceholder *@
 
         </div>
