@@ -3,36 +3,36 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using BlazorWebAppMovies.BusinessLogic.Entities;
 
-namespace BlazorWebAppMovies.BusinessLogic.Grid.Admin.EntityNamePlaceholderGrid;
+namespace BlazorWebAppMovies.BusinessLogic.Grid.Admin.CastMemberMovieGrid;
 
-public class EntityNamePlaceholderGridQueryAdapter
+public class CastMemberMovieGridQueryAdapter
 {
-    private readonly IEntityNamePlaceholderFilters controls;
+    private readonly ICastMemberMovieFilters controls;
 
-    private readonly Dictionary<EntityNamePlaceholderFilterColumns, Expression<Func<EntityNamePlaceholder, string>>> expressions =
+    private readonly Dictionary<CastMemberMovieFilterColumns, Expression<Func<CastMemberMovie, string>>> expressions =
         new()
         {
-            { EntityNamePlaceholderFilterColumns.Id, x => !x.Id.Equals(Guid.Empty) ? x.Id.ToString() : string.Empty },
+            { CastMemberMovieFilterColumns.Id, x => !x.Id.Equals(Guid.Empty) ? x.Id.ToString() : string.Empty },
 
             // SortExpressionCodePlaceholder
         };
 
-    private readonly Dictionary<EntityNamePlaceholderFilterColumns, Func<IQueryable<EntityNamePlaceholder>, IQueryable<EntityNamePlaceholder>>> filterQueries = [];
+    private readonly Dictionary<CastMemberMovieFilterColumns, Func<IQueryable<CastMemberMovie>, IQueryable<CastMemberMovie>>> filterQueries = [];
 
-    public EntityNamePlaceholderGridQueryAdapter(IEntityNamePlaceholderFilters controls)
+    public CastMemberMovieGridQueryAdapter(ICastMemberMovieFilters controls)
     {
         this.controls = controls;
 
         filterQueries =
             new()
             {
-                { EntityNamePlaceholderFilterColumns.Id, x => x.Where(y => y != null && !y.Id.Equals(Guid.Empty) && this.controls.FilterText != null && y.Id.ToString().Contains(this.controls.FilterText) ) },
+                { CastMemberMovieFilterColumns.Id, x => x.Where(y => y != null && !y.Id.Equals(Guid.Empty) && this.controls.FilterText != null && y.Id.ToString().Contains(this.controls.FilterText) ) },
 
                 // QueryExpressionCodePlaceholder
             };
     }
 
-    public async Task<ICollection<EntityNamePlaceholder>> FetchAsync(IQueryable<EntityNamePlaceholder> query)
+    public async Task<ICollection<CastMemberMovie>> FetchAsync(IQueryable<CastMemberMovie> query)
     {
         query = FilterAndQuery(query);
         await CountAsync(query);
@@ -41,16 +41,16 @@ public class EntityNamePlaceholderGridQueryAdapter
         return collection;
     }
 
-    public async Task CountAsync(IQueryable<EntityNamePlaceholder> query) =>
+    public async Task CountAsync(IQueryable<CastMemberMovie> query) =>
         controls.PageHelper.TotalItemCount = await query.CountAsync();
 
-    public IQueryable<EntityNamePlaceholder> FetchPageQuery(IQueryable<EntityNamePlaceholder> query) =>
+    public IQueryable<CastMemberMovie> FetchPageQuery(IQueryable<CastMemberMovie> query) =>
         query
             .Skip(controls.PageHelper.Skip)
             .Take(controls.PageHelper.PageSize)
             .AsNoTracking();
 
-    private IQueryable<EntityNamePlaceholder> FilterAndQuery(IQueryable<EntityNamePlaceholder> root)
+    private IQueryable<CastMemberMovie> FilterAndQuery(IQueryable<CastMemberMovie> root)
     {
         var sb = new System.Text.StringBuilder();
 
