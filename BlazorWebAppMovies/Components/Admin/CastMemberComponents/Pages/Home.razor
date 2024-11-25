@@ -48,6 +48,10 @@
                 <SortIndicator Column="@(CastMemberFilterColumns.Name1)" />&nbsp;Name1
             </div>
 
+            <div class="col-3" @onclick="@(async ()=>await ToggleAsync(CastMemberFilterColumns.Name2))">
+                <SortIndicator Column="@(CastMemberFilterColumns.Name2)" />&nbsp;Name2
+            </div>
+
             @* SortIndicatorCodePlaceholder *@
 
         </div>
