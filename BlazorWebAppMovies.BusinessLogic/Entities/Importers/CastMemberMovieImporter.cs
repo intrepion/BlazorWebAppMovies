@@ -52,6 +52,7 @@ public static class CastMemberMovieImporter
 
             if (true
                 && castMember is not null
+                && movie is not null
                 // NullCheckCodePlaceholder
             )
             {
