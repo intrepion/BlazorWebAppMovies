@@ -1,4 +1,4 @@
-﻿namespace ApplicationNamePlaceholder.BusinessLogic.Grid;
+﻿namespace BlazorWebAppMovies.BusinessLogic.Grid;
 
 public interface IPageHelper
 {
