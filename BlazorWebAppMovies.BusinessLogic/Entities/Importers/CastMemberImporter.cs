@@ -61,6 +61,7 @@ public static class CastMemberImporter
                     Name1 = record.Name1,
                     NormalizedName1 = record.Name1.ToUpper(CultureInfo.InvariantCulture),
                     Name2 = record.Name2,
+                    NormalizedName2 = record.Name2.ToUpper(CultureInfo.InvariantCulture),
                     // NewEntityCodePlaceholder
                 };
 
