@@ -24,6 +24,7 @@ entity CastMemberMovie {
 ' EntityCodePlaceholder
 
 CastMemberMovie }o--o| CastMember
+CastMemberMovie }o--o| Movie
 ' RelationshipCodePlaceholder
 
 @enduml
