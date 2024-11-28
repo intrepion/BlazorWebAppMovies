@@ -1,4 +1,4 @@
-namespace BlazorWebAppMovies.BusinessLogic.Grid.Admin.CastMemberMovieGrid;
+﻿namespace BlazorWebAppMovies.BusinessLogic.Grid.Admin.CastMemberMovieGrid;
 
 public class CastMemberMovieGridControls(IPageHelper pageHelper) : ICastMemberMovieFilters
 {
