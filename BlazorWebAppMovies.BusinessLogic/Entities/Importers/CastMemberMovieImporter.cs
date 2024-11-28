@@ -65,6 +65,7 @@ public static class CastMemberMovieImporter
                 var dbCastMemberMovie = await context.CastMemberMovies.SingleOrDefaultAsync(
                     x => true
                     && x.CastMember.Equals(castMember)
+                    && x.Movie.Equals(movie)
                     // CompositeKeyCodePlaceholder
                 );
 
