@@ -80,6 +80,7 @@ public static class CastMemberImporter
                     dbCastMember.ApplicationUserUpdatedBy = applicationUserUpdatedBy;
 
                     dbCastMember.Name1 = record.Name1;
+                    dbCastMember.Name2 = record.Name2;
                     // ExistingEntityCodePlaceholder
                 }
             }
