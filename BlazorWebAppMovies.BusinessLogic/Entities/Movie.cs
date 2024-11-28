@@ -12,5 +12,6 @@ public class Movie
     public ICollection<CastMemberMovie> MovieCastMembers { get; set; } = [];
     [Required]
     public string Title { get; set; } = string.Empty;
+    [Required]
     // ActualPropertyPlaceholder
 }
