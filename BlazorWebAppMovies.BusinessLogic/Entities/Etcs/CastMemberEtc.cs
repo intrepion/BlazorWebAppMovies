@@ -8,7 +8,7 @@ public class CastMemberEtc : IEntityTypeConfiguration<CastMember>
     public void Configure(EntityTypeBuilder<CastMember> builder)
     {
         builder.HasOne(x => x.ApplicationUserUpdatedBy)
-            .WithMany(x => x.UpdatedTableNamePlaceholder)
+            .WithMany(x => x.UpdatedCastMembers)
             .OnDelete(DeleteBehavior.Restrict);
 
         // EntityConfigurationCodePlaceholder
