@@ -7,6 +7,13 @@
         <DataAnnotationsValidator />
         <ValidationSummary />
 
+        <h2>Title</h2>
+        <p>
+            <label>
+                Title:
+                <InputText @bind-Value="Movie.Title" @oninput="HandleTitleChange"/>
+            </label>
+        </p>
         @* PropertyFormCodePlaceholder *@
 
         <br />
