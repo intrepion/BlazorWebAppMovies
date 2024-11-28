@@ -15,5 +15,6 @@ public class CastMember
     [Required]
     public string NormalizedName1 { get; set; } = string.Empty;
     [Required]
+    public string Name2 { get; set; } = string.Empty;
     // ActualPropertyPlaceholder
 }
