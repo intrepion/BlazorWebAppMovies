@@ -74,6 +74,9 @@ builder.Services.AddScoped<ApplicationUserGridQueryAdapter>();
 builder.Services.AddScoped<ICastMemberFilters, CastMemberGridControls>();
 builder.Services.AddScoped<CastMemberGridQueryAdapter>();
 
+builder.Services.AddScoped<ICastMemberMovieFilters, CastMemberMovieGridControls>();
+builder.Services.AddScoped<CastMemberMovieGridQueryAdapter>();
+
 // RegisterServerServiceCodePlaceholder
 
 var app = builder.Build();
