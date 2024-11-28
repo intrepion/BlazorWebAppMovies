@@ -53,6 +53,23 @@
 
     private void HandleTitleChange(ChangeEventArgs changeEventArgs)
     {
+        if (Movie == null)
+        {
+            return;
+        }
+
+        if (changeEventArgs == null)
+        {
+            return;
+        }
+
+        if (changeEventArgs.Value == null)
+        {
+            return;
+        }
+
+        Movie.NormalizedTitle = ((string)changeEventArgs.Value).ToUpperInvariant();
+
         // NormalizedCodeTitlePlaceholder
     }
 
