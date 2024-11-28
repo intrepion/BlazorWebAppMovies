@@ -10,5 +10,6 @@ public class CastMember
     public DateTime UpdateDateTime { get; set; }
 
     public ICollection<CastMemberMovie> CastMemberMovies { get; set; } = [];
+    [Required]
     // ActualPropertyPlaceholder
 }
