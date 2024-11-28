@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ApplicationNamePlaceholder.BusinessLogic.Entities.Configuration;
 
-public class EntityNamePlaceholderEtc : IEntityTypeConfiguration<EntityNamePlaceholder>
+public class CastMemberEtc : IEntityTypeConfiguration<CastMember>
 {
-    public void Configure(EntityTypeBuilder<EntityNamePlaceholder> builder)
+    public void Configure(EntityTypeBuilder<CastMember> builder)
     {
         builder.HasOne(x => x.ApplicationUserUpdatedBy)
             .WithMany(x => x.UpdatedTableNamePlaceholder)
