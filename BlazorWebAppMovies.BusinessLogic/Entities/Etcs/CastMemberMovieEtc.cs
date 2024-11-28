@@ -8,7 +8,7 @@ public class CastMemberMovieEtc : IEntityTypeConfiguration<CastMemberMovie>
     public void Configure(EntityTypeBuilder<CastMemberMovie> builder)
     {
         builder.HasOne(x => x.ApplicationUserUpdatedBy)
-            .WithMany(x => x.UpdatedTableNamePlaceholder)
+            .WithMany(x => x.UpdatedCastMemberMovies)
             .OnDelete(DeleteBehavior.Restrict);
 
         // EntityConfigurationCodePlaceholder
