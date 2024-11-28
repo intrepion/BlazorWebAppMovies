@@ -19,5 +19,6 @@ public class ApplicationUser : IdentityUser<Guid>
 
     public ICollection<CastMember> UpdatedCastMembers { get; set; } = [];
     public ICollection<CastMemberMovie> UpdatedCastMemberMovies { get; set; } = [];
+    public ICollection<Movie> UpdatedMovies { get; set; } = [];
     // ActualPropertyPlaceholder
 }
