@@ -9,5 +9,6 @@ public class CastMemberMovie
     public DateTime CreateDateTime { get; set; }
     public DateTime UpdateDateTime { get; set; }
 
+    public CastMember? CastMember { get; set; }
     // ActualPropertyPlaceholder
 }
