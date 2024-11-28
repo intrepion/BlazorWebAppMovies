@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="row">&nbsp;</div>
-        <div class="row LowercaseNamePlaceholder-header">
+        <div class="row castMember-header">
             <div class="col-2">&nbsp;</div>
             <div class="col-3"
                 @onclick="@(async ()=>await ToggleAsync(CastMemberFilterColumns.Id))">
@@ -65,9 +65,9 @@
         }
         @if (CastMembers is not null)
         {
-            @foreach (var LowercaseNamePlaceholder in CastMembers)
+            @foreach (var castMember in CastMembers)
             {
-                <CastMemberRow @key=LowercaseNamePlaceholder CurrentCastMember="LowercaseNamePlaceholder"
+                <CastMemberRow @key=castMember CurrentCastMember="castMember"
                             DeleteCastMember="DeleteCastMemberAsync" />
             }
         }
@@ -146,12 +146,12 @@
 
         if (Wrapper is not null && context.TableNamePlaceholder is not null)
         {
-            var LowercaseNamePlaceholder = await context.TableNamePlaceholder
+            var castMember = await context.TableNamePlaceholder
                 .FirstAsync(x => x.Id == Wrapper.DeleteRequestId);
 
-            if (LowercaseNamePlaceholder is not null)
+            if (castMember is not null)
             {
-                context.TableNamePlaceholder?.Remove(LowercaseNamePlaceholder);
+                context.TableNamePlaceholder?.Remove(castMember);
                 await context.SaveChangesAsync();
             }
         }
