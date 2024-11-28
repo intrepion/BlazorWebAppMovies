@@ -63,6 +63,7 @@ public static class CastMemberImporter
 
                 var dbCastMember = await context.CastMembers.SingleOrDefaultAsync(
                     x => true
+                    && x.NormalizedName1.Equals(castMember.NormalizedName1)
                     // CompositeKeyCodePlaceholder
                 );
 
