@@ -15,5 +15,6 @@ public class Movie
     [Required]
     public string NormalizedTitle { get; set; } = string.Empty;
     [Required]
+    public string Year { get; set; } = string.Empty;
     // ActualPropertyPlaceholder
 }
