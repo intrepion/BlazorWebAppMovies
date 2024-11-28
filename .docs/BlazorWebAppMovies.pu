@@ -1,5 +1,13 @@
 @startuml
 
+entity CastMember {
+    Id : Guid
+    --
+    ' CastMemberKeyCodePlaceholder
+    --
+    ' CastMemberPropertyCodePlaceholder
+}
+
 ' EntityCodePlaceholder
 
 ' RelationshipCodePlaceholder
