@@ -59,6 +59,7 @@ public static class CastMemberImporter
                     ApplicationUserUpdatedBy = applicationUserUpdatedBy,
 
                     Name1 = record.Name1,
+                    NormalizedName1 = record.Name1.ToUpper(CultureInfo.InvariantCulture),
                     // NewEntityCodePlaceholder
                 };
 
