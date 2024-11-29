@@ -1,4 +1,4 @@
-namespace BlazorWebAppMovies.BusinessLogic.Grid.Admin.MovieGrid;
+﻿namespace BlazorWebAppMovies.BusinessLogic.Grid.Admin.MovieGrid;
 
 public class MovieGridControls(IPageHelper pageHelper) : IMovieFilters
 {
