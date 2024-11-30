@@ -1,0 +1,147 @@
+@page "/admin/movie/edit/{MovieId:guid}"
+@rendermode InteractiveServer
+@implements IDisposable
+@inject IDbContextFactory<ApplicationDbContext> DbFactory
+@inject NavigationManager Navigation
+@inject IPageHelper PageHelper
+@inject EditSuccess EditSuccessState
+
+<PageTitle>Movie Edit</PageTitle>
+
+@if (Movie is null && !Busy)
+{
+    <p>Could not find Movie with id @MovieId.</p>
+}
+else
+{
+    <MovieForm Busy="Busy" 
+                 Movie="Movie" 
+                 DbMovie="DbMovie" 
+                 IsAdd="false" 
+                 CancelRequest="Cancel" 
+                 ValidationResult="@(async (success) => await ValidationResultAsync(success))" />
+}
+
+@if (ConcurrencyError)
+{
+    <br />
+    <div class="alert alert-danger">
+        <p>
+            The Movie details have changed since it was last loaded. The updated fields are highlighted in the form.
+            Please choose an option:
+        </p>
+        <p><b>Cancel</b> to lose your changes and keep the database version.</p>
+        <p><b>Submit</b> to force an update with your version.</p>
+    </div>
+}
+
+@if (Error)
+{
+    <br />
+    <div class="alert alert-danger">Failed to update the Movie (@ErrorMessage).</div>
+}
+
+@code {
+    [Parameter]
+    public Guid MovieId { get; set; }
+
+    private ApplicationDbContext? Context { get; set; }
+
+    private Movie Movie { get; set; } = new Movie();
+
+    private Movie DbMovie { get; set; } = new Movie();
+
+    private bool Busy;
+
+    private bool Error;
+
+    private bool ConcurrencyError;
+
+    private string ErrorMessage = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Busy = true;
+
+        try
+        {
+            Context = DbFactory.CreateDbContext();
+
+            if (Context is not null && Context.Movies is not null)
+            {
+                var movie = await Context.Movies.SingleOrDefaultAsync(x => x.Id == MovieId);
+
+                if (movie is not null)
+                {
+                    Movie = movie;
+                }
+            }
+        }
+        finally
+        {
+            Busy = false;
+        }
+    }
+
+    private async Task ValidationResultAsync(bool success)
+    {
+        if (Busy)
+        {
+            return;
+        }
+
+        if (!success)
+        {
+            Error = false;
+            ConcurrencyError = false;
+            return;
+        }
+
+        Busy = true;
+        try
+        {
+            if (Context is not null)
+            {
+                await Context.SaveChangesAsync();
+            }
+
+            EditSuccessState.Success = true;
+            Navigation.NavigateTo($"/admin/movie/view/{Movie.Id}");
+        }
+        catch (DbUpdateConcurrencyException dbex)
+        {
+            EditSuccessState.Success = false;
+
+            ConcurrencyError = true;
+
+            var dbValues = dbex.Entries[0].GetDatabaseValues();
+
+            if (dbValues is null)
+            {
+                Navigation.NavigateTo($"/admin/movie/view/{Movie.Id}");
+                return;
+            }
+
+            DbMovie = (Movie)dbValues.ToObject();
+
+            dbex.Entries[0].OriginalValues.SetValues(dbValues);
+            Error = false;
+            Busy = false;
+        }
+        catch (Exception ex)
+        {
+            EditSuccessState.Success = false;
+            Error = true;
+            ErrorMessage = ex.Message;
+            Busy = false;
+        }
+    }
+
+    private void Cancel()
+    {
+        Busy = true;
+        Navigation.NavigateTo($"/admin/movie/{PageHelper.Page}");
+    }
+
+    public void Dispose() => Context?.Dispose();
+}

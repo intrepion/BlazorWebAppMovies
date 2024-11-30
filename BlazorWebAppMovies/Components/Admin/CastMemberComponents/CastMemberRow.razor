@@ -1,0 +1,99 @@
+@inject ICastMemberFilters Filters
+
+@if (CurrentCastMember is not null)
+{
+    <div class="row CastMember-detail">
+        <div class="col-2 text-right">
+            <a title="Edit" href="admin/cast-member/edit/@CurrentCastMember.Id" style="text-decoration:none">
+                &nbsp;📝&nbsp;
+            </a>
+            @if (CanDelete)
+            {
+                <span @onclick="DeleteRequestAsync"
+                      title="Delete" class="clickable red">❌</span>
+            }
+            else
+            {
+                <span>&nbsp;</span>
+            }
+            &nbsp;
+        </div>
+
+        <div class="col-3">
+            <a href="@ViewLink" alt="View Details"
+               title="View Details">
+                @CurrentCastMember.Id
+            </a>
+        </div>
+
+        @if (!DeleteConfirmation)
+        {
+            @* RowColumnCodePlaceholder *@
+        }
+        else
+        {
+            <div class="col-9">
+                <DeletePrompt Confirmation="ConfirmAsync" />
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private CastMember _currentCastMember = new CastMember();
+
+    [Parameter]
+    public CastMember CurrentCastMember
+    {
+        get => _currentCastMember;
+        set
+        {
+            if (value is not null && !value.Equals(_currentCastMember))
+            {
+                _currentCastMember = value;
+                DeleteConfirmation = false;
+            }
+        }
+    }
+
+    [Parameter]
+    public EventCallback DeleteCastMember { get; set; }
+
+    [CascadingParameter]
+    public GridWrapper? Wrapper { get; set; }
+
+    private bool CanDelete =>
+        !DeleteConfirmation && (Wrapper?.DeleteRequestId.Equals(Guid.Empty) == true || Wrapper?.DeleteRequestId.Equals(CurrentCastMember?.Id) == true);
+
+    private string ViewLink => $"admin/cast-member/view/{CurrentCastMember?.Id}";
+
+    private bool DeleteConfirmation { get; set; }
+
+    private async Task ConfirmAsync(bool confirmed)
+    {
+        if (confirmed)
+        {
+            await DeleteAsync();
+        }
+        else
+        {
+            DeleteConfirmation = false;
+
+            if (Wrapper is not null)
+            {
+                await Wrapper.DeleteRequested.InvokeAsync(Guid.Empty);
+            }
+        }
+    }
+
+    private async Task DeleteRequestAsync()
+    {
+        if (Wrapper?.DeleteRequestId.Equals(Guid.Empty) == true)
+        {
+            DeleteConfirmation = true;
+            await Wrapper.DeleteRequested.InvokeAsync(CurrentCastMember.Id);
+        }
+    }
+
+    private Task DeleteAsync() => DeleteCastMember.InvokeAsync(this);
+}

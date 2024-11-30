@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Security.Claims;
+using BlazorWebAppMovies.BusinessLogic.Entities;
 using BlazorWebAppMovies.Client;
-using BlazorWebAppMovies.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server;
