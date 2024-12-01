@@ -1,0 +1,17 @@
+﻿@inject ICastMemberMovieFilters Filters
+
+@if (Column == Filters.SortColumn)
+{
+    <span>@SortSymbol</span>
+}
+else
+{
+    <span>&nbsp;</span>
+}
+
+@code {
+    [Parameter]
+    public CastMemberMovieFilterColumns Column { get; set; }
+
+    private string SortSymbol => Filters.SortAscending ? "🔼" : "🔽";
+}

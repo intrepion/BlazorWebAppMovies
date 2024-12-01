@@ -1,0 +1,199 @@
+@page "/admin/cast-member"
+@page "/admin/cast-member/{Page:int}"
+@rendermode InteractiveServer
+@inject ICastMemberFilters Filters
+@inject IDbContextFactory<ApplicationDbContext> DbFactory
+@inject NavigationManager Navigation
+@inject CastMemberGridQueryAdapter QueryAdapter
+
+<PageTitle>Cast Member Home</PageTitle>
+
+<h1>Cast Member Home</h1>
+<h6><a href="/admin/cast-member/add">Create New</a></h6>
+
+<GridWrapper @ref="Wrapper"
+             FilterChanged="ReloadAsync"
+             DeleteRequested="id => Wrapper.DeleteRequestId = id">
+    <div class="container-fluid CastMembers-grid">
+        <div class="row">
+            <div class="col-8"><TextFilter /></div>
+        </div>
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <div class="col-6">
+                Page @Filters.PageHelper.Page of @Filters.PageHelper.PageCount:
+                showing @Filters.PageHelper.PageItems of
+                @Filters.PageHelper.TotalItemCount items.
+                <a disabled="@(Filters.Loading || !Filters.PageHelper.HasPrev)"
+                   class="btn btn-primary @IsDisabled(Filters.PageHelper.HasPrev)"
+                   href="@Filters.PageHelper.PrevPage">
+                    Previous
+                </a>
+                <a disabled="@(Filters.Loading || !Filters.PageHelper.HasNext)"
+                   class="btn btn-primary @IsDisabled(Filters.PageHelper.HasNext)"
+                   href="@Filters.PageHelper.NextPage">
+                    Next
+                </a>
+            </div>
+        </div>
+        <div class="row">&nbsp;</div>
+        <div class="row castMember-header">
+            <div class="col-2">&nbsp;</div>
+            <div class="col-3"
+                @onclick="@(async ()=>await ToggleAsync(CastMemberFilterColumns.Id))">
+                <SortIndicator Column="@(CastMemberFilterColumns.Id)" />&nbsp;Id
+            </div>
+
+            <div class="col-3" @onclick="@(async ()=>await ToggleAsync(CastMemberFilterColumns.Name1))">
+                <SortIndicator Column="@(CastMemberFilterColumns.Name1)" />&nbsp;Name1
+            </div>
+
+            <div class="col-3" @onclick="@(async ()=>await ToggleAsync(CastMemberFilterColumns.Name2))">
+                <SortIndicator Column="@(CastMemberFilterColumns.Name2)" />&nbsp;Name2
+            </div>
+
+            @* SortIndicatorCodePlaceholder *@
+
+        </div>
+        @if (Filters.Loading || CastMembers is null)
+        {
+            <div class="row">
+                <div class="col-12 alert alert-info">
+                    Loading...
+                </div>
+            </div>
+        }
+        @if (CastMembers is not null && CastMembers.Count == 0)
+        {
+            <div class="row">
+                <div class="col-12 alert alert-warning">
+                    No Cast Member found.
+                </div>
+            </div>
+        }
+        @if (CastMembers is not null)
+        {
+            @foreach (var castMember in CastMembers)
+            {
+                <CastMemberRow @key=castMember CurrentCastMember="castMember"
+                            DeleteCastMember="DeleteCastMemberAsync" />
+            }
+        }
+    </div>
+</GridWrapper>
+
+@code {
+    [Parameter]
+    public int Page
+    {
+        get => Filters.PageHelper.Page;
+        set
+        {
+            Filters.PageHelper.Page = value;
+        }
+    }
+
+    private GridWrapper Wrapper { get; set; } = new GridWrapper();
+
+    private ICollection<CastMember>? CastMembers { get; set; }
+
+    private string IsDisabled(bool condition) =>
+        !Filters.Loading && condition ? "" : "disabled";
+
+    private int _lastPage = -1;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (_lastPage < 1)
+        {
+            Navigation.NavigateTo("/admin/cast-member/1");
+            return;
+        }
+
+        if (Filters.PageHelper.PageCount > 0)
+        {
+            if (Page < 1)
+            {
+                Navigation.NavigateTo("/admin/cast-member/1");
+                return;
+            }
+            if (Page > Filters.PageHelper.PageCount)
+            {
+                Navigation.NavigateTo($"/admin/cast-member/{Filters.PageHelper.PageCount}");
+                return;
+            }
+        }
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Page != _lastPage)
+        {
+            _lastPage = Page;
+            await ReloadAsync();
+        }
+    }
+
+    private Task ToggleAsync(CastMemberFilterColumns col)
+    {
+        if (Filters.SortColumn == col)
+        {
+            Filters.SortAscending = !Filters.SortAscending;
+        }
+        else
+        {
+            Filters.SortColumn = col;
+        }
+        return ReloadAsync();
+    }
+
+    private async Task DeleteCastMemberAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        Filters.Loading = true;
+
+        if (Wrapper is not null && context.CastMembers is not null)
+        {
+            var castMember = await context.CastMembers
+                .FirstAsync(x => x.Id == Wrapper.DeleteRequestId);
+
+            if (castMember is not null)
+            {
+                context.CastMembers?.Remove(castMember);
+                await context.SaveChangesAsync();
+            }
+        }
+
+        Filters.Loading = false;
+
+        await ReloadAsync();
+    }
+
+    private async Task ReloadAsync()
+    {
+        if (Filters.Loading || Page < 1)
+        {
+            return;
+        }
+
+        Filters.Loading = true;
+
+        if (Wrapper is not null)
+        {
+            Wrapper.DeleteRequestId = Guid.Empty;
+        }
+
+        CastMembers = new List<CastMember>();
+
+        using var context = DbFactory.CreateDbContext();
+        var query = context.CastMembers?.AsQueryable();
+
+        if (query is not null)
+        {
+            CastMembers = await QueryAdapter.FetchAsync(query);
+        }
+
+        Filters.Loading = false;
+    }
+}
+

@@ -1,0 +1,191 @@
+@page "/admin/cast-member-movie"
+@page "/admin/cast-member-movie/{Page:int}"
+@rendermode InteractiveServer
+@inject ICastMemberMovieFilters Filters
+@inject IDbContextFactory<ApplicationDbContext> DbFactory
+@inject NavigationManager Navigation
+@inject CastMemberMovieGridQueryAdapter QueryAdapter
+
+<PageTitle>Cast Member Movie Home</PageTitle>
+
+<h1>Cast Member Movie Home</h1>
+<h6><a href="/admin/cast-member-movie/add">Create New</a></h6>
+
+<GridWrapper @ref="Wrapper"
+             FilterChanged="ReloadAsync"
+             DeleteRequested="id => Wrapper.DeleteRequestId = id">
+    <div class="container-fluid CastMemberMovies-grid">
+        <div class="row">
+            <div class="col-8"><TextFilter /></div>
+        </div>
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <div class="col-6">
+                Page @Filters.PageHelper.Page of @Filters.PageHelper.PageCount:
+                showing @Filters.PageHelper.PageItems of
+                @Filters.PageHelper.TotalItemCount items.
+                <a disabled="@(Filters.Loading || !Filters.PageHelper.HasPrev)"
+                   class="btn btn-primary @IsDisabled(Filters.PageHelper.HasPrev)"
+                   href="@Filters.PageHelper.PrevPage">
+                    Previous
+                </a>
+                <a disabled="@(Filters.Loading || !Filters.PageHelper.HasNext)"
+                   class="btn btn-primary @IsDisabled(Filters.PageHelper.HasNext)"
+                   href="@Filters.PageHelper.NextPage">
+                    Next
+                </a>
+            </div>
+        </div>
+        <div class="row">&nbsp;</div>
+        <div class="row castMemberMovie-header">
+            <div class="col-2">&nbsp;</div>
+            <div class="col-3"
+                @onclick="@(async ()=>await ToggleAsync(CastMemberMovieFilterColumns.Id))">
+                <SortIndicator Column="@(CastMemberMovieFilterColumns.Id)" />&nbsp;Id
+            </div>
+
+            @* SortIndicatorCodePlaceholder *@
+
+        </div>
+        @if (Filters.Loading || CastMemberMovies is null)
+        {
+            <div class="row">
+                <div class="col-12 alert alert-info">
+                    Loading...
+                </div>
+            </div>
+        }
+        @if (CastMemberMovies is not null && CastMemberMovies.Count == 0)
+        {
+            <div class="row">
+                <div class="col-12 alert alert-warning">
+                    No Cast Member Movie found.
+                </div>
+            </div>
+        }
+        @if (CastMemberMovies is not null)
+        {
+            @foreach (var castMemberMovie in CastMemberMovies)
+            {
+                <CastMemberMovieRow @key=castMemberMovie CurrentCastMemberMovie="castMemberMovie"
+                            DeleteCastMemberMovie="DeleteCastMemberMovieAsync" />
+            }
+        }
+    </div>
+</GridWrapper>
+
+@code {
+    [Parameter]
+    public int Page
+    {
+        get => Filters.PageHelper.Page;
+        set
+        {
+            Filters.PageHelper.Page = value;
+        }
+    }
+
+    private GridWrapper Wrapper { get; set; } = new GridWrapper();
+
+    private ICollection<CastMemberMovie>? CastMemberMovies { get; set; }
+
+    private string IsDisabled(bool condition) =>
+        !Filters.Loading && condition ? "" : "disabled";
+
+    private int _lastPage = -1;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (_lastPage < 1)
+        {
+            Navigation.NavigateTo("/admin/cast-member-movie/1");
+            return;
+        }
+
+        if (Filters.PageHelper.PageCount > 0)
+        {
+            if (Page < 1)
+            {
+                Navigation.NavigateTo("/admin/cast-member-movie/1");
+                return;
+            }
+            if (Page > Filters.PageHelper.PageCount)
+            {
+                Navigation.NavigateTo($"/admin/cast-member-movie/{Filters.PageHelper.PageCount}");
+                return;
+            }
+        }
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Page != _lastPage)
+        {
+            _lastPage = Page;
+            await ReloadAsync();
+        }
+    }
+
+    private Task ToggleAsync(CastMemberMovieFilterColumns col)
+    {
+        if (Filters.SortColumn == col)
+        {
+            Filters.SortAscending = !Filters.SortAscending;
+        }
+        else
+        {
+            Filters.SortColumn = col;
+        }
+        return ReloadAsync();
+    }
+
+    private async Task DeleteCastMemberMovieAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        Filters.Loading = true;
+
+        if (Wrapper is not null && context.CastMemberMovies is not null)
+        {
+            var castMemberMovie = await context.CastMemberMovies
+                .FirstAsync(x => x.Id == Wrapper.DeleteRequestId);
+
+            if (castMemberMovie is not null)
+            {
+                context.CastMemberMovies?.Remove(castMemberMovie);
+                await context.SaveChangesAsync();
+            }
+        }
+
+        Filters.Loading = false;
+
+        await ReloadAsync();
+    }
+
+    private async Task ReloadAsync()
+    {
+        if (Filters.Loading || Page < 1)
+        {
+            return;
+        }
+
+        Filters.Loading = true;
+
+        if (Wrapper is not null)
+        {
+            Wrapper.DeleteRequestId = Guid.Empty;
+        }
+
+        CastMemberMovies = new List<CastMemberMovie>();
+
+        using var context = DbFactory.CreateDbContext();
+        var query = context.CastMemberMovies?.AsQueryable();
+
+        if (query is not null)
+        {
+            CastMemberMovies = await QueryAdapter.FetchAsync(query);
+        }
+
+        Filters.Loading = false;
+    }
+}
+
