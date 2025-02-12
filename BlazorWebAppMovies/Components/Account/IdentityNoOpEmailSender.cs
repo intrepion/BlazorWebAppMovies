@@ -1,4 +1,4 @@
-﻿using BlazorWebAppMovies.Data;
+﻿using BlazorWebAppMovies.BusinessLogic.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 

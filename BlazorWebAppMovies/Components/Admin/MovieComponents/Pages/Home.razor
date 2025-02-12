@@ -1,0 +1,70 @@
+@page "/admin/movie"
+@rendermode InteractiveServer
+@inject IDbContextFactory<ApplicationDbContext> DbFactory
+@inject NavigationManager Navigation
+
+<PageTitle>Movie Home</PageTitle>
+
+<h1>Movie Home</h1>
+<h6><a href="/admin/movie/add">Create New</a></h6>
+
+<div class="container-fluid">
+  <table class="table table-hover table-primary table-striped">
+    <thead>
+      <tr>
+        <th>Actions</th>
+        <th>Title</th>
+        <th>Year</th>
+        @* TableHeaderCodePlaceholder *@
+      </tr>
+    </thead>
+    <tbody>
+      @if (movies is not null)
+      {
+        @foreach (var movie in movies)
+        {
+          <tr>
+            <td>
+              <div class="btn-group">
+                <a class="btn btn-primary btn-sm btn-info" href="/admin/movie/view/@movie.Id" title="View">
+                  <i class="bi bi-eye"></i>
+                </a>
+                <a class="btn btn-primary btn-sm" href="/admin/movie/edit/@movie.Id" title="Edit">
+                  <i class="bi bi-pencil"></i>
+                </a>
+              </div>
+            </td>
+            <td>@movie.Title</td>
+            <td>@movie.Year</td>
+            @* TableRowCodePlaceholder *@
+          </tr>
+        }
+      }
+    </tbody>
+  </table>
+</div>
+
+@code {
+  private ICollection<Movie>? movies { get; set; }
+
+  protected override async Task OnParametersSetAsync()
+  {
+    await ReloadAsync();
+  }
+
+  private async Task ReloadAsync()
+  {
+    movies = new List<Movie>();
+
+    using var context = DbFactory.CreateDbContext();
+    var query = context.Movies?.AsQueryable();
+
+    if (query is not null)
+    {
+      movies = await query
+        @* QueryIncludeCodePlaceholder *@
+        .AsNoTracking().ToListAsync();
+    }
+  }
+}
+
