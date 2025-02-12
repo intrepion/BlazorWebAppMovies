@@ -1,0 +1,68 @@
+@page "/admin/cast-member"
+@rendermode InteractiveServer
+@inject IDbContextFactory<ApplicationDbContext> DbFactory
+@inject NavigationManager Navigation
+
+<PageTitle>Cast Member Home</PageTitle>
+
+<h1>Cast Member Home</h1>
+<h6><a href="/admin/cast-member/add">Create New</a></h6>
+
+<div class="container-fluid">
+  <table class="table table-hover table-primary table-striped">
+    <thead>
+      <tr>
+        <th>Actions</th>
+        <th>Name 1</th>
+        <th>Name 2</th>
+        @* TableHeaderCodePlaceholder *@
+      </tr>
+    </thead>
+    <tbody>
+      @if (castMembers is not null)
+      {
+        @foreach (var castMember in castMembers)
+        {
+          <tr>
+            <td>
+              <div class="btn-group">
+                <a class="btn btn-primary btn-sm btn-info" href="/admin/cast-member/view/@castMember.Id" title="View">
+                  <i class="bi bi-eye"></i>
+                </a>
+                <a class="btn btn-primary btn-sm" href="/admin/cast-member/edit/@castMember.Id" title="Edit">
+                  <i class="bi bi-pencil"></i>
+                </a>
+              </div>
+            </td>
+            <td>@castMember.Name1</td>
+            <td>@castMember.Name2</td>
+            @* TableRowCodePlaceholder *@
+          </tr>
+        }
+      }
+    </tbody>
+  </table>
+</div>
+
+@code {
+  private ICollection<CastMember>? castMembers { get; set; }
+
+  protected override async Task OnParametersSetAsync()
+  {
+    await ReloadAsync();
+  }
+
+  private async Task ReloadAsync()
+  {
+    castMembers = new List<CastMember>();
+
+    using var context = DbFactory.CreateDbContext();
+    var query = context.CastMembers?.AsQueryable();
+
+    if (query is not null)
+    {
+      castMembers = await query.AsNoTracking().ToListAsync();
+    }
+  }
+}
+
