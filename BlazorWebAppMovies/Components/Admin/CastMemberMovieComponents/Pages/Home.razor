@@ -1,0 +1,72 @@
+@page "/admin/cast-member-movie"
+@rendermode InteractiveServer
+@inject IDbContextFactory<ApplicationDbContext> DbFactory
+@inject NavigationManager Navigation
+
+<PageTitle>Cast Member Movie Home</PageTitle>
+
+<h1>Cast Member Movie Home</h1>
+<h6><a href="/admin/cast-member-movie/add">Create New</a></h6>
+
+<div class="container-fluid">
+  <table class="table table-hover table-primary table-striped">
+    <thead>
+      <tr>
+        <th>Actions</th>
+        <th>Cast Member</th>
+        <th>Movie</th>
+        @* TableHeaderCodePlaceholder *@
+      </tr>
+    </thead>
+    <tbody>
+      @if (castMemberMovies is not null)
+      {
+        @foreach (var castMemberMovie in castMemberMovies)
+        {
+          <tr>
+            <td>
+              <div class="btn-group">
+                <a class="btn btn-primary btn-sm btn-info" href="/admin/cast-member-movie/view/@castMemberMovie.Id" title="View">
+                  <i class="bi bi-eye"></i>
+                </a>
+                <a class="btn btn-primary btn-sm" href="/admin/cast-member-movie/edit/@castMemberMovie.Id" title="Edit">
+                  <i class="bi bi-pencil"></i>
+                </a>
+              </div>
+            </td>
+            <td>@castMemberMovie?.CastMember?.Name1 @castMemberMovie?.CastMember?.Name2</td>
+            <td>@castMemberMovie?.Movie?.Title</td>
+            @* TableRowCodePlaceholder *@
+          </tr>
+        }
+      }
+    </tbody>
+  </table>
+</div>
+
+@code {
+  private ICollection<CastMemberMovie>? castMemberMovies { get; set; }
+
+  protected override async Task OnParametersSetAsync()
+  {
+    await ReloadAsync();
+  }
+
+  private async Task ReloadAsync()
+  {
+    castMemberMovies = new List<CastMemberMovie>();
+
+    using var context = DbFactory.CreateDbContext();
+    var query = context.CastMemberMovies?.AsQueryable();
+
+    if (query is not null)
+    {
+      castMemberMovies = await query
+        .Include(x => x.CastMember)
+        .Include(x => x.Movie)
+        @* QueryIncludeCodePlaceholder *@
+        .AsNoTracking().ToListAsync();
+    }
+  }
+}
+
