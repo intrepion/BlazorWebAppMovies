@@ -1,4 +1,4 @@
-﻿using BlazorWebAppMovies.Data;
+﻿using BlazorWebAppMovies.BusinessLogic.Entities;
 using Microsoft.AspNetCore.Identity;
 
 namespace BlazorWebAppMovies.Components.Account;

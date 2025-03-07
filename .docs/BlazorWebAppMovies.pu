@@ -1,0 +1,41 @@
+@startuml
+
+entity CastMember {
+    Id : Guid
+    --
+    CastMemberMovies : ICollection<CastMemberMovie>
+    ' CastMemberKeyCodePlaceholder
+    --
+    Name1 : string
+    Name2 : string
+    ' CastMemberPropertyCodePlaceholder
+}
+
+entity CastMemberMovie {
+    Id : Guid
+    --
+    CastMember : CastMember
+    Movie : Movie
+    ' CastMemberMovieKeyCodePlaceholder
+    --
+    ' CastMemberMoviePropertyCodePlaceholder
+}
+
+entity Movie {
+    Id : Guid
+    --
+    MovieCastMembers : ICollection<CastMemberMovie>
+    ' MovieKeyCodePlaceholder
+    --
+    Title : string
+    Year : string
+    ' MoviePropertyCodePlaceholder
+}
+
+' EntityCodePlaceholder
+
+CastMemberMovie }o--o| CastMember
+CastMemberMovie }o--o| Movie
+' RelationshipCodePlaceholder
+
+@enduml

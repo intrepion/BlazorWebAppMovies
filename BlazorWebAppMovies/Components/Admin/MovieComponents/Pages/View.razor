@@ -1,0 +1,206 @@
+@page "/admin/movie/view/{MovieId:guid}"
+@rendermode InteractiveServer
+@inject IDbContextFactory<ApplicationDbContext> DbFactory
+@inject EditSuccess EditSuccessState
+
+<PageTitle>Movie View</PageTitle>
+
+@if (NotFound && !Loading)
+{
+  <div class="alert alert-warning">Movie with that id doesn't exist.</div>
+}
+else
+{
+  @if (Movie is null || Loading)
+  {
+    <div class="alert alert-info">Loading...</div>
+  }
+  else
+  {
+    @* <h1>Movie Details</h1>
+    <h6>ID: @Movie.Id</h6> *@
+    <h1>Movie Details</h1>
+    <h6>ID: @Movie.Id</h6>
+    @* PageHeaderCodePlaceholder *@
+
+    <br />
+    @if (EditSuccess)
+    {
+      <div class="alert alert-success">Successfully updated the Movie.</div>
+    }
+    <hr />
+
+    <div class="container-fluid">
+      <table class="table table-hover table-primary table-striped">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ID</td>
+            <td>@Movie.Id</td>
+          </tr>
+          <tr>
+            <td>Title</td>
+            <td>@Movie?.Title</td>
+          </tr>
+          <tr>
+            <td>Year</td>
+            <td>@Movie?.Year</td>
+          </tr>
+          @* ViewPropertyCodePlaceholder *@
+          @* <tr>
+            <td>Employee</td>
+            <td>@Movie?.Employee?.FirstName @Movie?.Employee?.LastName</td>
+          </tr>
+          <tr>
+            <td>Manager</td>
+            <td>@Movie?.Manager?.FirstName @Movie?.Manager?.LastName</td>
+          </tr> *@
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mt-4">
+      <a class="btn btn-primary" title="Go Back" href="admin/movie">
+        Back to Grid
+      </a>
+      <span>&nbsp;</span>
+      @if (!Deleted)
+      {
+        <a class="btn btn-primary" href="admin/movie/edit/@Movie.Id" title="Edit">Edit</a>
+
+        <span>&nbsp;</span>
+        @if (!ShowConfirmation)
+        {
+          <button class="btn btn-danger" @onclick="@(() => { ShowConfirmation = true; EditSuccess = false; })">Delete</button>
+        }
+        else
+        {
+          <br />
+          <br />
+          <DeletePrompt Confirmation="@(async result => await ConfirmAsync(result))" />
+        }
+      }
+      else
+      {
+        <div class="btn btn-danger">🚫 This Movie has been deleted.</div>
+      }
+    </div>
+  }
+}
+
+@code {
+  private bool Loading;
+
+  [Parameter]
+  public Guid MovieId { get; set; }
+
+  private Guid _lastMovieId;
+
+  [Parameter]
+  public bool EditSuccess { get; set; }
+
+  private Movie? Movie { get; set; }
+
+  private bool NotFound = false;
+
+  private bool ShowConfirmation = false;
+
+  private bool Deleted = false;
+
+  protected override async Task OnParametersSetAsync()
+  {
+    if (_lastMovieId != MovieId)
+    {
+      EditSuccess = EditSuccessState.Success;
+      EditSuccessState.Success = false;
+      _lastMovieId = MovieId;
+      await LoadMovieAsync();
+    }
+  }
+
+  private async Task ConfirmAsync(bool result)
+  {
+    if (result)
+    {
+      await DeleteAsync();
+    }
+    else
+    {
+      ShowConfirmation = false;
+      EditSuccess = false;
+    }
+  }
+
+  private async Task LoadMovieAsync()
+  {
+    if (Loading)
+    {
+      return;
+    }
+
+    NotFound = false;
+    Movie = null;
+
+    Loading = true;
+
+    using var context = DbFactory.CreateDbContext();
+
+    if (context.Movies is not null)
+    {
+      Movie = await context.Movies
+        @* IncludeCodePlaceholder *@
+        @* .Include(x => x.Employee)
+        .Include(x => x.Manager) *@
+        .AsNoTracking()
+        .SingleOrDefaultAsync(
+          x => x.Id == MovieId);
+
+      if (Movie is null)
+      {
+        NotFound = true;
+      }
+    }
+
+    Loading = false;
+  }
+
+  private async Task DeleteAsync()
+  {
+    if (Loading)
+    {
+      return;
+    }
+
+    Loading = true;
+    using var context = DbFactory?.CreateDbContext();
+
+    if (context?.Movies is not null)
+    {
+      var movie = await context.Movies
+        .SingleOrDefaultAsync(x => x.Id == MovieId);
+
+      if (movie is not null)
+      {
+        context.Movies?.Remove(movie);
+        await context.SaveChangesAsync();
+        Loading = false;
+        Deleted = true;
+      }
+      else
+      {
+        Loading = false;
+        await LoadMovieAsync();
+      }
+    }
+    else
+    {
+      Loading = false;
+      await LoadMovieAsync();
+    }
+  }
+}
