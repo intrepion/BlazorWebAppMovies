@@ -48,10 +48,14 @@ public class InfoGridGetGridStateTests
 
         var actual = _infoGridApplicationUser._infoGridState;
 
-        Assert.That(actual._columns, Is.EqualTo(expected._columns));
-        Assert.That(actual._page, Is.EqualTo(expected._page));
-        Assert.That(actual._rowsPerPage, Is.EqualTo(expected._rowsPerPage));
-        Assert.That(actual._sorts, Is.EqualTo(expected._sorts));
-        Assert.That(actual._totalRows, Is.EqualTo(expected._totalRows));
+        Assert.Multiple(() =>
+        {
+            Assert.That(actual._columns, Is.EqualTo(expected._columns));
+            Assert.That(actual._page, Is.EqualTo(expected._page));
+            Assert.That(actual._rowsPerPage, Is.EqualTo(expected._rowsPerPage));
+            Assert.That(actual._sorts, Is.EqualTo(expected._sorts));
+            Assert.That(actual._totalRows, Is.EqualTo(expected._totalRows));
+        });
+
     }
 }
