@@ -40,6 +40,7 @@ public class InfoGridGetGridStateTests
         var expected = new InfoGridState
         {
             _columns = 0,
+            _filters = [],
             _page = 1,
             _rowsPerPage = 10,
             _sorts = [],
@@ -51,6 +52,7 @@ public class InfoGridGetGridStateTests
         Assert.Multiple(() =>
         {
             Assert.That(actual._columns, Is.EqualTo(expected._columns));
+            Assert.That(actual._filters, Is.EqualTo(expected._filters));
             Assert.That(actual._page, Is.EqualTo(expected._page));
             Assert.That(actual._rowsPerPage, Is.EqualTo(expected._rowsPerPage));
             Assert.That(actual._sorts, Is.EqualTo(expected._sorts));
