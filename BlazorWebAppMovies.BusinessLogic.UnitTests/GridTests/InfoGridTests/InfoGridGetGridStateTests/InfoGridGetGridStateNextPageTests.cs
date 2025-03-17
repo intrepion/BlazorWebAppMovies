@@ -1,7 +1,7 @@
 ﻿using BlazorWebAppMovies.BusinessLogic.Entities;
 using BlazorWebAppMovies.BusinessLogic.Grid;
 
-namespace BlazorWebAppMovies.BusinessLogic.UnitTests.InfoGridTests.InfoGridGetGridStateTests;
+namespace BlazorWebAppMovies.BusinessLogic.UnitTests.GridTests.InfoGridTests.InfoGridGetGridStateTests;
 
 public class InfoGridGetGridStateNextPageTests
 {
