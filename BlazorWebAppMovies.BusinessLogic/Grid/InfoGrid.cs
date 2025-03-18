@@ -27,11 +27,6 @@ public class InfoGrid<T>()
 
     public void NextPage()
     {
-        if (_infoGridState._page < 1)
-        {
-            return;
-        }
-
         var nextPage = _infoGridState._page + 1;
 
         if (nextPage <= _infoGridState._totalPages)
@@ -42,6 +37,11 @@ public class InfoGrid<T>()
 
     public void PreviousPage()
     {
-        _infoGridState._page = 1;
+        var previousPage = _infoGridState._page - 1;
+
+        if (previousPage >= 1)
+        {
+            _infoGridState._page = previousPage;
+        }
     }
 }
