@@ -39,4 +39,9 @@ public class InfoGrid<T>()
             _infoGridState._page = nextPage;
         }
     }
+
+    public void PreviousPage()
+    {
+        _infoGridState._page = 1;
+    }
 }
