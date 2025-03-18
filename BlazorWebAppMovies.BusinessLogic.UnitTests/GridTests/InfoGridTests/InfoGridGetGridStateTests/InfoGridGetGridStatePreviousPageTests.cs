@@ -247,7 +247,7 @@ public class InfoGridGetGridStatePreviousPageTests
     [Test]
     public void Page1_WhenPreviousPage()
     {
-        var expected = new InfoGridState
+        var expected = new InfoGrid<ApplicationUser>
         {
             _columns = 3,
             _filters = [],
@@ -259,7 +259,7 @@ public class InfoGridGetGridStatePreviousPageTests
         };
 
         _infoGridApplicationUser.PreviousPage();
-        var actual = _infoGridApplicationUser._infoGridState;
+        var actual = _infoGridApplicationUser;
 
         Assert.Multiple(() =>
         {
@@ -276,7 +276,7 @@ public class InfoGridGetGridStatePreviousPageTests
     [Test]
     public void Page3_WhenNextPageTwicePreviousPage()
     {
-        var expected = new InfoGridState
+        var expected = new InfoGrid<ApplicationUser>
         {
             _columns = 3,
             _filters = [],
@@ -290,7 +290,7 @@ public class InfoGridGetGridStatePreviousPageTests
         _infoGridApplicationUser.NextPage();
         _infoGridApplicationUser.NextPage();
         _infoGridApplicationUser.PreviousPage();
-        var actual = _infoGridApplicationUser._infoGridState;
+        var actual = _infoGridApplicationUser;
 
         Assert.Multiple(() =>
         {

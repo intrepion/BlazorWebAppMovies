@@ -2,46 +2,52 @@
 
 public class InfoGrid<T>()
 {
+    public int _columns = 0;
+    public List<(int, string)> _filters = [];
     public List<T> _info = [];
-    public InfoGridState _infoGridState = new();
+    public int _page = 0;
+    public int _rowsPerPage = 10;
+    public List<(int, bool)> _sorts = [];
+    public int _totalPages = 0;
+    public int _totalRows = 0;
 
     public void SetInitialInfo(List<T> info)
     {
         _info = info;
-        _infoGridState._columns = 3;
+        _columns = 3;
         if (info.Count > 0)
         {
-            _infoGridState._page = 1;
+            _page = 1;
         }
 
-        if ((info.Count % _infoGridState._rowsPerPage) == 0)
+        if ((info.Count % _rowsPerPage) == 0)
         {
-            _infoGridState._totalPages = info.Count / _infoGridState._rowsPerPage;
+            _totalPages = info.Count / _rowsPerPage;
         }
         else
         {
-            _infoGridState._totalPages = (info.Count / _infoGridState._rowsPerPage) + 1;
+            _totalPages = (info.Count / _rowsPerPage) + 1;
         }
-        _infoGridState._totalRows = info.Count;
+        _totalRows = info.Count;
     }
 
     public void NextPage()
     {
-        var nextPage = _infoGridState._page + 1;
+        var nextPage = _page + 1;
 
-        if (nextPage <= _infoGridState._totalPages)
+        if (nextPage <= _totalPages)
         {
-            _infoGridState._page = nextPage;
+            _page = nextPage;
         }
     }
 
     public void PreviousPage()
     {
-        var previousPage = _infoGridState._page - 1;
+        var previousPage = _page - 1;
 
         if (previousPage >= 1)
         {
-            _infoGridState._page = previousPage;
+            _page = previousPage;
         }
     }
 }

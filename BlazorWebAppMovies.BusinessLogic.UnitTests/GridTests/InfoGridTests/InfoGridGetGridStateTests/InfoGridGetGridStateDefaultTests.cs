@@ -247,7 +247,7 @@ public class InfoGridGetGridStateDefaultTests
     [Test]
     public void DefaultState_WhenNothing()
     {
-        var expected = new InfoGridState
+        var expected = new InfoGrid<ApplicationUser>
         {
             _columns = 3,
             _filters = [],
@@ -258,7 +258,7 @@ public class InfoGridGetGridStateDefaultTests
             _totalRows = 28,
         };
 
-        var actual = _infoGridApplicationUser._infoGridState;
+        var actual = _infoGridApplicationUser;
 
         Assert.Multiple(() =>
         {
