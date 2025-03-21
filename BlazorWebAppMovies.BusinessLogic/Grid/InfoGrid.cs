@@ -58,6 +58,11 @@ public class InfoGrid<T>()
             return;
         }
 
+        if (column > _columns)
+        {
+            return;
+        }
+
         var found = -1;
         var n = _sorts.Count;
 
