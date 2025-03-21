@@ -76,7 +76,7 @@ public class InfoGrid<T>()
 
         if (found == -1)
         {
-            _sorts.Add((column, true));
+            _sorts.Insert(0, (column, true));
 
             return;
         }
