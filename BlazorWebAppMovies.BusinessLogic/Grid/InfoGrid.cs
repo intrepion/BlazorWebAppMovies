@@ -58,6 +58,27 @@ public class InfoGrid<T>()
             return;
         }
 
-        _sorts.Add((column, true));
+        var found = -1;
+        var n = _sorts.Count;
+
+        for (var i = 0; i < n; i += 1)
+        {
+            if (_sorts[i].Item1 == column)
+            {
+                found = i;
+            }
+        }
+
+        if (found == -1)
+        {
+            _sorts.Add((column, true));
+
+            return;
+        }
+
+        if (_sorts[found].Item2)
+        {
+            _sorts[found] = (column, false);
+        }
     }
 }
