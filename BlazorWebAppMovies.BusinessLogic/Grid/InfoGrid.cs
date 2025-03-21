@@ -11,6 +11,26 @@ public class InfoGrid<T>()
     public int _totalPages = 0;
     public int _totalRows = 0;
 
+    public void NextPage()
+    {
+        var nextPage = _page + 1;
+
+        if (nextPage <= _totalPages)
+        {
+            _page = nextPage;
+        }
+    }
+
+    public void PreviousPage()
+    {
+        var previousPage = _page - 1;
+
+        if (previousPage >= 1)
+        {
+            _page = previousPage;
+        }
+    }
+
     public void SetInitialInfo(List<T> info)
     {
         _info = info;
@@ -31,23 +51,8 @@ public class InfoGrid<T>()
         _totalRows = info.Count;
     }
 
-    public void NextPage()
+    public void Sort(int column)
     {
-        var nextPage = _page + 1;
-
-        if (nextPage <= _totalPages)
-        {
-            _page = nextPage;
-        }
-    }
-
-    public void PreviousPage()
-    {
-        var previousPage = _page - 1;
-
-        if (previousPage >= 1)
-        {
-            _page = previousPage;
-        }
+        _sorts.Add((column, true));
     }
 }
