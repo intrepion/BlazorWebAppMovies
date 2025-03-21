@@ -79,6 +79,10 @@ public class InfoGrid<T>()
         if (_sorts[found].Item2)
         {
             _sorts[found] = (column, false);
+
+            return;
         }
+
+        _sorts.RemoveAt(found);
     }
 }
