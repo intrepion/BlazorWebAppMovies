@@ -373,7 +373,7 @@ public class InfoGridGetGridStateSortTests
     }
 
     [Test]
-    public void Sort1False_WhenSort1Twice()
+    public void Sort2True1False3True_WhenSort1Twice()
     {
         var expected = new InfoGrid<ApplicationUser>
         {
@@ -382,13 +382,17 @@ public class InfoGridGetGridStateSortTests
             _page = 1,
             _rowsPerPage = 10,
             _sorts = [
+                (3, true),
                 (1, false),
+                (2, true),
             ],
             _totalPages = 3,
             _totalRows = 28,
         };
 
+        _infoGridApplicationUser.Sort(2);
         _infoGridApplicationUser.Sort(1);
+        _infoGridApplicationUser.Sort(3);
         _infoGridApplicationUser.Sort(1);
         var actual = _infoGridApplicationUser;
 
@@ -405,7 +409,7 @@ public class InfoGridGetGridStateSortTests
     }
 
     [Test]
-    public void Default_WhenSort1Thrice()
+    public void Sort2True3True_WhenSort1Thrice()
     {
         var expected = new InfoGrid<ApplicationUser>
         {
@@ -413,12 +417,17 @@ public class InfoGridGetGridStateSortTests
             _filters = [],
             _page = 1,
             _rowsPerPage = 10,
-            _sorts = [],
+            _sorts = [
+                (3, true),
+                (2, true),
+            ],
             _totalPages = 3,
             _totalRows = 28,
         };
 
+        _infoGridApplicationUser.Sort(2);
         _infoGridApplicationUser.Sort(1);
+        _infoGridApplicationUser.Sort(3);
         _infoGridApplicationUser.Sort(1);
         _infoGridApplicationUser.Sort(1);
         var actual = _infoGridApplicationUser;
