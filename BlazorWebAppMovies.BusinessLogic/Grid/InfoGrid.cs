@@ -53,6 +53,11 @@ public class InfoGrid<T>()
 
     public void Sort(int column)
     {
+        if (column < 1)
+        {
+            return;
+        }
+
         _sorts.Add((column, true));
     }
 }
