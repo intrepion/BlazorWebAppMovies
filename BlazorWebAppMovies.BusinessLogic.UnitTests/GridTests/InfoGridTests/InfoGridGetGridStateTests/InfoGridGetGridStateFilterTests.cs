@@ -3,7 +3,7 @@ using BlazorWebAppMovies.BusinessLogic.Grid;
 
 namespace BlazorWebAppMovies.BusinessLogic.UnitTests.GridTests.InfoGridTests.InfoGridGetGridStateTests;
 
-public class InfoGridGetGridStateNextPageTests
+public class InfoGridGetGridStateFilterTests
 {
     private List<ApplicationUser> _listApplicationUser;
     private InfoGrid<ApplicationUser> _infoGridApplicationUser;
@@ -245,93 +245,24 @@ public class InfoGridGetGridStateNextPageTests
     }
 
     [Test]
-    public void Page2_WhenNextPage()
+    public void FilterHello_WhenFilterHello()
     {
         var expected = new InfoGrid<ApplicationUser>
         {
             _columns = 3,
             _filters = [
                 null,
-                null,
+                "Hello",
                 null,
             ],
-            _page = 2,
+            _page = 1,
             _rowsPerPage = 10,
             _sorts = [],
             _totalPages = 3,
             _totalRows = 28,
         };
 
-        _infoGridApplicationUser.NextPage();
-        var actual = _infoGridApplicationUser;
-
-        Assert.Multiple(() =>
-        {
-            Assert.That(actual._columns, Is.EqualTo(expected._columns), $"Columns is {actual._columns}, but should be {expected._columns}");
-            Assert.That(actual._filters, Is.EqualTo(expected._filters), $"Filters is {actual._filters}, but should be {expected._filters}");
-            Assert.That(actual._page, Is.EqualTo(expected._page), $"Page is {actual._page}, but should be {expected._page}");
-            Assert.That(actual._rowsPerPage, Is.EqualTo(expected._rowsPerPage), $"Rows Per Page is {actual._rowsPerPage}, but should be {expected._rowsPerPage}");
-            Assert.That(actual._sorts, Is.EqualTo(expected._sorts), $"Sorts is {actual._sorts}, but should be {expected._sorts}");
-            Assert.That(actual._totalPages, Is.EqualTo(expected._totalPages), $"Total Pages is {actual._totalPages}, but should be {expected._totalPages}");
-            Assert.That(actual._totalRows, Is.EqualTo(expected._totalRows), $"Total Rows is {actual._totalRows}, but should be {expected._totalRows}");
-        });
-    }
-
-    [Test]
-    public void Page3_WhenNextPageTwice()
-    {
-        var expected = new InfoGrid<ApplicationUser>
-        {
-            _columns = 3,
-            _filters = [
-                null,
-                null,
-                null,
-            ],
-            _page = 3,
-            _rowsPerPage = 10,
-            _sorts = [],
-            _totalPages = 3,
-            _totalRows = 28,
-        };
-
-        _infoGridApplicationUser.NextPage();
-        _infoGridApplicationUser.NextPage();
-        var actual = _infoGridApplicationUser;
-
-        Assert.Multiple(() =>
-        {
-            Assert.That(actual._columns, Is.EqualTo(expected._columns), $"Columns is {actual._columns}, but should be {expected._columns}");
-            Assert.That(actual._filters, Is.EqualTo(expected._filters), $"Filters is {actual._filters}, but should be {expected._filters}");
-            Assert.That(actual._page, Is.EqualTo(expected._page), $"Page is {actual._page}, but should be {expected._page}");
-            Assert.That(actual._rowsPerPage, Is.EqualTo(expected._rowsPerPage), $"Rows Per Page is {actual._rowsPerPage}, but should be {expected._rowsPerPage}");
-            Assert.That(actual._sorts, Is.EqualTo(expected._sorts), $"Sorts is {actual._sorts}, but should be {expected._sorts}");
-            Assert.That(actual._totalPages, Is.EqualTo(expected._totalPages), $"Total Pages is {actual._totalPages}, but should be {expected._totalPages}");
-            Assert.That(actual._totalRows, Is.EqualTo(expected._totalRows), $"Total Rows is {actual._totalRows}, but should be {expected._totalRows}");
-        });
-    }
-
-    [Test]
-    public void Page3_WhenNextPageThrice()
-    {
-        var expected = new InfoGrid<ApplicationUser>
-        {
-            _columns = 3,
-            _filters = [
-                null,
-                null,
-                null,
-            ],
-            _page = 3,
-            _rowsPerPage = 10,
-            _sorts = [],
-            _totalPages = 3,
-            _totalRows = 28,
-        };
-
-        _infoGridApplicationUser.NextPage();
-        _infoGridApplicationUser.NextPage();
-        _infoGridApplicationUser.NextPage();
+        _infoGridApplicationUser.Filter(2, "Hello");
         var actual = _infoGridApplicationUser;
 
         Assert.Multiple(() =>

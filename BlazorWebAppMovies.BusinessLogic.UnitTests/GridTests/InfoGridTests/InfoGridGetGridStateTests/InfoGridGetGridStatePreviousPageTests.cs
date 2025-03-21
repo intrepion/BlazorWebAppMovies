@@ -250,7 +250,11 @@ public class InfoGridGetGridStatePreviousPageTests
         var expected = new InfoGrid<ApplicationUser>
         {
             _columns = 3,
-            _filters = [],
+            _filters = [
+                null,
+                null,
+                null,
+            ],
             _page = 1,
             _rowsPerPage = 10,
             _sorts = [],
@@ -279,7 +283,11 @@ public class InfoGridGetGridStatePreviousPageTests
         var expected = new InfoGrid<ApplicationUser>
         {
             _columns = 3,
-            _filters = [],
+            _filters = [
+                null,
+                null,
+                null,
+            ],
             _page = 2,
             _rowsPerPage = 10,
             _sorts = [],

@@ -3,13 +3,18 @@
 public class InfoGrid<T>()
 {
     public int _columns = 0;
-    public List<(int, string)> _filters = [];
+    public List<string?> _filters = [];
     public List<T> _info = [];
     public int _page = 0;
     public int _rowsPerPage = 10;
     public List<(int, bool)> _sorts = [];
     public int _totalPages = 0;
     public int _totalRows = 0;
+
+    public void Filter(int column, string? filter)
+    {
+        _filters[column - 1] = filter;
+    }
 
     public void NextPage()
     {
@@ -35,6 +40,12 @@ public class InfoGrid<T>()
     {
         _info = info;
         _columns = 3;
+        _filters = [
+            null,
+            null,
+            null,
+        ];
+
         if (info.Count > 0)
         {
             _page = 1;
