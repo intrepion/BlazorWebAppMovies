@@ -245,7 +245,7 @@ public class InfoGridGetGridStateSortTests
     }
 
     [Test]
-    public void Sort1True_WhenSort1()
+    public void Sort0True_WhenSort0()
     {
         var expected = new InfoGrid<ApplicationUser>
         {
@@ -258,48 +258,12 @@ public class InfoGridGetGridStateSortTests
             _page = 1,
             _rowsPerPage = 10,
             _sorts = [
-                (1, true),
+                (0, true),
             ],
             _totalPages = 3,
             _totalRows = 28,
         };
 
-        _infoGridApplicationUser.Sort(1);
-        var actual = _infoGridApplicationUser;
-
-        Assert.Multiple(() =>
-        {
-            Assert.That(actual._columns, Is.EqualTo(expected._columns), $"Columns is {actual._columns}, but should be {expected._columns}");
-            Assert.That(actual._filters, Is.EqualTo(expected._filters), $"Filters is {actual._filters}, but should be {expected._filters}");
-            Assert.That(actual._page, Is.EqualTo(expected._page), $"Page is {actual._page}, but should be {expected._page}");
-            Assert.That(actual._rowsPerPage, Is.EqualTo(expected._rowsPerPage), $"Rows Per Page is {actual._rowsPerPage}, but should be {expected._rowsPerPage}");
-            Assert.That(actual._sorts, Is.EqualTo(expected._sorts), $"Sorts is {actual._sorts}, but should be {expected._sorts}");
-            Assert.That(actual._totalPages, Is.EqualTo(expected._totalPages), $"Total Pages is {actual._totalPages}, but should be {expected._totalPages}");
-            Assert.That(actual._totalRows, Is.EqualTo(expected._totalRows), $"Total Rows is {actual._totalRows}, but should be {expected._totalRows}");
-        });
-    }
-
-    [Test]
-    public void Sort1True_WhenSort1ThenSort0()
-    {
-        var expected = new InfoGrid<ApplicationUser>
-        {
-            _columns = 3,
-            _filters = [
-                null,
-                null,
-                null,
-            ],
-            _page = 1,
-            _rowsPerPage = 10,
-            _sorts = [
-                (1, true),
-            ],
-            _totalPages = 3,
-            _totalRows = 28,
-        };
-
-        _infoGridApplicationUser.Sort(1);
         _infoGridApplicationUser.Sort(0);
         var actual = _infoGridApplicationUser;
 
@@ -316,7 +280,156 @@ public class InfoGridGetGridStateSortTests
     }
 
     [Test]
-    public void Sort2True1True_WhenSort1Sort2()
+    public void Sort0True_WhenSort0ThenSortNeg1()
+    {
+        var expected = new InfoGrid<ApplicationUser>
+        {
+            _columns = 3,
+            _filters = [
+                null,
+                null,
+                null,
+            ],
+            _page = 1,
+            _rowsPerPage = 10,
+            _sorts = [
+                (0, true),
+            ],
+            _totalPages = 3,
+            _totalRows = 28,
+        };
+
+        _infoGridApplicationUser.Sort(0);
+        _infoGridApplicationUser.Sort(-1);
+        var actual = _infoGridApplicationUser;
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(actual._columns, Is.EqualTo(expected._columns), $"Columns is {actual._columns}, but should be {expected._columns}");
+            Assert.That(actual._filters, Is.EqualTo(expected._filters), $"Filters is {actual._filters}, but should be {expected._filters}");
+            Assert.That(actual._page, Is.EqualTo(expected._page), $"Page is {actual._page}, but should be {expected._page}");
+            Assert.That(actual._rowsPerPage, Is.EqualTo(expected._rowsPerPage), $"Rows Per Page is {actual._rowsPerPage}, but should be {expected._rowsPerPage}");
+            Assert.That(actual._sorts, Is.EqualTo(expected._sorts), $"Sorts is {actual._sorts}, but should be {expected._sorts}");
+            Assert.That(actual._totalPages, Is.EqualTo(expected._totalPages), $"Total Pages is {actual._totalPages}, but should be {expected._totalPages}");
+            Assert.That(actual._totalRows, Is.EqualTo(expected._totalRows), $"Total Rows is {actual._totalRows}, but should be {expected._totalRows}");
+        });
+    }
+
+    [Test]
+    public void Sort1True0True_WhenSort0Sort1()
+    {
+        var expected = new InfoGrid<ApplicationUser>
+        {
+            _columns = 3,
+            _filters = [
+                null,
+                null,
+                null,
+            ],
+            _page = 1,
+            _rowsPerPage = 10,
+            _sorts = [
+                (1, true),
+                (0, true),
+            ],
+            _totalPages = 3,
+            _totalRows = 28,
+        };
+
+        _infoGridApplicationUser.Sort(0);
+        _infoGridApplicationUser.Sort(1);
+        var actual = _infoGridApplicationUser;
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(actual._columns, Is.EqualTo(expected._columns), $"Columns is {actual._columns}, but should be {expected._columns}");
+            Assert.That(actual._filters, Is.EqualTo(expected._filters), $"Filters is {actual._filters}, but should be {expected._filters}");
+            Assert.That(actual._page, Is.EqualTo(expected._page), $"Page is {actual._page}, but should be {expected._page}");
+            Assert.That(actual._rowsPerPage, Is.EqualTo(expected._rowsPerPage), $"Rows Per Page is {actual._rowsPerPage}, but should be {expected._rowsPerPage}");
+            Assert.That(actual._sorts, Is.EqualTo(expected._sorts), $"Sorts is {actual._sorts}, but should be {expected._sorts}");
+            Assert.That(actual._totalPages, Is.EqualTo(expected._totalPages), $"Total Pages is {actual._totalPages}, but should be {expected._totalPages}");
+            Assert.That(actual._totalRows, Is.EqualTo(expected._totalRows), $"Total Rows is {actual._totalRows}, but should be {expected._totalRows}");
+        });
+    }
+
+    [Test]
+    public void Sort0True_WhenSort0ThenSort3()
+    {
+        var expected = new InfoGrid<ApplicationUser>
+        {
+            _columns = 3,
+            _filters = [
+                null,
+                null,
+                null,
+            ],
+            _page = 1,
+            _rowsPerPage = 10,
+            _sorts = [
+                (0, true),
+            ],
+            _totalPages = 3,
+            _totalRows = 28,
+        };
+
+        _infoGridApplicationUser.Sort(0);
+        _infoGridApplicationUser.Sort(3);
+        var actual = _infoGridApplicationUser;
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(actual._columns, Is.EqualTo(expected._columns), $"Columns is {actual._columns}, but should be {expected._columns}");
+            Assert.That(actual._filters, Is.EqualTo(expected._filters), $"Filters is {actual._filters}, but should be {expected._filters}");
+            Assert.That(actual._page, Is.EqualTo(expected._page), $"Page is {actual._page}, but should be {expected._page}");
+            Assert.That(actual._rowsPerPage, Is.EqualTo(expected._rowsPerPage), $"Rows Per Page is {actual._rowsPerPage}, but should be {expected._rowsPerPage}");
+            Assert.That(actual._sorts, Is.EqualTo(expected._sorts), $"Sorts is {actual._sorts}, but should be {expected._sorts}");
+            Assert.That(actual._totalPages, Is.EqualTo(expected._totalPages), $"Total Pages is {actual._totalPages}, but should be {expected._totalPages}");
+            Assert.That(actual._totalRows, Is.EqualTo(expected._totalRows), $"Total Rows is {actual._totalRows}, but should be {expected._totalRows}");
+        });
+    }
+
+    [Test]
+    public void Sort1True0False2True_WhenSort0Twice()
+    {
+        var expected = new InfoGrid<ApplicationUser>
+        {
+            _columns = 3,
+            _filters = [
+                null,
+                null,
+                null,
+            ],
+            _page = 1,
+            _rowsPerPage = 10,
+            _sorts = [
+                (2, true),
+                (0, false),
+                (1, true),
+            ],
+            _totalPages = 3,
+            _totalRows = 28,
+        };
+
+        _infoGridApplicationUser.Sort(1);
+        _infoGridApplicationUser.Sort(0);
+        _infoGridApplicationUser.Sort(2);
+        _infoGridApplicationUser.Sort(0);
+        var actual = _infoGridApplicationUser;
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(actual._columns, Is.EqualTo(expected._columns), $"Columns is {actual._columns}, but should be {expected._columns}");
+            Assert.That(actual._filters, Is.EqualTo(expected._filters), $"Filters is {actual._filters}, but should be {expected._filters}");
+            Assert.That(actual._page, Is.EqualTo(expected._page), $"Page is {actual._page}, but should be {expected._page}");
+            Assert.That(actual._rowsPerPage, Is.EqualTo(expected._rowsPerPage), $"Rows Per Page is {actual._rowsPerPage}, but should be {expected._rowsPerPage}");
+            Assert.That(actual._sorts, Is.EqualTo(expected._sorts), $"Sorts is {actual._sorts}, but should be {expected._sorts}");
+            Assert.That(actual._totalPages, Is.EqualTo(expected._totalPages), $"Total Pages is {actual._totalPages}, but should be {expected._totalPages}");
+            Assert.That(actual._totalRows, Is.EqualTo(expected._totalRows), $"Total Rows is {actual._totalRows}, but should be {expected._totalRows}");
+        });
+    }
+
+    [Test]
+    public void Sort1True2True_WhenSort0Thrice()
     {
         var expected = new InfoGrid<ApplicationUser>
         {
@@ -337,123 +450,10 @@ public class InfoGridGetGridStateSortTests
         };
 
         _infoGridApplicationUser.Sort(1);
+        _infoGridApplicationUser.Sort(0);
         _infoGridApplicationUser.Sort(2);
-        var actual = _infoGridApplicationUser;
-
-        Assert.Multiple(() =>
-        {
-            Assert.That(actual._columns, Is.EqualTo(expected._columns), $"Columns is {actual._columns}, but should be {expected._columns}");
-            Assert.That(actual._filters, Is.EqualTo(expected._filters), $"Filters is {actual._filters}, but should be {expected._filters}");
-            Assert.That(actual._page, Is.EqualTo(expected._page), $"Page is {actual._page}, but should be {expected._page}");
-            Assert.That(actual._rowsPerPage, Is.EqualTo(expected._rowsPerPage), $"Rows Per Page is {actual._rowsPerPage}, but should be {expected._rowsPerPage}");
-            Assert.That(actual._sorts, Is.EqualTo(expected._sorts), $"Sorts is {actual._sorts}, but should be {expected._sorts}");
-            Assert.That(actual._totalPages, Is.EqualTo(expected._totalPages), $"Total Pages is {actual._totalPages}, but should be {expected._totalPages}");
-            Assert.That(actual._totalRows, Is.EqualTo(expected._totalRows), $"Total Rows is {actual._totalRows}, but should be {expected._totalRows}");
-        });
-    }
-
-    [Test]
-    public void Sort1True_WhenSort1ThenSort4()
-    {
-        var expected = new InfoGrid<ApplicationUser>
-        {
-            _columns = 3,
-            _filters = [
-                null,
-                null,
-                null,
-            ],
-            _page = 1,
-            _rowsPerPage = 10,
-            _sorts = [
-                (1, true),
-            ],
-            _totalPages = 3,
-            _totalRows = 28,
-        };
-
-        _infoGridApplicationUser.Sort(1);
-        _infoGridApplicationUser.Sort(4);
-        var actual = _infoGridApplicationUser;
-
-        Assert.Multiple(() =>
-        {
-            Assert.That(actual._columns, Is.EqualTo(expected._columns), $"Columns is {actual._columns}, but should be {expected._columns}");
-            Assert.That(actual._filters, Is.EqualTo(expected._filters), $"Filters is {actual._filters}, but should be {expected._filters}");
-            Assert.That(actual._page, Is.EqualTo(expected._page), $"Page is {actual._page}, but should be {expected._page}");
-            Assert.That(actual._rowsPerPage, Is.EqualTo(expected._rowsPerPage), $"Rows Per Page is {actual._rowsPerPage}, but should be {expected._rowsPerPage}");
-            Assert.That(actual._sorts, Is.EqualTo(expected._sorts), $"Sorts is {actual._sorts}, but should be {expected._sorts}");
-            Assert.That(actual._totalPages, Is.EqualTo(expected._totalPages), $"Total Pages is {actual._totalPages}, but should be {expected._totalPages}");
-            Assert.That(actual._totalRows, Is.EqualTo(expected._totalRows), $"Total Rows is {actual._totalRows}, but should be {expected._totalRows}");
-        });
-    }
-
-    [Test]
-    public void Sort2True1False3True_WhenSort1Twice()
-    {
-        var expected = new InfoGrid<ApplicationUser>
-        {
-            _columns = 3,
-            _filters = [
-                null,
-                null,
-                null,
-            ],
-            _page = 1,
-            _rowsPerPage = 10,
-            _sorts = [
-                (3, true),
-                (1, false),
-                (2, true),
-            ],
-            _totalPages = 3,
-            _totalRows = 28,
-        };
-
-        _infoGridApplicationUser.Sort(2);
-        _infoGridApplicationUser.Sort(1);
-        _infoGridApplicationUser.Sort(3);
-        _infoGridApplicationUser.Sort(1);
-        var actual = _infoGridApplicationUser;
-
-        Assert.Multiple(() =>
-        {
-            Assert.That(actual._columns, Is.EqualTo(expected._columns), $"Columns is {actual._columns}, but should be {expected._columns}");
-            Assert.That(actual._filters, Is.EqualTo(expected._filters), $"Filters is {actual._filters}, but should be {expected._filters}");
-            Assert.That(actual._page, Is.EqualTo(expected._page), $"Page is {actual._page}, but should be {expected._page}");
-            Assert.That(actual._rowsPerPage, Is.EqualTo(expected._rowsPerPage), $"Rows Per Page is {actual._rowsPerPage}, but should be {expected._rowsPerPage}");
-            Assert.That(actual._sorts, Is.EqualTo(expected._sorts), $"Sorts is {actual._sorts}, but should be {expected._sorts}");
-            Assert.That(actual._totalPages, Is.EqualTo(expected._totalPages), $"Total Pages is {actual._totalPages}, but should be {expected._totalPages}");
-            Assert.That(actual._totalRows, Is.EqualTo(expected._totalRows), $"Total Rows is {actual._totalRows}, but should be {expected._totalRows}");
-        });
-    }
-
-    [Test]
-    public void Sort2True3True_WhenSort1Thrice()
-    {
-        var expected = new InfoGrid<ApplicationUser>
-        {
-            _columns = 3,
-            _filters = [
-                null,
-                null,
-                null,
-            ],
-            _page = 1,
-            _rowsPerPage = 10,
-            _sorts = [
-                (3, true),
-                (2, true),
-            ],
-            _totalPages = 3,
-            _totalRows = 28,
-        };
-
-        _infoGridApplicationUser.Sort(2);
-        _infoGridApplicationUser.Sort(1);
-        _infoGridApplicationUser.Sort(3);
-        _infoGridApplicationUser.Sort(1);
-        _infoGridApplicationUser.Sort(1);
+        _infoGridApplicationUser.Sort(0);
+        _infoGridApplicationUser.Sort(0);
         var actual = _infoGridApplicationUser;
 
         Assert.Multiple(() =>

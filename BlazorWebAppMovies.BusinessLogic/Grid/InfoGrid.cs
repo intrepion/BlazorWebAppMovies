@@ -64,12 +64,12 @@ public class InfoGrid<T>()
 
     public void Sort(int column)
     {
-        if (column < 1)
+        if (column < 0)
         {
             return;
         }
 
-        if (column > _columns)
+        if (column >= _columns)
         {
             return;
         }
