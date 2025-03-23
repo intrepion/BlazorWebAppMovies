@@ -1,10 +1,10 @@
 ﻿namespace BlazorWebAppMovies.BusinessLogic.Grid;
 
-public class InfoGrid<T>()
+public class InfoGrid()
 {
-    public int _columns = 0;
+    public List<(string, ColumnType)> _columns = [];
     public List<string?> _filters = [];
-    public List<T> _info = [];
+    public List<List<string>> _info = [];
     public int _page = 0;
     public int _rowsPerPage = 10;
     public List<(int, bool)> _sorts = [];
@@ -36,10 +36,10 @@ public class InfoGrid<T>()
         }
     }
 
-    public void SetInitialInfo(List<T> info)
+    public void SetInitialInfo(List<(string, ColumnType)> columns, List<List<string>> info)
     {
         _info = info;
-        _columns = 3;
+        _columns = columns;
         _filters = [
             null,
             null,
@@ -69,7 +69,7 @@ public class InfoGrid<T>()
             return;
         }
 
-        if (column >= _columns)
+        if (column >= _columns.Count)
         {
             return;
         }
