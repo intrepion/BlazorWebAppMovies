@@ -13,7 +13,7 @@ public class InfoGrid()
 
     public void Filter(int column, string? filter)
     {
-        _filters[column - 1] = filter;
+        _filters[column] = filter;
     }
 
     public void NextPage()

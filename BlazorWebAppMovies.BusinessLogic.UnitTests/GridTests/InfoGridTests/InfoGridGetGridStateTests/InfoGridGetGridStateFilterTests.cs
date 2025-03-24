@@ -189,7 +189,7 @@ public class InfoGridGetGridStateFilterTests
             _totalRows = 28,
         };
 
-        _infoGrid.Filter(2, "Hello");
+        _infoGrid.Filter(1, "Hello");
         var actual = _infoGrid;
 
         Assert.Multiple(() =>
