@@ -5,17 +5,24 @@ namespace BlazorWebAppMovies.BusinessLogic.UnitTests.GridTests.InfoGridTests.Inf
 
 public class InfoGridGetGridStateFilterTests
 {
-    private List<(string, ColumnType)> _columns;
+    private List<string> _columnNames;
+    private List<ColumnType> _columnTypes;
     private List<List<string>> _info;
     private InfoGrid _infoGrid;
 
     [SetUp]
     public void Setup()
     {
-        _columns = [
-            ("Email", ColumnType.Normalized),
-            ("Phone Number", ColumnType.Text),
-            ("User Name", ColumnType.Normalized),
+        _columnNames = [
+            "Email",
+            "Phone Number",
+            "User Name",
+        ];
+
+        _columnTypes = [
+            ColumnType.Normalized,
+            ColumnType.Text,
+            ColumnType.Normalized,
         ];
 
         _info =
@@ -164,7 +171,7 @@ public class InfoGridGetGridStateFilterTests
 
         _infoGrid = new InfoGrid();
 
-        _infoGrid.SetInitialInfo(_columns, _info);
+        _infoGrid.SetInitialInfo(_columnNames, _columnTypes, _info);
     }
 
     [Test]
@@ -172,10 +179,15 @@ public class InfoGridGetGridStateFilterTests
     {
         var expected = new InfoGrid
         {
-            _columns = [
-                ("Email", ColumnType.Normalized),
-                ("Phone Number", ColumnType.Text),
-                ("User Name", ColumnType.Normalized),
+            _columnNames = [
+                "Email",
+                "Phone Number",
+                "User Name",
+            ],
+            _columnTypes = [
+                ColumnType.Normalized,
+                ColumnType.Text,
+                ColumnType.Normalized,
             ],
             _filters = [
                 null,
@@ -194,7 +206,8 @@ public class InfoGridGetGridStateFilterTests
 
         Assert.Multiple(() =>
         {
-            Assert.That(actual._columns, Is.EqualTo(expected._columns), $"Columns is {actual._columns}, but should be {expected._columns}");
+            Assert.That(actual._columnNames, Is.EqualTo(expected._columnNames), $"Columns is {actual._columnNames}, but should be {expected._columnNames}");
+            Assert.That(actual._columnTypes, Is.EqualTo(expected._columnTypes), $"Columns is {actual._columnTypes}, but should be {expected._columnTypes}");
             Assert.That(actual._filters, Is.EqualTo(expected._filters), $"Filters is {actual._filters}, but should be {expected._filters}");
             Assert.That(actual._page, Is.EqualTo(expected._page), $"Page is {actual._page}, but should be {expected._page}");
             Assert.That(actual._rowsPerPage, Is.EqualTo(expected._rowsPerPage), $"Rows Per Page is {actual._rowsPerPage}, but should be {expected._rowsPerPage}");
@@ -209,10 +222,15 @@ public class InfoGridGetGridStateFilterTests
     {
         var expected = new InfoGrid
         {
-            _columns = [
-                ("Email", ColumnType.Normalized),
-                ("Phone Number", ColumnType.Text),
-                ("User Name", ColumnType.Normalized),
+            _columnNames = [
+                "Email",
+                "Phone Number",
+                "User Name",
+            ],
+            _columnTypes = [
+                ColumnType.Normalized,
+                ColumnType.Text,
+                ColumnType.Normalized,
             ],
             _filters = [
                 null,
@@ -232,7 +250,8 @@ public class InfoGridGetGridStateFilterTests
 
         Assert.Multiple(() =>
         {
-            Assert.That(actual._columns, Is.EqualTo(expected._columns), $"Columns is {actual._columns}, but should be {expected._columns}");
+            Assert.That(actual._columnNames, Is.EqualTo(expected._columnNames), $"Columns is {actual._columnNames}, but should be {expected._columnNames}");
+            Assert.That(actual._columnTypes, Is.EqualTo(expected._columnTypes), $"Columns is {actual._columnTypes}, but should be {expected._columnTypes}");
             Assert.That(actual._filters, Is.EqualTo(expected._filters), $"Filters is {actual._filters}, but should be {expected._filters}");
             Assert.That(actual._page, Is.EqualTo(expected._page), $"Page is {actual._page}, but should be {expected._page}");
             Assert.That(actual._rowsPerPage, Is.EqualTo(expected._rowsPerPage), $"Rows Per Page is {actual._rowsPerPage}, but should be {expected._rowsPerPage}");
@@ -247,10 +266,15 @@ public class InfoGridGetGridStateFilterTests
     {
         var expected = new InfoGrid
         {
-            _columns = [
-                ("Email", ColumnType.Normalized),
-                ("Phone Number", ColumnType.Text),
-                ("User Name", ColumnType.Normalized),
+            _columnNames = [
+                "Email",
+                "Phone Number",
+                "User Name",
+            ],
+            _columnTypes = [
+                ColumnType.Normalized,
+                ColumnType.Text,
+                ColumnType.Normalized,
             ],
             _filters = [
                 null,
@@ -270,7 +294,8 @@ public class InfoGridGetGridStateFilterTests
 
         Assert.Multiple(() =>
         {
-            Assert.That(actual._columns, Is.EqualTo(expected._columns), $"Columns is {actual._columns}, but should be {expected._columns}");
+            Assert.That(actual._columnNames, Is.EqualTo(expected._columnNames), $"Columns is {actual._columnNames}, but should be {expected._columnNames}");
+            Assert.That(actual._columnTypes, Is.EqualTo(expected._columnTypes), $"Columns is {actual._columnTypes}, but should be {expected._columnTypes}");
             Assert.That(actual._filters, Is.EqualTo(expected._filters), $"Filters is {actual._filters}, but should be {expected._filters}");
             Assert.That(actual._page, Is.EqualTo(expected._page), $"Page is {actual._page}, but should be {expected._page}");
             Assert.That(actual._rowsPerPage, Is.EqualTo(expected._rowsPerPage), $"Rows Per Page is {actual._rowsPerPage}, but should be {expected._rowsPerPage}");

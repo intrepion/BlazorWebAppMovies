@@ -2,7 +2,8 @@
 
 public class InfoGrid()
 {
-    public List<(string, ColumnType)> _columns = [];
+    public List<string> _columnNames = [];
+    public List<ColumnType> _columnTypes = [];
     public List<string?> _filters = [];
     public List<List<string>> _info = [];
     public int _page = 0;
@@ -18,7 +19,7 @@ public class InfoGrid()
             return;
         }
 
-        if (column >= _columns.Count)
+        if (column >= _columnTypes.Count)
         {
             return;
         }
@@ -46,10 +47,11 @@ public class InfoGrid()
         }
     }
 
-    public void SetInitialInfo(List<(string, ColumnType)> columns, List<List<string>> info)
+    public void SetInitialInfo(List<string> columnNames, List<ColumnType> columnTypes, List<List<string>> info)
     {
+        _columnNames = columnNames;
+        _columnTypes = columnTypes;
         _info = info;
-        _columns = columns;
         _filters = [
             null,
             null,
@@ -79,7 +81,7 @@ public class InfoGrid()
             return;
         }
 
-        if (column >= _columns.Count)
+        if (column >= _columnTypes.Count)
         {
             return;
         }
