@@ -168,7 +168,7 @@ public class InfoGridGetGridStateFilterTests
     }
 
     [Test]
-    public void FilterHello_WhenFilterHello()
+    public void FilterHello_WhenFilter1Hello()
     {
         var expected = new InfoGrid
         {
@@ -190,6 +190,44 @@ public class InfoGridGetGridStateFilterTests
         };
 
         _infoGrid.Filter(1, "Hello");
+        var actual = _infoGrid;
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(actual._columns, Is.EqualTo(expected._columns), $"Columns is {actual._columns}, but should be {expected._columns}");
+            Assert.That(actual._filters, Is.EqualTo(expected._filters), $"Filters is {actual._filters}, but should be {expected._filters}");
+            Assert.That(actual._page, Is.EqualTo(expected._page), $"Page is {actual._page}, but should be {expected._page}");
+            Assert.That(actual._rowsPerPage, Is.EqualTo(expected._rowsPerPage), $"Rows Per Page is {actual._rowsPerPage}, but should be {expected._rowsPerPage}");
+            Assert.That(actual._sorts, Is.EqualTo(expected._sorts), $"Sorts is {actual._sorts}, but should be {expected._sorts}");
+            Assert.That(actual._totalPages, Is.EqualTo(expected._totalPages), $"Total Pages is {actual._totalPages}, but should be {expected._totalPages}");
+            Assert.That(actual._totalRows, Is.EqualTo(expected._totalRows), $"Total Rows is {actual._totalRows}, but should be {expected._totalRows}");
+        });
+    }
+
+    [Test]
+    public void FilterHello_WhenFilter1HelloNegative1World()
+    {
+        var expected = new InfoGrid
+        {
+            _columns = [
+                ("Email", ColumnType.Normalized),
+                ("Phone Number", ColumnType.Text),
+                ("User Name", ColumnType.Normalized),
+            ],
+            _filters = [
+                null,
+                "Hello",
+                null,
+            ],
+            _page = 1,
+            _rowsPerPage = 10,
+            _sorts = [],
+            _totalPages = 3,
+            _totalRows = 28,
+        };
+
+        _infoGrid.Filter(1, "Hello");
+        _infoGrid.Filter(-1, "World");
         var actual = _infoGrid;
 
         Assert.Multiple(() =>

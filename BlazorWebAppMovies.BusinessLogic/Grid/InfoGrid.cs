@@ -13,6 +13,11 @@ public class InfoGrid()
 
     public void Filter(int column, string? filter)
     {
+        if (column < 0)
+        {
+            return;
+        }
+
         _filters[column] = filter;
     }
 
