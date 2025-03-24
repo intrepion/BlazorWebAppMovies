@@ -18,6 +18,11 @@ public class InfoGrid()
             return;
         }
 
+        if (column >= _columns.Count)
+        {
+            return;
+        }
+
         _filters[column] = filter;
     }
 
