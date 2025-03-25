@@ -1,5 +1,4 @@
-﻿using BlazorWebAppMovies.BusinessLogic.Entities;
-using BlazorWebAppMovies.BusinessLogic.Grid;
+﻿using BlazorWebAppMovies.BusinessLogic.Grid;
 
 namespace BlazorWebAppMovies.BusinessLogic.UnitTests.GridTests.InfoGridTests.InfoGridGetGridStateTests;
 
