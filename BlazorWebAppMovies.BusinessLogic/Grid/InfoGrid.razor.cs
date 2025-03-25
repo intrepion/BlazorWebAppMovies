@@ -47,6 +47,22 @@ public class InfoGrid()
         }
     }
 
+    public void RowsPerPage(int rowsPerPage)
+    {
+        _rowsPerPage = rowsPerPage;
+
+        if ((_info.Count % _rowsPerPage) == 0)
+        {
+            _totalPages = _info.Count / _rowsPerPage;
+        }
+        else
+        {
+            _totalPages = (_info.Count / _rowsPerPage) + 1;
+        }
+
+        _totalRows = _info.Count;
+    }
+
     public void SetInitialInfo(List<string> columnNames, List<ColumnType> columnTypes, List<List<string>> info)
     {
         _columnNames = columnNames;
@@ -63,15 +79,7 @@ public class InfoGrid()
             _page = 1;
         }
 
-        if ((info.Count % _rowsPerPage) == 0)
-        {
-            _totalPages = info.Count / _rowsPerPage;
-        }
-        else
-        {
-            _totalPages = (info.Count / _rowsPerPage) + 1;
-        }
-        _totalRows = info.Count;
+        RowsPerPage(10);
     }
 
     public void Sort(int column)
