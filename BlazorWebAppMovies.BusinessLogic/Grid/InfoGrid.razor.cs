@@ -68,11 +68,7 @@ public class InfoGrid()
         _columnNames = columnNames;
         _columnTypes = columnTypes;
         _info = info;
-        _filters = [
-            null,
-            null,
-            null,
-        ];
+        _filters = [.. Enumerable.Repeat<string?>(null, columnNames.Count)];
 
         if (info.Count > 0)
         {

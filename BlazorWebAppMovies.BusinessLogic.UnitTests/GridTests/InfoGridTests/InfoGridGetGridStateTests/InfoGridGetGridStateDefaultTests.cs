@@ -10,16 +10,22 @@ public class InfoGridGetGridStateDefaultTests : InfoGridTestsBaseClass
         var expected = new InfoGrid
         {
             _columnNames = [
-                "Email",
-                "Phone Number",
-                "User Name",
+                "Completed Date and Time",
+                "Is Completed",
+                "Ordering",
+                "Title",
+                "To Do List",
             ],
             _columnTypes = [
+                ColumnType.DateTime,
+                ColumnType.Boolean,
+                ColumnType.Integer,
                 ColumnType.Normalized,
-                ColumnType.Text,
                 ColumnType.Normalized,
             ],
             _filters = [
+                null,
+                null,
                 null,
                 null,
                 null,

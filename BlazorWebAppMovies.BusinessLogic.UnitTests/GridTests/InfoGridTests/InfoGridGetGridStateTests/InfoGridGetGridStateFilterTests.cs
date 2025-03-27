@@ -10,18 +10,24 @@ public class InfoGridGetGridStateFilterTests : InfoGridTestsBaseClass
         var expected = new InfoGrid
         {
             _columnNames = [
-                "Email",
-                "Phone Number",
-                "User Name",
+                "Completed Date and Time",
+                "Is Completed",
+                "Ordering",
+                "Title",
+                "To Do List",
             ],
             _columnTypes = [
+                ColumnType.DateTime,
+                ColumnType.Boolean,
+                ColumnType.Integer,
                 ColumnType.Normalized,
-                ColumnType.Text,
                 ColumnType.Normalized,
             ],
             _filters = [
                 null,
                 "Hello",
+                null,
+                null,
                 null,
             ],
             _page = 1,
@@ -53,18 +59,24 @@ public class InfoGridGetGridStateFilterTests : InfoGridTestsBaseClass
         var expected = new InfoGrid
         {
             _columnNames = [
-                "Email",
-                "Phone Number",
-                "User Name",
+                "Completed Date and Time",
+                "Is Completed",
+                "Ordering",
+                "Title",
+                "To Do List",
             ],
             _columnTypes = [
+                ColumnType.DateTime,
+                ColumnType.Boolean,
+                ColumnType.Integer,
                 ColumnType.Normalized,
-                ColumnType.Text,
                 ColumnType.Normalized,
             ],
             _filters = [
                 null,
                 "Hello",
+                null,
+                null,
                 null,
             ],
             _page = 1,
@@ -92,23 +104,29 @@ public class InfoGridGetGridStateFilterTests : InfoGridTestsBaseClass
     }
 
     [Test]
-    public void FilterHello_WhenFilter1Hello3World()
+    public void FilterHello_WhenFilter1Hello5World()
     {
         var expected = new InfoGrid
         {
             _columnNames = [
-                "Email",
-                "Phone Number",
-                "User Name",
+                "Completed Date and Time",
+                "Is Completed",
+                "Ordering",
+                "Title",
+                "To Do List",
             ],
             _columnTypes = [
+                ColumnType.DateTime,
+                ColumnType.Boolean,
+                ColumnType.Integer,
                 ColumnType.Normalized,
-                ColumnType.Text,
                 ColumnType.Normalized,
             ],
             _filters = [
                 null,
                 "Hello",
+                null,
+                null,
                 null,
             ],
             _page = 1,
@@ -119,7 +137,7 @@ public class InfoGridGetGridStateFilterTests : InfoGridTestsBaseClass
         };
 
         _infoGrid.Filter(1, "Hello");
-        _infoGrid.Filter(3, "World");
+        _infoGrid.Filter(5, "World");
         var actual = _infoGrid;
 
         Assert.Multiple(() =>

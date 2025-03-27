@@ -10,16 +10,22 @@ public class InfoGridGetGridStateSortTests : InfoGridTestsBaseClass
         var expected = new InfoGrid
         {
             _columnNames = [
-                "Email",
-                "Phone Number",
-                "User Name",
+                "Completed Date and Time",
+                "Is Completed",
+                "Ordering",
+                "Title",
+                "To Do List",
             ],
             _columnTypes = [
+                ColumnType.DateTime,
+                ColumnType.Boolean,
+                ColumnType.Integer,
                 ColumnType.Normalized,
-                ColumnType.Text,
                 ColumnType.Normalized,
             ],
             _filters = [
+                null,
+                null,
                 null,
                 null,
                 null,
@@ -55,16 +61,22 @@ public class InfoGridGetGridStateSortTests : InfoGridTestsBaseClass
         var expected = new InfoGrid
         {
             _columnNames = [
-                "Email",
-                "Phone Number",
-                "User Name",
+                "Completed Date and Time",
+                "Is Completed",
+                "Ordering",
+                "Title",
+                "To Do List",
             ],
             _columnTypes = [
+                ColumnType.DateTime,
+                ColumnType.Boolean,
+                ColumnType.Integer,
                 ColumnType.Normalized,
-                ColumnType.Text,
                 ColumnType.Normalized,
             ],
             _filters = [
+                null,
+                null,
                 null,
                 null,
                 null,
@@ -101,16 +113,22 @@ public class InfoGridGetGridStateSortTests : InfoGridTestsBaseClass
         var expected = new InfoGrid
         {
             _columnNames = [
-                "Email",
-                "Phone Number",
-                "User Name",
+                "Completed Date and Time",
+                "Is Completed",
+                "Ordering",
+                "Title",
+                "To Do List",
             ],
             _columnTypes = [
+                ColumnType.DateTime,
+                ColumnType.Boolean,
+                ColumnType.Integer,
                 ColumnType.Normalized,
-                ColumnType.Text,
                 ColumnType.Normalized,
             ],
             _filters = [
+                null,
+                null,
                 null,
                 null,
                 null,
@@ -143,21 +161,27 @@ public class InfoGridGetGridStateSortTests : InfoGridTestsBaseClass
     }
 
     [Test]
-    public void Sort0True_WhenSort0ThenSort3()
+    public void Sort0True_WhenSort0ThenSort5()
     {
         var expected = new InfoGrid
         {
             _columnNames = [
-                "Email",
-                "Phone Number",
-                "User Name",
+                "Completed Date and Time",
+                "Is Completed",
+                "Ordering",
+                "Title",
+                "To Do List",
             ],
             _columnTypes = [
+                ColumnType.DateTime,
+                ColumnType.Boolean,
+                ColumnType.Integer,
                 ColumnType.Normalized,
-                ColumnType.Text,
                 ColumnType.Normalized,
             ],
             _filters = [
+                null,
+                null,
                 null,
                 null,
                 null,
@@ -172,7 +196,7 @@ public class InfoGridGetGridStateSortTests : InfoGridTestsBaseClass
         };
 
         _infoGrid.Sort(0);
-        _infoGrid.Sort(3);
+        _infoGrid.Sort(5);
         var actual = _infoGrid;
 
         Assert.Multiple(() =>
@@ -194,16 +218,22 @@ public class InfoGridGetGridStateSortTests : InfoGridTestsBaseClass
         var expected = new InfoGrid
         {
             _columnNames = [
-                "Email",
-                "Phone Number",
-                "User Name",
+                "Completed Date and Time",
+                "Is Completed",
+                "Ordering",
+                "Title",
+                "To Do List",
             ],
             _columnTypes = [
+                ColumnType.DateTime,
+                ColumnType.Boolean,
+                ColumnType.Integer,
                 ColumnType.Normalized,
-                ColumnType.Text,
                 ColumnType.Normalized,
             ],
             _filters = [
+                null,
+                null,
                 null,
                 null,
                 null,
@@ -244,16 +274,22 @@ public class InfoGridGetGridStateSortTests : InfoGridTestsBaseClass
         var expected = new InfoGrid
         {
             _columnNames = [
-                "Email",
-                "Phone Number",
-                "User Name",
+                "Completed Date and Time",
+                "Is Completed",
+                "Ordering",
+                "Title",
+                "To Do List",
             ],
             _columnTypes = [
+                ColumnType.DateTime,
+                ColumnType.Boolean,
+                ColumnType.Integer,
                 ColumnType.Normalized,
-                ColumnType.Text,
                 ColumnType.Normalized,
             ],
             _filters = [
+                null,
+                null,
                 null,
                 null,
                 null,
