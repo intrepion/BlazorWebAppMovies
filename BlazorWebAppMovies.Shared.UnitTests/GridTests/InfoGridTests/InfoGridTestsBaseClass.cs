@@ -1,7 +1,6 @@
-using BlazorWebAppMovies.BusinessLogic.Grid;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using BlazorWebAppMovies.Shared.Grid;
 
-namespace BlazorWebAppMovies.BusinessLogic.UnitTests.GridTests.InfoGridTests;
+namespace BlazorWebAppMovies.Shared.UnitTests.GridTests.InfoGridTests;
 
 public class InfoGridTestsBaseClass
 {

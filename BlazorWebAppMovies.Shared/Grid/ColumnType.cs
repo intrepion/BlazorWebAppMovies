@@ -1,4 +1,4 @@
-namespace BlazorWebAppMovies.BusinessLogic.Grid;
+namespace BlazorWebAppMovies.Shared.Grid;
 
 public enum ColumnType
 {
