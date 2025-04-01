@@ -1,0 +1,61 @@
+<div>
+  @if (Info == null)
+  {
+    <p>Loading...</p>
+  }
+  else if (Info.Count == 0)
+  {
+    <p>No information found.</p>
+  }
+  else
+  {
+    <div class="grid-controls">
+      <div class="items-per-page">
+        Rows per page:
+        <select @bind="RowsPerPage">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+        </select>
+      </div>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          @for (var i = 0; i < ColumnNames.Count; i += 1)
+          {
+            <th @onclick="() => SetSort(i)">
+              <div>
+                @ColumnNames[i]
+              <span>
+                @if (Sorts.Any(s => s.Item1 == i))
+                {
+                    var sort = Sorts.First(s => s.Item1 == i);
+                    <span>@(sort.Item2 ? "↑" : "↓")</span>
+                    <small>@(Sorts.IndexOf(sort) + 1)</small>
+                }
+                else
+                {
+                    <span>↕</span>
+                }
+                </span>
+              </div>
+            </th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for (var i = 0; i < Info.Count; i += 1)
+        {
+          <tr>
+            @for (var j = 0; j < Info[i].Count; j += 1)
+            {
+              <td>@Info[i][j]</td>
+            }
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

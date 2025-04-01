@@ -11,9 +11,9 @@ public partial class InfoGrid
     [Parameter]
     public List<string?> Filters { get; set; } = [];
     [Parameter]
-    public List<List<string>> Info { get; set; } = [];
+    public List<List<string>>? Info { get; set; } = [];
     [Parameter]
-    public int Page { get; set; } = 0;
+    public int Page { get; set; } = 1;
     [Parameter]
     public int RowsPerPage { get; set; } = 10;
     [Parameter]
@@ -62,6 +62,14 @@ public partial class InfoGrid
     {
         RowsPerPage = rowsPerPage;
 
+        if (Info == null)
+        {
+            TotalPages = 1;
+            TotalRows = 0;
+
+            return;
+        }
+
         if ((Info.Count % RowsPerPage) == 0)
         {
             TotalPages = Info.Count / RowsPerPage;
@@ -74,19 +82,16 @@ public partial class InfoGrid
         TotalRows = Info.Count;
     }
 
-    public void SetInitialInfo(List<string> columnNames, List<ColumnType> columnTypes, List<List<string>> info)
+    public void SetInitialInfo(List<string> columnNames, List<ColumnType> columnTypes, List<List<string>>? info)
     {
         ColumnNames = columnNames;
         ColumnTypes = columnTypes;
         Info = info;
         Filters = [.. Enumerable.Repeat<string?>(null, columnNames.Count)];
 
-        if (info.Count > 0)
-        {
-            Page = 1;
-        }
-
         SetRowsPerPage(10);
+
+        Page = 1;
     }
 
     public void SetSort(int column)
