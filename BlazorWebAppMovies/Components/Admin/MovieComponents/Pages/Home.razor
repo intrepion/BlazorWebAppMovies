@@ -2,50 +2,27 @@
 @rendermode InteractiveServer
 @inject IDbContextFactory<ApplicationDbContext> DbFactory
 @inject NavigationManager Navigation
+@using BlazorWebAppMovies.Shared.Grid;
 
 <PageTitle>Movie Home</PageTitle>
 
 <h1>Movie Home</h1>
 <h6><a href="/admin/movie/add">Create New</a></h6>
 
-<div class="container-fluid">
-  <table class="table table-hover table-primary table-striped">
-    <thead>
-      <tr>
-        <th>Actions</th>
-        <th>Title</th>
-        <th>Year</th>
-        @* TableHeaderCodePlaceholder *@
-      </tr>
-    </thead>
-    <tbody>
-      @if (movies is not null)
-      {
-        @foreach (var movie in movies)
-        {
-          <tr>
-            <td>
-              <div class="btn-group">
-                <a class="btn btn-primary btn-sm btn-info" href="/admin/movie/view/@movie.Id" title="View">
-                  <i class="bi bi-eye"></i>
-                </a>
-                <a class="btn btn-primary btn-sm" href="/admin/movie/edit/@movie.Id" title="Edit">
-                  <i class="bi bi-pencil"></i>
-                </a>
-              </div>
-            </td>
-            <td>@movie?.Title</td>
-            <td>@movie?.Year</td>
-            @* TableRowCodePlaceholder *@
-          </tr>
-        }
-      }
-    </tbody>
-  </table>
-</div>
+<InfoGrid ColumnNames="columnNames" ColumnTypes="columnTypes" Ids="ids" Info="info" UrlName="movie"></InfoGrid>
 
 @code {
-  private ICollection<Movie>? movies { get; set; }
+  private List<string> columnNames = [
+    "Title",
+    "Year",
+  ];
+  private List<ColumnType> columnTypes = [
+    ColumnType.Normalized,
+    ColumnType.Normalized,
+  ];
+  private List<Guid>? ids;
+  private List<List<string>>? info;
+  private ICollection<Movie>? movies;
 
   protected override async Task OnParametersSetAsync()
   {
@@ -64,6 +41,19 @@
       movies = await query
         @* QueryIncludeCodePlaceholder *@
         .AsNoTracking().ToListAsync();
+
+      ids = [];
+      info = [];
+
+      foreach (var movie in movies)
+      {
+        ids.Add(movie.Id);
+
+        info.Add([
+          movie.Title,
+          movie.Year,
+        ]);
+      }
     }
   }
 }

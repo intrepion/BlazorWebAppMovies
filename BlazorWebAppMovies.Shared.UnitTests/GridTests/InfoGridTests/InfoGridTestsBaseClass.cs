@@ -6,6 +6,7 @@ public class InfoGridTestsBaseClass
 {
     protected List<string> _columnNames;
     protected List<ColumnType> _columnTypes;
+    protected List<Guid> _ids;
     protected List<List<string>> _info;
     protected InfoGrid _infoGrid;
 
@@ -26,6 +27,37 @@ public class InfoGridTestsBaseClass
             ColumnType.Integer,
             ColumnType.Normalized,
             ColumnType.Normalized,
+        ];
+
+        _ids = [
+            Guid.Parse("09191919-1919-1919-1919-191919191918"),
+            Guid.Parse("12323232-3232-3232-3232-323232323230"),
+            Guid.Parse("1B4B4B4B-4B4B-4B4B-4B4B-4B4B4B4B4B48"),
+            Guid.Parse("24646464-6464-6464-6464-646464646460"),
+            Guid.Parse("2D7D7D7D-7D7D-7D7D-7D7D-7D7D7D7D7D78"),
+            Guid.Parse("36969696-9696-9696-9696-969696969690"),
+            Guid.Parse("3FAFAFAF-AFAF-AFAF-AFAF-AFAFAFAFAFA8"),
+            Guid.Parse("48C8C8C8-C8C8-C8C8-C8C8-C8C8C8C8C8C0"),
+            Guid.Parse("51E1E1E1-E1E1-E1E1-E1E1-E1E1E1E1E1D8"),
+            Guid.Parse("5AFAFAFA-FAFA-FAFA-FAFA-FAFAFAFAFAF0"),
+            Guid.Parse("64181818-1818-1818-1818-181818181808"),
+            Guid.Parse("6D313131-3131-3131-3131-313131313120"),
+            Guid.Parse("764A4A4A-4A4A-4A4A-4A4A-4A4A4A4A4A38"),
+            Guid.Parse("7F636363-6363-6363-6363-636363636350"),
+            Guid.Parse("887C7C7C-7C7C-7C7C-7C7C-7C7C7C7C7C68"),
+            Guid.Parse("91959595-9595-9595-9595-959595959580"),
+            Guid.Parse("9AAEAEAE-AEAE-AEAE-AEAE-AEAEAEAEAE98"),
+            Guid.Parse("A3C7C7C7-C7C7-C7C7-C7C7-C7C7C7C7C7B0"),
+            Guid.Parse("ACE0E0E0-E0E0-E0E0-E0E0-E0E0E0E0E0C8"),
+            Guid.Parse("B5FAFAFA-FAFA-FAFA-FAFA-FAFAFAFAFAE0"),
+            Guid.Parse("BF131313-1313-1313-1313-1313131313F8"),
+            Guid.Parse("C82C2C2C-2C2C-2C2C-2C2C-2C2C2C2C2C10"),
+            Guid.Parse("D1454545-4545-4545-4545-454545454528"),
+            Guid.Parse("DA5E5E5E-5E5E-5E5E-5E5E-5E5E5E5E5E40"),
+            Guid.Parse("E3777777-7777-7777-7777-777777777758"),
+            Guid.Parse("EC909090-9090-9090-9090-909090909070"),
+            Guid.Parse("F5A9A9A9-A9A9-A9A9-A9A9-A9A9A9A9A988"),
+            Guid.Parse("FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF"),
         ];
 
         _info = [
@@ -229,6 +261,6 @@ public class InfoGridTestsBaseClass
 
         _infoGrid = new InfoGrid();
 
-        _infoGrid.SetInitialInfo(_columnNames, _columnTypes, _info);
+        _infoGrid.SetInitialInfo(_columnNames, _columnTypes, _ids, _info);
     }
 }

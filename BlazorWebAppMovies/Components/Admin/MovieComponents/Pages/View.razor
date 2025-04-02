@@ -59,7 +59,7 @@ else
         Back to Grid
       </a>
       <span>&nbsp;</span>
-      @if (!Deleted)
+      @if (Movie is not null && !Deleted)
       {
         <a class="btn btn-primary" href="admin/movie/edit/@Movie.Id" title="Edit">Edit</a>
 

@@ -59,7 +59,7 @@ else
         Back to Grid
       </a>
       <span>&nbsp;</span>
-      @if (!Deleted)
+      @if (CastMember is not null && !Deleted)
       {
         <a class="btn btn-primary" href="admin/cast-member/edit/@CastMember.Id" title="Edit">Edit</a>
 

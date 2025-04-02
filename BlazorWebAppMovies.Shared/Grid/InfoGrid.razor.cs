@@ -11,6 +11,8 @@ public partial class InfoGrid
     [Parameter]
     public List<string?> Filters { get; set; } = [];
     [Parameter]
+    public List<Guid>? Ids { get; set; } = [];
+    [Parameter]
     public List<List<string>>? Info { get; set; } = [];
     [Parameter]
     public int Page { get; set; } = 1;
@@ -22,6 +24,18 @@ public partial class InfoGrid
     public int TotalPages { get; set; } = 0;
     [Parameter]
     public int TotalRows { get; set; } = 0;
+    [Parameter]
+    public string UrlName { get; set; } = string.Empty;
+
+    protected override void OnParametersSet()
+    {
+        if (ColumnNames.Count > 0 && Filters.Count == 0)
+        {
+            Filters = [.. Enumerable.Repeat<string?>(null, ColumnNames.Count)];
+        }
+
+        SetRowsPerPage(RowsPerPage);
+    }
 
     public void SetFilter(int column, string? filter)
     {
@@ -62,7 +76,7 @@ public partial class InfoGrid
     {
         RowsPerPage = rowsPerPage;
 
-        if (Info == null)
+        if (Info is null)
         {
             TotalPages = 1;
             TotalRows = 0;
@@ -82,10 +96,11 @@ public partial class InfoGrid
         TotalRows = Info.Count;
     }
 
-    public void SetInitialInfo(List<string> columnNames, List<ColumnType> columnTypes, List<List<string>>? info)
+    public void SetInitialInfo(List<string> columnNames, List<ColumnType> columnTypes, List<Guid>? ids, List<List<string>>? info)
     {
         ColumnNames = columnNames;
         ColumnTypes = columnTypes;
+        Ids = ids;
         Info = info;
         Filters = [.. Enumerable.Repeat<string?>(null, columnNames.Count)];
 

@@ -92,7 +92,7 @@ public class InfoGridGetGridStateRowsPerPageTests : InfoGridTestsBaseClass
         var totalPages = 1;
         var totalRows = 0;
 
-        _infoGrid.SetInitialInfo(_columnNames, _columnTypes, null);
+        _infoGrid.SetInitialInfo(_columnNames, _columnTypes, null, null);
         _infoGrid.SetRowsPerPage(5);
         var actual = _infoGrid;
 
