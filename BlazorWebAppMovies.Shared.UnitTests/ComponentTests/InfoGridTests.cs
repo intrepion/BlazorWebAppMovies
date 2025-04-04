@@ -7,15 +7,11 @@ namespace BlazorWebAppMovies.Shared.UnitTests.InfoGridTests;
 public class InfoGridTests : BunitContext
 {
     [Test]
-    public void HelloWorldComponentRendersCorrectly()
+    public void InfoGridComponentRendersCorrectly()
     {
         // Act
-        var cut = Render<Counter>();
+        var cut = Render<InfoGrid>();
 
-        // Assert
-        cut.MarkupMatches(@"<h1>Counter</h1>
-<p>
-  Current count: 0</p>
-<button class=""btn btn-primary"" >Click me</button>");
+        cut.MarkupMatches("<div><p>No information found.</p></div>");
     }
 }
