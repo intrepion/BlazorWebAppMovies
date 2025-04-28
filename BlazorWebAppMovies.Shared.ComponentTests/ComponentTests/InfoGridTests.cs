@@ -1,4 +1,4 @@
-using BlazorWebAppMovies.Shared.Grid;
+﻿using BlazorWebAppMovies.Shared.Grid;
 using Bunit;
 using NUnit.Framework;
 

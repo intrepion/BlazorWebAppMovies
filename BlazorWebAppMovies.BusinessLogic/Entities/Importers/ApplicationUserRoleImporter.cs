@@ -1,8 +1,8 @@
 ﻿using System.Globalization;
-using CsvHelper;
-using CsvHelper.Configuration;
 using BlazorWebAppMovies.BusinessLogic.Data;
 using BlazorWebAppMovies.BusinessLogic.Entities.Records;
+using CsvHelper;
+using CsvHelper.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlazorWebAppMovies.BusinessLogic.Entities.Importers;

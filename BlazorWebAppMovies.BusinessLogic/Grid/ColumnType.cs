@@ -1,4 +1,4 @@
-namespace ApplicationNamePlaceholder.BusinessLogic.Grid;
+﻿namespace ApplicationNamePlaceholder.BusinessLogic.Grid;
 
 public enum ColumnType
 {
