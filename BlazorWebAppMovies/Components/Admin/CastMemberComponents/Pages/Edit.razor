@@ -1,0 +1,161 @@
+@page "/admin/cast-member/add"
+@page "/admin/cast-member/edit/{CastMemberId:guid?}"
+@rendermode InteractiveServer
+@implements IDisposable
+@inject IDbContextFactory<ApplicationDbContext> DbFactory
+@inject NavigationManager Navigation
+
+<PageTitle>Cast Member @(IsAdd ? "Add" : "Edit")</PageTitle>
+
+@if (CastMember is null && !Busy && !IsAdd)
+{
+  <p>Could not find Cast Member with id @CastMemberId.</p>
+}
+else
+{
+    @* EmulatorList="EmulatorList" *@
+  <CastMemberForm
+    Busy="Busy" 
+    CancelRequest="Cancel"
+    DbCastMember="DbCastMember" 
+    CastMember="CastMember" 
+    IsAdd="IsAdd"
+    ValidationResult="@(async (success) => await ValidationResultAsync(success))"
+  />
+}
+
+@if (Error)
+{
+  <br />
+  <div class="alert alert-danger">Failed to @(IsAdd ? "add" : "update") the Cast Member (@ErrorMessage).</div>
+}
+
+@code {
+  [Parameter]
+  public Guid? CastMemberId { get; set; }
+
+  private bool IsAdd => CastMemberId == null;
+
+  private ApplicationDbContext? Context { get; set; }
+
+  private CastMember? CastMember { get; set; }
+
+  private CastMember DbCastMember { get; set; } = new CastMember();
+
+  @* ListDeclarationCodePlaceholder *@
+  @* private List<Emulator> EmulatorList { get; set; } = new List<Emulator>();*@
+
+  private bool Busy;
+
+  private bool Error;
+
+  private string ErrorMessage = string.Empty;
+
+  protected override async Task OnInitializedAsync()
+  {
+    Busy = true;
+
+    try
+    {
+      Context = DbFactory.CreateDbContext();
+
+      @* LoadListCodePlaceholder *@
+      @* if (Context.Emulators != null)
+      {
+        EmulatorList = await Context.Emulators.OrderBy(e => e.Name).ToListAsync();
+      } *@
+
+      if (IsAdd)
+      {
+        CastMember = new();
+      }
+      else if (Context is not null && Context.CastMembers is not null)
+      {
+        var castMember = await Context.CastMembers
+            @* IncludeListCodePlaceholder *@
+            @* .Include(e => e.Emulator) *@
+            .SingleOrDefaultAsync(x => x.Id == CastMemberId);
+
+        if (castMember is not null)
+        {
+          CastMember = castMember;
+        }
+      }
+    }
+    finally
+    {
+      Busy = false;
+    }
+  }
+
+  private async Task ValidationResultAsync(bool success)
+  {
+    if (Busy)
+    {
+      return;
+    }
+
+    if (!success)
+    {
+      Error = false;
+      return;
+    }
+
+    Busy = true;
+
+    try
+    {
+      if (Context is not null && CastMember is not null)
+      {
+        @* SetExistingCodePlaceholder *@
+        @* if (CastMember.Emulator != null && CastMember.Emulator.Id != Guid.Empty)
+        {
+          var existingEmulator = await Context.Emulators.FindAsync(CastMember.Emulator.Id);
+          if (existingEmulator != null)
+          {
+            CastMember.Emulator = existingEmulator;
+          }
+        } *@
+        
+        if (IsAdd && Context.CastMembers != null)
+        {
+          Context.CastMembers.Add(CastMember);
+        }
+        
+        await Context.SaveChangesAsync();
+      }
+
+      Navigation.NavigateTo($"/admin/cast-member/view/{CastMember?.Id}");
+    }
+    catch (DbUpdateConcurrencyException dbex)
+    {
+      var dbValues = dbex.Entries[0].GetDatabaseValues();
+
+      if (dbValues is null)
+      {
+        Navigation.NavigateTo($"/admin/cast-member/view/{CastMember?.Id}");
+        return;
+      }
+
+      DbCastMember = (CastMember)dbValues.ToObject();
+
+      dbex.Entries[0].OriginalValues.SetValues(dbValues);
+      Error = false;
+      Busy = false;
+    }
+    catch (Exception ex)
+    {
+      Error = true;
+      ErrorMessage = ex.Message;
+      Busy = false;
+    }
+  }
+
+  private void Cancel()
+  {
+    Busy = true;
+    Navigation.NavigateTo($"/admin/cast-member");
+  }
+
+  public void Dispose() => Context?.Dispose();
+}

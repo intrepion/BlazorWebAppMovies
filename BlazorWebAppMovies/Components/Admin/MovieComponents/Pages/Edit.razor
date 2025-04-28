@@ -1,0 +1,161 @@
+@page "/admin/movie/add"
+@page "/admin/movie/edit/{MovieId:guid?}"
+@rendermode InteractiveServer
+@implements IDisposable
+@inject IDbContextFactory<ApplicationDbContext> DbFactory
+@inject NavigationManager Navigation
+
+<PageTitle>Movie @(IsAdd ? "Add" : "Edit")</PageTitle>
+
+@if (Movie is null && !Busy && !IsAdd)
+{
+  <p>Could not find Movie with id @MovieId.</p>
+}
+else
+{
+    @* EmulatorList="EmulatorList" *@
+  <MovieForm
+    Busy="Busy" 
+    CancelRequest="Cancel"
+    DbMovie="DbMovie" 
+    Movie="Movie" 
+    IsAdd="IsAdd"
+    ValidationResult="@(async (success) => await ValidationResultAsync(success))"
+  />
+}
+
+@if (Error)
+{
+  <br />
+  <div class="alert alert-danger">Failed to @(IsAdd ? "add" : "update") the Movie (@ErrorMessage).</div>
+}
+
+@code {
+  [Parameter]
+  public Guid? MovieId { get; set; }
+
+  private bool IsAdd => MovieId == null;
+
+  private ApplicationDbContext? Context { get; set; }
+
+  private Movie? Movie { get; set; }
+
+  private Movie DbMovie { get; set; } = new Movie();
+
+  @* ListDeclarationCodePlaceholder *@
+  @* private List<Emulator> EmulatorList { get; set; } = new List<Emulator>();*@
+
+  private bool Busy;
+
+  private bool Error;
+
+  private string ErrorMessage = string.Empty;
+
+  protected override async Task OnInitializedAsync()
+  {
+    Busy = true;
+
+    try
+    {
+      Context = DbFactory.CreateDbContext();
+
+      @* LoadListCodePlaceholder *@
+      @* if (Context.Emulators != null)
+      {
+        EmulatorList = await Context.Emulators.OrderBy(e => e.Name).ToListAsync();
+      } *@
+
+      if (IsAdd)
+      {
+        Movie = new();
+      }
+      else if (Context is not null && Context.Movies is not null)
+      {
+        var movie = await Context.Movies
+            @* IncludeListCodePlaceholder *@
+            @* .Include(e => e.Emulator) *@
+            .SingleOrDefaultAsync(x => x.Id == MovieId);
+
+        if (movie is not null)
+        {
+          Movie = movie;
+        }
+      }
+    }
+    finally
+    {
+      Busy = false;
+    }
+  }
+
+  private async Task ValidationResultAsync(bool success)
+  {
+    if (Busy)
+    {
+      return;
+    }
+
+    if (!success)
+    {
+      Error = false;
+      return;
+    }
+
+    Busy = true;
+
+    try
+    {
+      if (Context is not null && Movie is not null)
+      {
+        @* SetExistingCodePlaceholder *@
+        @* if (Movie.Emulator != null && Movie.Emulator.Id != Guid.Empty)
+        {
+          var existingEmulator = await Context.Emulators.FindAsync(Movie.Emulator.Id);
+          if (existingEmulator != null)
+          {
+            Movie.Emulator = existingEmulator;
+          }
+        } *@
+        
+        if (IsAdd && Context.Movies != null)
+        {
+          Context.Movies.Add(Movie);
+        }
+        
+        await Context.SaveChangesAsync();
+      }
+
+      Navigation.NavigateTo($"/admin/movie/view/{Movie?.Id}");
+    }
+    catch (DbUpdateConcurrencyException dbex)
+    {
+      var dbValues = dbex.Entries[0].GetDatabaseValues();
+
+      if (dbValues is null)
+      {
+        Navigation.NavigateTo($"/admin/movie/view/{Movie?.Id}");
+        return;
+      }
+
+      DbMovie = (Movie)dbValues.ToObject();
+
+      dbex.Entries[0].OriginalValues.SetValues(dbValues);
+      Error = false;
+      Busy = false;
+    }
+    catch (Exception ex)
+    {
+      Error = true;
+      ErrorMessage = ex.Message;
+      Busy = false;
+    }
+  }
+
+  private void Cancel()
+  {
+    Busy = true;
+    Navigation.NavigateTo($"/admin/movie");
+  }
+
+  public void Dispose() => Context?.Dispose();
+}

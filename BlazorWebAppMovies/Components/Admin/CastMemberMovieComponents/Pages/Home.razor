@@ -1,0 +1,63 @@
+@page "/admin/cast-member-movie"
+@rendermode InteractiveServer
+@inject IDbContextFactory<ApplicationDbContext> DbFactory
+@inject NavigationManager Navigation
+
+<PageTitle>Cast Member Movie Home</PageTitle>
+
+<h1>Cast Member Movie Home</h1>
+<h6><a href="/admin/movie/add">Create New</a></h6>
+
+<InfoGrid ColumnNames="columnNames" ColumnTypes="columnTypes" Ids="ids" Info="info" UrlName="cast-member-movie"></InfoGrid>
+
+@code {
+  private List<string> columnNames = [
+    "Cast Member",
+    "Movie",
+    @* ColumnNamesCodePlaceholder *@
+  ];
+  private List<ColumnType> columnTypes = [
+    ColumnType.Text,
+    ColumnType.Text,
+    @* ColumnTypesCodePlaceholder *@
+  ];
+  private List<Guid>? ids;
+  private List<List<string>>? info;
+  private ICollection<CastMemberMovie>? castMemberMovies;
+
+  protected override async Task OnParametersSetAsync()
+  {
+    await ReloadAsync();
+  }
+
+  private async Task ReloadAsync()
+  {
+    castMemberMovies = new List<CastMemberMovie>();
+
+    using var context = DbFactory.CreateDbContext();
+    var query = context.CastMemberMovies?.AsQueryable();
+
+    if (query is not null)
+    {
+      castMemberMovies = await query
+        .Include(x => x.CastMember)
+        .Include(x => x.Movie)
+        @* QueryIncludeCodePlaceholder *@
+        .AsNoTracking().ToListAsync();
+
+      ids = [];
+      info = [];
+
+      foreach (var castMemberMovie in castMemberMovies)
+      {
+        ids.Add(castMemberMovie.Id);
+
+        info.Add([
+          "" + castMemberMovie?.CastMember?.Name1 + " " + castMemberMovie?.CastMember?.Name2,
+          "" + castMemberMovie?.Movie?.Title,
+          @* InfoAddCodePlaceholder *@
+        ]);
+      }
+    }
+  }
+}

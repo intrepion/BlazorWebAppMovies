@@ -1,0 +1,61 @@
+@page "/admin/movie"
+@rendermode InteractiveServer
+@inject IDbContextFactory<ApplicationDbContext> DbFactory
+@inject NavigationManager Navigation
+
+<PageTitle>Movie Home</PageTitle>
+
+<h1>Movie Home</h1>
+<h6><a href="/admin/movie/add">Create New</a></h6>
+
+<InfoGrid ColumnNames="columnNames" ColumnTypes="columnTypes" Ids="ids" Info="info" UrlName="movie"></InfoGrid>
+
+@code {
+  private List<string> columnNames = [
+    "Title",
+    "Year",
+    @* ColumnNamesCodePlaceholder *@
+  ];
+  private List<ColumnType> columnTypes = [
+    ColumnType.Normalized,
+    ColumnType.Alphanumeric,
+    @* ColumnTypesCodePlaceholder *@
+  ];
+  private List<Guid>? ids;
+  private List<List<string>>? info;
+  private ICollection<Movie>? movies;
+
+  protected override async Task OnParametersSetAsync()
+  {
+    await ReloadAsync();
+  }
+
+  private async Task ReloadAsync()
+  {
+    movies = new List<Movie>();
+
+    using var context = DbFactory.CreateDbContext();
+    var query = context.Movies?.AsQueryable();
+
+    if (query is not null)
+    {
+      movies = await query
+        @* QueryIncludeCodePlaceholder *@
+        .AsNoTracking().ToListAsync();
+
+      ids = [];
+      info = [];
+
+      foreach (var movie in movies)
+      {
+        ids.Add(movie.Id);
+
+        info.Add([
+          movie.Title,
+          movie.Year,
+          @* InfoAddCodePlaceholder *@
+        ]);
+      }
+    }
+  }
+}

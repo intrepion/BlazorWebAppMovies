@@ -1,0 +1,175 @@
+@page "/admin/cast-member-movie/add"
+@page "/admin/cast-member-movie/edit/{CastMemberMovieId:guid?}"
+@rendermode InteractiveServer
+@implements IDisposable
+@inject IDbContextFactory<ApplicationDbContext> DbFactory
+@inject NavigationManager Navigation
+
+<PageTitle>Cast Member Movie @(IsAdd ? "Add" : "Edit")</PageTitle>
+
+@if (CastMemberMovie is null && !Busy && !IsAdd)
+{
+  <p>Could not find Cast Member Movie with id @CastMemberMovieId.</p>
+}
+else
+{
+    @* EmulatorList="EmulatorList" *@
+  <CastMemberMovieForm
+    CastMemberList="CastMemberList"
+    MovieList="MovieList"
+    Busy="Busy" 
+    CancelRequest="Cancel"
+    DbCastMemberMovie="DbCastMemberMovie" 
+    CastMemberMovie="CastMemberMovie" 
+    IsAdd="IsAdd"
+    ValidationResult="@(async (success) => await ValidationResultAsync(success))"
+  />
+}
+
+@if (Error)
+{
+  <br />
+  <div class="alert alert-danger">Failed to @(IsAdd ? "add" : "update") the Cast Member Movie (@ErrorMessage).</div>
+}
+
+@code {
+  [Parameter]
+  public Guid? CastMemberMovieId { get; set; }
+
+  private bool IsAdd => CastMemberMovieId == null;
+
+  private ApplicationDbContext? Context { get; set; }
+
+  private CastMemberMovie? CastMemberMovie { get; set; }
+
+  private CastMemberMovie DbCastMemberMovie { get; set; } = new CastMemberMovie();
+
+  private List<CastMember> CastMemberList { get; set; } = new List<CastMember>();
+  private List<Movie> MovieList { get; set; } = new List<Movie>();
+  @* ListDeclarationCodePlaceholder *@
+  @* private List<Emulator> EmulatorList { get; set; } = new List<Emulator>();*@
+
+  private bool Busy;
+
+  private bool Error;
+
+  private string ErrorMessage = string.Empty;
+
+  protected override async Task OnInitializedAsync()
+  {
+    Busy = true;
+
+    try
+    {
+      Context = DbFactory.CreateDbContext();
+
+      if (Context.CastMembers != null)
+      {
+        CastMemberList = await Context.CastMembers.ToListAsync();
+      }
+      if (Context.Movies != null)
+      {
+        MovieList = await Context.Movies.ToListAsync();
+      }
+      @* LoadListCodePlaceholder *@
+      @* if (Context.Emulators != null)
+      {
+        EmulatorList = await Context.Emulators.OrderBy(e => e.Name).ToListAsync();
+      } *@
+
+      if (IsAdd)
+      {
+        CastMemberMovie = new();
+      }
+      else if (Context is not null && Context.CastMemberMovies is not null)
+      {
+        var castMemberMovie = await Context.CastMemberMovies
+            .Include(x => x.CastMember)
+            .Include(x => x.Movie)
+            @* IncludeListCodePlaceholder *@
+            @* .Include(e => e.Emulator) *@
+            .SingleOrDefaultAsync(x => x.Id == CastMemberMovieId);
+
+        if (castMemberMovie is not null)
+        {
+          CastMemberMovie = castMemberMovie;
+        }
+      }
+    }
+    finally
+    {
+      Busy = false;
+    }
+  }
+
+  private async Task ValidationResultAsync(bool success)
+  {
+    if (Busy)
+    {
+      return;
+    }
+
+    if (!success)
+    {
+      Error = false;
+      return;
+    }
+
+    Busy = true;
+
+    try
+    {
+      if (Context is not null && CastMemberMovie is not null)
+      {
+        @* SetExistingCodePlaceholder *@
+        @* if (CastMemberMovie.Emulator != null && CastMemberMovie.Emulator.Id != Guid.Empty)
+        {
+          var existingEmulator = await Context.Emulators.FindAsync(CastMemberMovie.Emulator.Id);
+          if (existingEmulator != null)
+          {
+            CastMemberMovie.Emulator = existingEmulator;
+          }
+        } *@
+        
+        if (IsAdd && Context.CastMemberMovies != null)
+        {
+          Context.CastMemberMovies.Add(CastMemberMovie);
+        }
+        
+        await Context.SaveChangesAsync();
+      }
+
+      Navigation.NavigateTo($"/admin/cast-member-movie/view/{CastMemberMovie?.Id}");
+    }
+    catch (DbUpdateConcurrencyException dbex)
+    {
+      var dbValues = dbex.Entries[0].GetDatabaseValues();
+
+      if (dbValues is null)
+      {
+        Navigation.NavigateTo($"/admin/cast-member-movie/view/{CastMemberMovie?.Id}");
+        return;
+      }
+
+      DbCastMemberMovie = (CastMemberMovie)dbValues.ToObject();
+
+      dbex.Entries[0].OriginalValues.SetValues(dbValues);
+      Error = false;
+      Busy = false;
+    }
+    catch (Exception ex)
+    {
+      Error = true;
+      ErrorMessage = ex.Message;
+      Busy = false;
+    }
+  }
+
+  private void Cancel()
+  {
+    Busy = true;
+    Navigation.NavigateTo($"/admin/cast-member-movie");
+  }
+
+  public void Dispose() => Context?.Dispose();
+}
