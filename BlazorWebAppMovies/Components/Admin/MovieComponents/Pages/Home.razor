@@ -1,0 +1,217 @@
+@page "/admin/movie"
+@rendermode InteractiveServer
+@inject IDbContextFactory<ApplicationDbContext> DbFactory
+@inject NavigationManager Navigation
+
+<PageTitle>Movie Home</PageTitle>
+
+<h1>Movie Home</h1>
+<h6><a href="/admin/movie/add">Create New</a></h6>
+
+<InfoGrid 
+  ColumnNames="columnNames" 
+  ColumnTypes="columnTypes" 
+  Ids="ids" 
+  Info="info"
+  OnPageChanged="HandlePageChanged"
+  OnRowsPerPage="HandleRowsPerPageChanged"
+  Page="currentPage"
+  RowsPerPage="rowsPerPage"
+  TotalPages="totalPages"
+  UrlName="movie"
+>
+</InfoGrid>
+
+@code {
+  private List<string> columnNames = [
+    "Title",
+    "Year",
+    @* ColumnNamesCodePlaceholder *@
+  ];
+  private List<ColumnType> columnTypes = [
+    ColumnType.Normalized,
+    ColumnType.Alphanumeric,
+    @* ColumnTypesCodePlaceholder *@
+  ];
+  private List<Guid>? ids;
+  private List<List<string>>? info;
+  private ICollection<Movie>? movies;
+  private int currentPage = 1;
+  private int rowsPerPage = 10;
+  private int totalPages = 1;
+  private bool isNavigating = false;
+
+  public void Dispose()
+  {
+    Navigation.LocationChanged -= OnLocationChanged;
+  }
+
+  private async Task HandlePageChanged(int page)
+  {
+    try
+    {
+      isNavigating = true;
+      
+      currentPage = page;
+      
+      UpdateUrlWithParameters(page, rowsPerPage);
+      
+      await ReloadAsync();
+    }
+    finally
+    {
+      isNavigating = false;
+    }
+  }
+
+  private async Task HandleRowsPerPageChanged(int newRowsPerPage)
+  {
+    try
+    {
+      isNavigating = true;
+      
+      currentPage = 1;
+      rowsPerPage = newRowsPerPage;
+      
+      UpdateUrlWithParameters(1, newRowsPerPage);
+      
+      await ReloadAsync();
+    }
+    finally
+    {
+      isNavigating = false;
+    }
+  }
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    if (firstRender)
+    {
+      await ReloadAsync();
+      StateHasChanged();
+    }
+  }
+
+  protected override void OnInitialized()
+  {
+    Navigation.LocationChanged += OnLocationChanged;
+    
+    ParseUrlParameters();
+  }
+
+  private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+  {
+    if (!isNavigating && e.Location.Contains("/admin/movie"))
+    {
+      InvokeAsync(async () => {
+        bool parametersChanged = ParseUrlParameters();
+        
+        StateHasChanged();
+        
+        if (parametersChanged)
+        {
+          await ReloadAsync();
+          
+          StateHasChanged();
+        }
+      });
+    }
+  }
+
+  protected override async Task OnParametersSetAsync()
+  {
+    await ReloadAsync();
+  }
+
+    private bool ParseUrlParameters()
+  {
+    var uri = new Uri(Navigation.Uri);
+    var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
+
+    var oldPage = currentPage;
+    var oldRowsPerPage = rowsPerPage;
+    
+    if (int.TryParse(query["page"], out int page) && page > 0)
+    {
+      currentPage = page;
+    }
+    else
+    {
+      currentPage = 1;
+    }
+    
+    if (int.TryParse(query["rowsPerPage"], out int rpp))
+    {
+      rowsPerPage = rpp switch
+      {
+        5 or 10 or 20 or 50 => rpp,
+        _ => 10
+      };
+    }
+    else
+    {
+      rowsPerPage = 10;
+    }
+    
+    return oldPage != currentPage || oldRowsPerPage != rowsPerPage;
+  }
+
+  private async Task ReloadAsync()
+  {
+    using var context = DbFactory.CreateDbContext();
+    var query = context.Movies?.AsQueryable();
+
+    if (query is not null)
+    {
+      var totalItems = await query.CountAsync();
+      
+      totalPages = (totalItems + rowsPerPage - 1) / rowsPerPage;
+      
+      if (currentPage > totalPages && totalPages > 0)
+      {
+        currentPage = totalPages;
+        var uriBuilder = new UriBuilder(Navigation.Uri);
+        var queryString = System.Web.HttpUtility.ParseQueryString(uriBuilder.Query);
+        queryString["page"] = currentPage.ToString();
+        uriBuilder.Query = queryString.ToString();
+        isNavigating = true;
+        Navigation.NavigateTo(uriBuilder.Uri.ToString(), false);
+        isNavigating = false;
+      }
+      
+      var pagedQuery = query
+        @* QueryIncludeCodePlaceholder *@
+        .AsNoTracking()
+        .Skip((currentPage - 1) * rowsPerPage)
+        .Take(rowsPerPage);
+
+      movies = await pagedQuery.ToListAsync();
+
+      ids = [];
+      info = [];
+
+      foreach (var movie in movies)
+      {
+        ids.Add(movie.Id);
+
+        info.Add([
+          movie.Title,
+          movie.Year,
+          @* InfoAddCodePlaceholder *@
+        ]);
+      }
+    }
+  }
+
+  private void UpdateUrlWithParameters(int page, int rpp)
+  {
+    var uriBuilder = new UriBuilder(Navigation.Uri);
+    var query = System.Web.HttpUtility.ParseQueryString(uriBuilder.Query);
+    
+    query["page"] = page.ToString();
+    query["rowsPerPage"] = rpp.ToString();
+    
+    uriBuilder.Query = query.ToString();
+    Navigation.NavigateTo(uriBuilder.Uri.ToString(), false);
+  }
+}
