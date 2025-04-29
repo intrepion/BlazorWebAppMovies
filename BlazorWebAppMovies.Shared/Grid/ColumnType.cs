@@ -1,11 +1,11 @@
-namespace BlazorWebAppMovies.Shared.Grid;
+﻿namespace BlazorWebAppMovies.Shared.Grid;
 
 public enum ColumnType
 {
-  Alphanumeric,
-  Boolean,
-  DateTime,
-  Integer,
-  Normalized,
-  Text,
+    Alphanumeric,
+    Boolean,
+    DateTime,
+    Integer,
+    Normalized,
+    Text,
 }
