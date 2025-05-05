@@ -1,0 +1,310 @@
+@page "/admin/movie"
+@rendermode InteractiveServer
+@inject IDbContextFactory<ApplicationDbContext> DbFactory
+@inject NavigationManager Navigation
+
+<PageTitle>Movie Home</PageTitle>
+
+<h1>Movie Home</h1>
+<h6><a href="/admin/movie/add">Create New</a></h6>
+
+<InfoGrid 
+  OnPageChanged="HandlePageChanged"
+  OnRowsPerPage="HandleRowsPerPageChanged"
+  OnSortsChanged="HandleSortsChanged"
+  ColumnNames="columnNames" 
+  ColumnTypes="columnTypes" 
+  Ids="ids" 
+  Info="info"
+  Page="currentPage"
+  RowsPerPage="rowsPerPage"
+  Sorts="sorts"
+  TotalPages="totalPages"
+  UrlName="movie"
+>
+</InfoGrid>
+
+@code {
+  private List<string> columnNames = [
+    "Title",
+    "Year",
+    @* ColumnNamesCodePlaceholder *@
+  ];
+  private List<ColumnType> columnTypes = [
+    ColumnType.Normalized,
+    ColumnType.Alphanumeric,
+    @* ColumnTypesCodePlaceholder *@
+  ];
+  private ICollection<Movie>? movies;
+  private List<Guid>? ids;
+  private List<List<string>>? info;
+  private int currentPage = 1;
+  private int rowsPerPage = 10;
+  private List<(int, bool)> sorts = [];
+  private int totalPages = 1;
+  private bool isNavigating = false;
+
+  public void Dispose()
+  {
+    Navigation.LocationChanged -= OnLocationChanged;
+  }
+
+  private async Task HandlePageChanged(int page)
+  {
+    try
+    {
+      isNavigating = true;
+      
+      currentPage = page;
+      
+      UpdateUrlWithParameters(page, rowsPerPage, sorts);
+      
+      await ReloadAsync();
+    }
+    finally
+    {
+      isNavigating = false;
+    }
+  }
+
+  private async Task HandleRowsPerPageChanged(int newRowsPerPage)
+  {
+    try
+    {
+      isNavigating = true;
+      
+      currentPage = 1;
+      rowsPerPage = newRowsPerPage;
+      
+      UpdateUrlWithParameters(1, newRowsPerPage, sorts);
+      
+      await ReloadAsync();
+    }
+    finally
+    {
+      isNavigating = false;
+    }
+  }
+
+  private async Task HandleSortsChanged(List<(int, bool)> newSorts)
+  {
+    try
+    {
+      isNavigating = true;
+
+      sorts = newSorts;
+
+      UpdateUrlWithParameters(currentPage, rowsPerPage, sorts);
+
+      await ReloadAsync();
+
+      StateHasChanged();
+    }
+    finally
+    {
+      isNavigating = false;
+    }
+  }
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    if (firstRender)
+    {
+      await ReloadAsync();
+      StateHasChanged();
+    }
+  }
+
+  protected override void OnInitialized()
+  {
+    Navigation.LocationChanged += OnLocationChanged;
+
+    ParseUrlParameters();
+  }
+
+  private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+  {
+    if (!isNavigating && e.Location.Contains("/admin/movie"))
+    {
+      InvokeAsync(async () => {
+        bool parametersChanged = ParseUrlParameters();
+
+        StateHasChanged();
+
+        if (parametersChanged)
+        {
+          await ReloadAsync();
+
+          StateHasChanged();
+        }
+      });
+    }
+  }
+
+  protected override async Task OnParametersSetAsync()
+  {
+    await ReloadAsync();
+  }
+
+  private bool ParseUrlParameters()
+  {
+    var uri = new Uri(Navigation.Uri);
+    var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
+
+    var oldPage = currentPage;
+    var oldRowsPerPage = rowsPerPage;
+    var oldSorts = new List<(int, bool)>(sorts);
+
+    if (int.TryParse(query["page"], out int page) && page > 0)
+    {
+      currentPage = page;
+    }
+    else
+    {
+      currentPage = 1;
+    }
+
+    if (int.TryParse(query["rowsPerPage"], out int rpp))
+    {
+      rowsPerPage = rpp switch
+      {
+        5 or 10 or 20 or 50 => rpp,
+        _ => 10
+      };
+    }
+    else
+    {
+      rowsPerPage = 10;
+    }
+
+    sorts.Clear();
+    var sortParams = query["sort"]?.Split(',') ?? Array.Empty<string>();
+
+    foreach (var sortParam in sortParams)
+    {
+      if (string.IsNullOrEmpty(sortParam)) continue;
+
+      var parts = sortParam.Split(':');
+      if (parts.Length == 2 && 
+          int.TryParse(parts[0], out int column) && 
+          bool.TryParse(parts[1], out bool ascending))
+      {
+        sorts.Add((column, ascending));
+      }
+    }
+    
+    var changed = oldPage != currentPage || 
+                 oldRowsPerPage != rowsPerPage || 
+                 !Enumerable.SequenceEqual(oldSorts, sorts);
+                 
+    return changed;
+  }
+
+  private async Task ReloadAsync()
+  {
+    using var context = DbFactory.CreateDbContext();
+    var query = context.Movies?.AsQueryable();
+
+    if (query is not null)
+    {
+      var totalItems = await query.CountAsync();
+      
+      totalPages = (totalItems + rowsPerPage - 1) / rowsPerPage;
+      
+      if (currentPage > totalPages && totalPages > 0)
+      {
+        currentPage = totalPages;
+        UpdateUrlWithParameters(currentPage, rowsPerPage, sorts);
+      }
+      
+      var pagedQuery = query
+        @* QueryIncludeCodePlaceholder *@
+        .AsNoTracking();
+
+      if (sorts.Count > 0)
+      {
+        IOrderedQueryable<Movie>? orderedQuery = null;
+
+        for (int i = 0; i < sorts.Count; i++)
+        {
+          var (columnIndex, isAscending) = sorts[i];
+
+          if (i == 0)
+          {
+            orderedQuery = ApplyInitialOrderBy(pagedQuery, columnIndex, isAscending);
+          }
+          else if (orderedQuery != null)
+          {
+            orderedQuery = ApplyThenBy(orderedQuery, columnIndex, isAscending);
+          }
+        }
+
+        pagedQuery = orderedQuery ?? pagedQuery;
+      }
+
+      pagedQuery = pagedQuery
+        .Skip((currentPage - 1) * rowsPerPage)
+        .Take(rowsPerPage);
+
+      movies = await pagedQuery.ToListAsync();
+
+      ids = [];
+      info = [];
+
+      foreach (var movie in movies)
+      {
+        ids.Add(movie.Id);
+
+        info.Add([
+          movie.Title,
+          movie.Year,
+          @* InfoAddCodePlaceholder *@
+        ]);
+      }
+    }
+  }
+
+  private IOrderedQueryable<Movie> ApplyInitialOrderBy(IQueryable<Movie> query, int columnIndex, bool isAscending)
+  {
+    return columnIndex switch
+    {
+      0 => isAscending ? query.OrderBy(x => x.Title) : query.OrderByDescending(x => x.Title),
+      1 => isAscending ? query.OrderBy(x => x.Year) : query.OrderByDescending(x => x.Year),
+      @* InitialOrderCodePlaceholder *@
+      _ => isAscending ? query.OrderBy(x => x.Id) : query.OrderByDescending(x => x.Id)
+    };
+  }
+
+  private IOrderedQueryable<Movie> ApplyThenBy(IOrderedQueryable<Movie> query, int columnIndex, bool isAscending)
+  {
+    return columnIndex switch
+    {
+      0 => isAscending ? query.ThenBy(x => x.Title) : query.ThenByDescending(x => x.Title),
+      1 => isAscending ? query.ThenBy(x => x.Year) : query.ThenByDescending(x => x.Year),
+      @* ThenOrderCodePlaceholder *@
+      _ => isAscending ? query.ThenBy(x => x.Id) : query.ThenByDescending(x => x.Id)
+    };
+  }
+
+  private void UpdateUrlWithParameters(int page, int rpp, List<(int, bool)> currentSorts)
+  {
+    var uriBuilder = new UriBuilder(Navigation.Uri);
+    var query = System.Web.HttpUtility.ParseQueryString(uriBuilder.Query);
+    
+    query["page"] = page.ToString();
+    query["rowsPerPage"] = rpp.ToString();
+    
+    if (currentSorts.Count > 0)
+    {
+      var sortParams = string.Join(",", currentSorts.Select(s => $"{s.Item1}:{s.Item2}"));
+      query["sort"] = sortParams;
+    }
+    else
+    {
+      query.Remove("sort");
+    }
+    
+    uriBuilder.Query = query.ToString();
+    Navigation.NavigateTo(uriBuilder.Uri.ToString(), false);
+  }
+}

@@ -1,13 +1,13 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Security.Claims;
+using BlazorWebAppMovies.BusinessLogic.Entities;
+using BlazorWebAppMovies.Client;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
-using BlazorWebAppMovies.Client;
-using BlazorWebAppMovies.Data;
 
 namespace BlazorWebAppMovies.Components.Account;
 
