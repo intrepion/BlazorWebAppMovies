@@ -51,7 +51,7 @@ public static class MovieImporter
             // ManyToOneCodePlaceholder
 
             if (true
-                // NullCheckCodePlaceholder
+            // NullCheckCodePlaceholder
             )
             {
                 var movie = new Movie
