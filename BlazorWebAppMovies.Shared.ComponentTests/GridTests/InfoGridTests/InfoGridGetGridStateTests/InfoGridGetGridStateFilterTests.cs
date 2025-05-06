@@ -4,10 +4,10 @@ namespace BlazorWebAppMovies.Shared.UnitTests.GridTests.InfoGridTests.InfoGridGe
 
 public class InfoGridGetGridStateFilterTests : InfoGridTestsBaseClass
 {
-  [Test]
-  public void FilterHello_WhenFilter1Hello()
-  {
-    var columnNames = new List<string>
+    [Test]
+    public void FilterHello_WhenFilter1Hello()
+    {
+        var columnNames = new List<string>
     {
       "Completed Date and Time",
       "Is Completed",
@@ -16,7 +16,7 @@ public class InfoGridGetGridStateFilterTests : InfoGridTestsBaseClass
       "To Do List",
     };
 
-    var columnTypes = new List<ColumnType>
+        var columnTypes = new List<ColumnType>
     {
       ColumnType.DateTime,
       ColumnType.Boolean,
@@ -25,7 +25,7 @@ public class InfoGridGetGridStateFilterTests : InfoGridTestsBaseClass
       ColumnType.Normalized,
     };
 
-    var filters = new List<string?>
+        var filters = new List<string?>
     {
       null,
       "Hello",
@@ -34,32 +34,32 @@ public class InfoGridGetGridStateFilterTests : InfoGridTestsBaseClass
       null,
     };
 
-    var page = 1;
-    var rowsPerPage = 10;
-    var sorts = new List<(int, bool)>();
-    var totalPages = 3;
-    var totalRows = 28;
+        var page = 1;
+        var rowsPerPage = 10;
+        var sorts = new List<(int, bool)>();
+        var totalPages = 3;
+        var totalRows = 28;
 
-    _infoGrid.SetFilter(1, "Hello");
-    var actual = _infoGrid;
+        _infoGrid.SetFilter(1, "Hello");
+        var actual = _infoGrid;
 
-    Assert.Multiple(() =>
+        Assert.Multiple(() =>
+        {
+            Assert.That(actual.ColumnNames, Is.EqualTo(columnNames), $"Columns is {actual.ColumnNames}, but should be {columnNames}");
+            Assert.That(actual.ColumnTypes, Is.EqualTo(columnTypes), $"Columns is {actual.ColumnTypes}, but should be {columnTypes}");
+            Assert.That(actual.Filters, Is.EqualTo(filters), $"Filters is {actual.Filters}, but should be {filters}");
+            Assert.That(actual.Page, Is.EqualTo(page), $"Page is {actual.Page}, but should be {page}");
+            Assert.That(actual.RowsPerPage, Is.EqualTo(rowsPerPage), $"Rows Per Page is {actual.RowsPerPage}, but should be {rowsPerPage}");
+            Assert.That(actual.Sorts, Is.EqualTo(sorts), $"Sorts is {actual.Sorts}, but should be {sorts}");
+            Assert.That(actual.TotalPages, Is.EqualTo(totalPages), $"Total Pages is {actual.TotalPages}, but should be {totalPages}");
+            Assert.That(actual.TotalRows, Is.EqualTo(totalRows), $"Total Rows is {actual.TotalRows}, but should be {totalRows}");
+        });
+    }
+
+    [Test]
+    public void FilterHello_WhenFilter1HelloNegative1World()
     {
-      Assert.That(actual.ColumnNames, Is.EqualTo(columnNames), $"Columns is {actual.ColumnNames}, but should be {columnNames}");
-      Assert.That(actual.ColumnTypes, Is.EqualTo(columnTypes), $"Columns is {actual.ColumnTypes}, but should be {columnTypes}");
-      Assert.That(actual.Filters, Is.EqualTo(filters), $"Filters is {actual.Filters}, but should be {filters}");
-      Assert.That(actual.Page, Is.EqualTo(page), $"Page is {actual.Page}, but should be {page}");
-      Assert.That(actual.RowsPerPage, Is.EqualTo(rowsPerPage), $"Rows Per Page is {actual.RowsPerPage}, but should be {rowsPerPage}");
-      Assert.That(actual.Sorts, Is.EqualTo(sorts), $"Sorts is {actual.Sorts}, but should be {sorts}");
-      Assert.That(actual.TotalPages, Is.EqualTo(totalPages), $"Total Pages is {actual.TotalPages}, but should be {totalPages}");
-      Assert.That(actual.TotalRows, Is.EqualTo(totalRows), $"Total Rows is {actual.TotalRows}, but should be {totalRows}");
-    });
-  }
-
-  [Test]
-  public void FilterHello_WhenFilter1HelloNegative1World()
-  {
-    var columnNames = new List<string>
+        var columnNames = new List<string>
     {
       "Completed Date and Time",
       "Is Completed",
@@ -68,7 +68,7 @@ public class InfoGridGetGridStateFilterTests : InfoGridTestsBaseClass
       "To Do List",
     };
 
-    var columnTypes = new List<ColumnType>
+        var columnTypes = new List<ColumnType>
     {
       ColumnType.DateTime,
       ColumnType.Boolean,
@@ -77,7 +77,7 @@ public class InfoGridGetGridStateFilterTests : InfoGridTestsBaseClass
       ColumnType.Normalized,
     };
 
-    var filters = new List<string?>
+        var filters = new List<string?>
     {
       null,
       "Hello",
@@ -86,41 +86,41 @@ public class InfoGridGetGridStateFilterTests : InfoGridTestsBaseClass
       null,
     };
 
-    var page = 1;
-    var rowsPerPage = 10;
-    var sorts = new List<(int, bool)>();
-    var totalPages = 3;
-    var totalRows = 28;
+        var page = 1;
+        var rowsPerPage = 10;
+        var sorts = new List<(int, bool)>();
+        var totalPages = 3;
+        var totalRows = 28;
 
-    _infoGrid.ColumnNames = columnNames;
-    _infoGrid.ColumnTypes = columnTypes;
-    _infoGrid.Filters = filters;
-    _infoGrid.Page = page;
-    _infoGrid.RowsPerPage = rowsPerPage;
-    _infoGrid.Sorts = sorts;
-    _infoGrid.TotalPages = totalPages;
-    _infoGrid.TotalRows = totalRows;
-    _infoGrid.SetFilter(1, "Hello");
-    _infoGrid.SetFilter(-1, "World");
-    var actual = _infoGrid;
+        _infoGrid.ColumnNames = columnNames;
+        _infoGrid.ColumnTypes = columnTypes;
+        _infoGrid.Filters = filters;
+        _infoGrid.Page = page;
+        _infoGrid.RowsPerPage = rowsPerPage;
+        _infoGrid.Sorts = sorts;
+        _infoGrid.TotalPages = totalPages;
+        _infoGrid.TotalRows = totalRows;
+        _infoGrid.SetFilter(1, "Hello");
+        _infoGrid.SetFilter(-1, "World");
+        var actual = _infoGrid;
 
-    Assert.Multiple(() =>
+        Assert.Multiple(() =>
+        {
+            Assert.That(actual.ColumnNames, Is.EqualTo(columnNames), $"Columns is {actual.ColumnNames}, but should be {columnNames}");
+            Assert.That(actual.ColumnTypes, Is.EqualTo(columnTypes), $"Columns is {actual.ColumnTypes}, but should be {columnTypes}");
+            Assert.That(actual.Filters, Is.EqualTo(filters), $"Filters is {actual.Filters}, but should be {filters}");
+            Assert.That(actual.Page, Is.EqualTo(page), $"Page is {actual.Page}, but should be {page}");
+            Assert.That(actual.RowsPerPage, Is.EqualTo(rowsPerPage), $"Rows Per Page is {actual.RowsPerPage}, but should be {rowsPerPage}");
+            Assert.That(actual.Sorts, Is.EqualTo(sorts), $"Sorts is {actual.Sorts}, but should be {sorts}");
+            Assert.That(actual.TotalPages, Is.EqualTo(totalPages), $"Total Pages is {actual.TotalPages}, but should be {totalPages}");
+            Assert.That(actual.TotalRows, Is.EqualTo(totalRows), $"Total Rows is {actual.TotalRows}, but should be {totalRows}");
+        });
+    }
+
+    [Test]
+    public void FilterHello_WhenFilter1Hello5World()
     {
-      Assert.That(actual.ColumnNames, Is.EqualTo(columnNames), $"Columns is {actual.ColumnNames}, but should be {columnNames}");
-      Assert.That(actual.ColumnTypes, Is.EqualTo(columnTypes), $"Columns is {actual.ColumnTypes}, but should be {columnTypes}");
-      Assert.That(actual.Filters, Is.EqualTo(filters), $"Filters is {actual.Filters}, but should be {filters}");
-      Assert.That(actual.Page, Is.EqualTo(page), $"Page is {actual.Page}, but should be {page}");
-      Assert.That(actual.RowsPerPage, Is.EqualTo(rowsPerPage), $"Rows Per Page is {actual.RowsPerPage}, but should be {rowsPerPage}");
-      Assert.That(actual.Sorts, Is.EqualTo(sorts), $"Sorts is {actual.Sorts}, but should be {sorts}");
-      Assert.That(actual.TotalPages, Is.EqualTo(totalPages), $"Total Pages is {actual.TotalPages}, but should be {totalPages}");
-      Assert.That(actual.TotalRows, Is.EqualTo(totalRows), $"Total Rows is {actual.TotalRows}, but should be {totalRows}");
-    });
-  }
-
-  [Test]
-  public void FilterHello_WhenFilter1Hello5World()
-  {
-    var columnNames = new List<string>
+        var columnNames = new List<string>
     {
       "Completed Date and Time",
       "Is Completed",
@@ -129,7 +129,7 @@ public class InfoGridGetGridStateFilterTests : InfoGridTestsBaseClass
       "To Do List",
     };
 
-    var columnTypes = new List<ColumnType>
+        var columnTypes = new List<ColumnType>
     {
       ColumnType.DateTime,
       ColumnType.Boolean,
@@ -138,7 +138,7 @@ public class InfoGridGetGridStateFilterTests : InfoGridTestsBaseClass
       ColumnType.Normalized,
     };
 
-    var filters = new List<string?>
+        var filters = new List<string?>
     {
       null,
       "Hello",
@@ -147,34 +147,34 @@ public class InfoGridGetGridStateFilterTests : InfoGridTestsBaseClass
       null,
     };
 
-    var page = 1;
-    var rowsPerPage = 10;
-    var sorts = new List<(int, bool)>();
-    var totalPages = 3;
-    var totalRows = 28;
+        var page = 1;
+        var rowsPerPage = 10;
+        var sorts = new List<(int, bool)>();
+        var totalPages = 3;
+        var totalRows = 28;
 
-    _infoGrid.ColumnNames = columnNames;
-    _infoGrid.ColumnTypes = columnTypes;
-    _infoGrid.Filters = filters;
-    _infoGrid.Page = page;
-    _infoGrid.RowsPerPage = rowsPerPage;
-    _infoGrid.Sorts = sorts;
-    _infoGrid.TotalPages = totalPages;
-    _infoGrid.TotalRows = totalRows;
-    _infoGrid.SetFilter(1, "Hello");
-    _infoGrid.SetFilter(5, "World");
-    var actual = _infoGrid;
+        _infoGrid.ColumnNames = columnNames;
+        _infoGrid.ColumnTypes = columnTypes;
+        _infoGrid.Filters = filters;
+        _infoGrid.Page = page;
+        _infoGrid.RowsPerPage = rowsPerPage;
+        _infoGrid.Sorts = sorts;
+        _infoGrid.TotalPages = totalPages;
+        _infoGrid.TotalRows = totalRows;
+        _infoGrid.SetFilter(1, "Hello");
+        _infoGrid.SetFilter(5, "World");
+        var actual = _infoGrid;
 
-    Assert.Multiple(() =>
-    {
-      Assert.That(actual.ColumnNames, Is.EqualTo(columnNames), $"Columns is {actual.ColumnNames}, but should be {columnNames}");
-      Assert.That(actual.ColumnTypes, Is.EqualTo(columnTypes), $"Columns is {actual.ColumnTypes}, but should be {columnTypes}");
-      Assert.That(actual.Filters, Is.EqualTo(filters), $"Filters is {actual.Filters}, but should be {filters}");
-      Assert.That(actual.Page, Is.EqualTo(page), $"Page is {actual.Page}, but should be {page}");
-      Assert.That(actual.RowsPerPage, Is.EqualTo(rowsPerPage), $"Rows Per Page is {actual.RowsPerPage}, but should be {rowsPerPage}");
-      Assert.That(actual.Sorts, Is.EqualTo(sorts), $"Sorts is {actual.Sorts}, but should be {sorts}");
-      Assert.That(actual.TotalPages, Is.EqualTo(totalPages), $"Total Pages is {actual.TotalPages}, but should be {totalPages}");
-      Assert.That(actual.TotalRows, Is.EqualTo(totalRows), $"Total Rows is {actual.TotalRows}, but should be {totalRows}");
-    });
-  }
+        Assert.Multiple(() =>
+        {
+            Assert.That(actual.ColumnNames, Is.EqualTo(columnNames), $"Columns is {actual.ColumnNames}, but should be {columnNames}");
+            Assert.That(actual.ColumnTypes, Is.EqualTo(columnTypes), $"Columns is {actual.ColumnTypes}, but should be {columnTypes}");
+            Assert.That(actual.Filters, Is.EqualTo(filters), $"Filters is {actual.Filters}, but should be {filters}");
+            Assert.That(actual.Page, Is.EqualTo(page), $"Page is {actual.Page}, but should be {page}");
+            Assert.That(actual.RowsPerPage, Is.EqualTo(rowsPerPage), $"Rows Per Page is {actual.RowsPerPage}, but should be {rowsPerPage}");
+            Assert.That(actual.Sorts, Is.EqualTo(sorts), $"Sorts is {actual.Sorts}, but should be {sorts}");
+            Assert.That(actual.TotalPages, Is.EqualTo(totalPages), $"Total Pages is {actual.TotalPages}, but should be {totalPages}");
+            Assert.That(actual.TotalRows, Is.EqualTo(totalRows), $"Total Rows is {actual.TotalRows}, but should be {totalRows}");
+        });
+    }
 }
