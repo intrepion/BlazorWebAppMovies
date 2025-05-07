@@ -114,7 +114,7 @@ public partial class InfoGrid
         }
 
         var newSorts = new List<(int, bool)>(Sorts);
-        
+
         if (found == -1)
         {
             newSorts.Add((column, true));
@@ -127,7 +127,7 @@ public partial class InfoGrid
         {
             newSorts.RemoveAt(found);
         }
-        
+
         if (OnSortsChanged.HasDelegate)
         {
             await OnSortsChanged.InvokeAsync(newSorts);
