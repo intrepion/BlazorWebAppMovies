@@ -1,0 +1,103 @@
+<div>
+  @if (Info == null)
+  {
+    <p>Loading...</p>
+  }
+  else if (Info.Count == 0)
+  {
+    <p>No information found.</p>
+  }
+  else
+  {
+    <div class="grid-controls">
+      <div class="items-per-page">
+        Rows per page:
+        <select value="@RowsPerPage" @onchange="HandleRowsPerPageChange">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+        </select>
+      </div>
+    </div>
+    <table class="table table-hover table-primary table-striped">
+      <thead>
+        <tr>
+          <th>Actions</th>
+          @for (var i = 0; i < ColumnNames.Count; i += 1)
+          {
+            int columnIndex = i;
+            <th @onclick="async () => await SetSortAsync(columnIndex)" style="cursor: pointer;">
+              <div>
+                @ColumnNames[i]
+                <span>
+                  @if (Sorts.Any(s => s.Item1 == i))
+                  {
+                    var sort = Sorts.First(s => s.Item1 == i);
+                    <span>@(sort.Item2 ? "↑" : "↓")</span>
+                    <small>@(Sorts.IndexOf(sort) + 1)</small>
+                  }
+                  else
+                  {
+                    <span>↕</span>
+                  }
+                </span>
+              </div>
+            </th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for (var i = 0; i < Info.Count; i += 1)
+        {
+          <tr>
+            @if (Ids != null)
+            {
+              <td>
+                <div class="btn-group">
+                  <a class="btn btn-primary btn-sm btn-info" href="/admin/@UrlName/view/@Ids[i]" title="View">
+                    <i class="bi bi-eye"></i>
+                  </a>
+                  <a class="btn btn-primary btn-sm" href="/admin/@UrlName/edit/@Ids[i]" title="Edit">
+                    <i class="bi bi-pencil"></i>
+                  </a>
+                </div>
+              </td>
+            }
+            @for (var j = 0; j < Info[i].Count; j += 1)
+            {
+              <td>@Info[i][j]</td>
+            }
+          </tr>
+        }
+      </tbody>
+    </table>
+    <div>
+      <button @onclick="PreviousPageAsync" disabled="@(Page == 1)">Previous</button>
+      <span>Page @Page of @TotalPages</span>
+      <button @onclick="NextPageAsync" disabled="@(Page >= TotalPages)">Next</button>
+    </div>
+  }
+</div>
+
+@code {
+    private async Task HandleRowsPerPageChange(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value?.ToString(), out int newRowsPerPage))
+        {
+            await SetRowsPerPage(newRowsPerPage);
+        }
+        else
+        {
+            await SetRowsPerPage(10);
+        }
+    }
+
+    private async Task NextPageAsync() => await NextPage();
+    private async Task PreviousPageAsync() => await PreviousPage();
+
+    private async Task SetSortAsync(int column)
+    {
+        await SetSort(column);
+    }
+}
